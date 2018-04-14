@@ -4,43 +4,59 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.slash.comflix.R
+import com.example.slash.comflix.adapter.MovieAdapter
+import com.example.slash.comflix.entities.LinearLayoutSpaceItemDecoration
+import com.example.slash.comflix.entities.Movie
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MoviesFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MoviesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MoviesFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+
 
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_movies, container, false)
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
+        var view= inflater!!.inflate(R.layout.fragment_movies, container, false)
+        var movieList=ArrayList<Movie>()
+        var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
+        var movieAdapter= MovieAdapter(this.context,movieList)
+        var mLayoutManager:RecyclerView.LayoutManager= LinearLayoutManager(this.context)
+        recyclerView.addItemDecoration(LinearLayoutSpaceItemDecoration(0))
+        recyclerView.layoutManager=mLayoutManager
+        recyclerView.itemAnimator=DefaultItemAnimator()
+        recyclerView.adapter=movieAdapter
+        prepareMovies(movieList,movieAdapter)
+        return view
+    }
+    fun prepareMovies(movieList:ArrayList<Movie>, movieAdapter: MovieAdapter){
+       var covers= intArrayOf(
+               R.drawable.divergent,
+               R.drawable.hungergamescatchingfire,
+               R.drawable.mazerunner,
+               R.drawable.pirateofthecar,
+               R.drawable.themazerunnerdeathcure,
+               R.drawable.themazerunnerscorch
+       )
+        var movieTitles=resources.getStringArray(R.array.movieTitles)
+        var movieTime= resources.getStringArray(R.array.movieTime)
+        for (i in 0 until covers.size){
+            var movie=Movie(movieTitles.get(i),covers.get(i),movieTime.get(i))
+            movieList.add(movie)
+        }
+        movieAdapter.notifyDataSetChanged()
+    }
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)

@@ -10,4 +10,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="top_movies">Top movies</string>
     <string name="top_series">Top series</string>
+    <string name="in_cinemas">In cenima</string>
+    <string name="season">Season</string>
+    <string name="episode">Episode</string>
 </resources>

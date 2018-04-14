@@ -4,11 +4,19 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.example.slash.comflix.R
+import com.example.slash.comflix.adapter.MovieAdapter
+import com.example.slash.comflix.adapter.SerieAdapter
+import com.example.slash.comflix.entities.LinearLayoutSpaceItemDecoration
+import com.example.slash.comflix.entities.Movie
+import com.example.slash.comflix.entities.Serie
 
 /**
  * A simple [Fragment] subclass.
@@ -36,10 +44,39 @@ class SeriesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_series, container, false)
+        var view= inflater!!.inflate(R.layout.fragment_series, container, false)
+        var serieList=ArrayList<Serie>()
+        var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
+        var serieAdapter= SerieAdapter(this.context,serieList)
+        var mLayoutManager: RecyclerView.LayoutManager= LinearLayoutManager(this.context)
+        recyclerView.addItemDecoration(LinearLayoutSpaceItemDecoration(0))
+        recyclerView.layoutManager=mLayoutManager
+        recyclerView.itemAnimator= DefaultItemAnimator()
+        recyclerView.adapter=serieAdapter
+        prepareSeries(serieList,serieAdapter)
+        return view
     }
+    fun prepareSeries(serieList:ArrayList<Serie>, serieAdapter: SerieAdapter){
+        var covers= intArrayOf(
+                R.drawable.breakingbad,
+                R.drawable.lacasadepapel,
+                R.drawable.prisonbreak,
+                R.drawable.houseofcards,
+                R.drawable.gameofthrones,
+                R.drawable.friends,
+                R.drawable.suits,
+                R.drawable.vikings
+        )
+        var serieTitles=resources.getStringArray(R.array.serieTitles)
+        var serieSeasons= resources.getIntArray(R.array.serieSeasons)
+        var serieEpisodes= resources.getIntArray(R.array.serieEpisodes)
 
+        for (i in 0 until covers.size){
+            var serie=Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i))
+            serieList.add(serie)
+        }
+        serieAdapter.notifyDataSetChanged()
+    }
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {

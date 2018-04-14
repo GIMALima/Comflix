@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="movieTitles">
+        <item>Divergent</item>
+        <item>The hunger Games:Catching Fire</item>
+        <item>The pirates of the caribbean</item>
+        <item>The maze runner</item>
+        <item>The maze runner:Scorch</item>
+        <item>The maze runner:Death Cure</item>
+    </string-array>
+    <string-array name="movieTime">
+        <item>2h22min</item>
+        <item>1h42min</item>
+        <item>1h53min</item>
+        <item>1h53min</item>
+        <item>1h53min</item>
+        <item>2h10min</item>
+    </string-array>
+
+</resources>

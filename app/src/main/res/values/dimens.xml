@@ -6,4 +6,11 @@
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="text">13sp</dimen>
     <dimen name="padding">16dp</dimen>
+    <dimen name="cadrmargin">2dp</dimen>
+    <dimen name="paddingTextView">10dp</dimen>
+    <dimen name="cardmarginTop">150dp</dimen>
+    <dimen name="button_width">100dp</dimen>
+    <dimen name="button_height">35dp</dimen>
+    <dimen name="image_height">200dp</dimen>
+    <dimen name="titleMovie">15sp</dimen>
 </resources>
