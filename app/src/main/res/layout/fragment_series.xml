@@ -1,9 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorAccent"
+    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingView"
     tools:context="com.example.slash.comflix.fragment.SeriesFragment">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
@@ -11,4 +14,4 @@
         android:clipToPadding="false"
         android:scrollbars="vertical"/>
 
-</FrameLayout>
+</RelativeLayout>

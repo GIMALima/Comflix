@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/cadrmargin"
+        android:layout_margin="@dimen/cardmargin"
+        android:elevation="@dimen/cardEaluation"
         card_view:cardCornerRadius="0dp">
 
-        <android.support.constraint.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -23,135 +23,41 @@
                 android:layout_height="@dimen/image_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:scaleType="fitXY"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-
-            <ImageView
-                android:id="@+id/favoris"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline6"
-                card_view:layout_constraintHorizontal_bias="0.795"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline13"
-                card_view:srcCompat="@drawable/ic_favorite_border_black_24dp"
-                tools:layout_editor_absoluteY="16dp" />
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/title"
                 style="@style/textStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="TextView"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline9"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline6"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline5"
-                card_view:layout_constraintTop_toTopOf="@+id/guideline8" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline5"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                card_view:layout_constraintGuide_percent="0.053475935" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                card_view:layout_constraintGuide_begin="357dp" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                card_view:layout_constraintGuide_begin="136dp" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                card_view:layout_constraintGuide_begin="164dp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/textStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="Season"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline11"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline10"
-                card_view:layout_constraintHorizontal_bias="0.0"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline5"
-                card_view:layout_constraintTop_toTopOf="@+id/guideline9" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                card_view:layout_constraintGuide_percent="0.21" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                card_view:layout_constraintGuide_percent="0.96" />
-
+                android:layout_below="@+id/serieCover"
+                android:paddingLeft="@dimen/paddingTextView"
+                android:paddingRight="@dimen/paddingTextView"
+                android:paddingTop="@dimen/paddingTextView"
+                />
             <TextView
                 android:id="@+id/season"
-                style="@style/textStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="TextView"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline11"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline12"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline10"
-                card_view:layout_constraintTop_toTopOf="@+id/guideline9" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline12"
-                android:layout_width="wrap_content"
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                card_view:layout_constraintGuide_percent="0.33" />
-
-            <TextView
-                android:id="@+id/textView4"
-                style="@style/textStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="Episode"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline11"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline13"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline12"
-                card_view:layout_constraintTop_toTopOf="@+id/guideline9" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                card_view:layout_constraintGuide_percent="0.5" />
-
+                android:layout_below="@+id/title"
+                android:paddingLeft="@dimen/paddingTextView"
+                android:paddingRight="@dimen/paddingTextView"
+                android:paddingBottom="@dimen/paddingTextView"
+                />
             <TextView
                 android:id="@+id/episode"
-                style="@style/textStyle"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="TextView"
-                card_view:layout_constraintBottom_toTopOf="@+id/guideline11"
-                card_view:layout_constraintEnd_toStartOf="@+id/guideline6"
-                card_view:layout_constraintStart_toStartOf="@+id/guideline13"
-                card_view:layout_constraintTop_toTopOf="@+id/guideline9" />
+                style="@style/secondary_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/season"
+                android:paddingLeft="@dimen/paddingTextView"
+                android:paddingRight="@dimen/paddingTextView"
+                android:paddingBottom="@dimen/paddingTextView"
+                />
 
-        </android.support.constraint.ConstraintLayout>
+
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 

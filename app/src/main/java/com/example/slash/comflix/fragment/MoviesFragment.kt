@@ -10,8 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
-import com.example.slash.comflix.entities.LinearLayoutSpaceItemDecoration
+import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
+import com.example.slash.comflix.entities.dpToPx
 
 class MoviesFragment : Fragment() {
 
@@ -32,8 +33,8 @@ class MoviesFragment : Fragment() {
         var movieList=ArrayList<Movie>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
         var movieAdapter= MovieAdapter(this.context,movieList)
-        var mLayoutManager:RecyclerView.LayoutManager= LinearLayoutManager(this.context)
-        recyclerView.addItemDecoration(LinearLayoutSpaceItemDecoration(0))
+        var mLayoutManager:RecyclerView.LayoutManager= GridLayoutManager(this.context,2)
+        recyclerView.addItemDecoration(GridSpacingItemDecoration(2,dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator=DefaultItemAnimator()
         recyclerView.adapter=movieAdapter
@@ -51,8 +52,9 @@ class MoviesFragment : Fragment() {
        )
         var movieTitles=resources.getStringArray(R.array.movieTitles)
         var movieTime= resources.getStringArray(R.array.movieTime)
+        var movieCinema= resources.getStringArray(R.array.movieCinema)
         for (i in 0 until covers.size){
-            var movie=Movie(movieTitles.get(i),covers.get(i),movieTime.get(i))
+            var movie=Movie(movieTitles.get(i),covers.get(i),movieTime.get(i),movieCinema.get(i))
             movieList.add(movie)
         }
         movieAdapter.notifyDataSetChanged()

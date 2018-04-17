@@ -7,10 +7,12 @@ class Movie {
     var title:String?=null
     var cover:Int?=null
     var time:String?=null
+    var cinema:String?=null
 
-    constructor(title: String?, cover: Int?, time: String?) {
+    constructor(title: String?, cover: Int?, time: String?,cinema:String?) {
         this.title = title
         this.cover = cover
         this.time = time
+        this.cinema= cinema
     }
 }

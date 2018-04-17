@@ -24,12 +24,12 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
     inner class MyViewHolder : RecyclerView.ViewHolder{
         var title: TextView
-        var time: TextView
+        var cinema: TextView
         var thumbnail: ImageView
 
         constructor(itemView: View) : super(itemView) {
             this.title= itemView.findViewById<TextView>(R.id.title) as TextView
-            this.time= itemView.findViewById<TextView>(R.id.date) as TextView
+            this.cinema= itemView.findViewById<TextView>(R.id.cinema) as TextView
             this.thumbnail= itemView.findViewById<ImageView>(R.id.movieCover) as ImageView
 
         }
@@ -38,7 +38,7 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
           var movie=movieList.get(position)
           holder.title.text=movie.title
-          holder.time.text=movie.time
+          holder.cinema.text=movie.cinema
           Glide.with(mcontext).load(movie.cover).into(holder.thumbnail)
 
     }

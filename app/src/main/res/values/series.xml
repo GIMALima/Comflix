@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="serieTitles">
-        <item>Breaking bad</item>
-        <item>La casa de papel</item>
-        <item>Prison break</item>
+
         <item>House of cards</item>
         <item>Game of thrones</item>
         <item>Friends</item>
         <item>Suits</item>
         <item>Vikings</item>
+        <item>Breaking bad</item>
+        <item>La casa de papel</item>
+        <item>Prison break</item>
     </string-array>
     <integer-array name="serieSeasons">
-        <item>5</item>
-        <item>2</item>
-        <item>5</item>
+
         <item>5</item>
         <item>7</item>
         <item>10</item>
         <item>7</item>
         <item>5</item>
+        <item>5</item>
+        <item>2</item>
+        <item>5</item>
     </integer-array>
     <integer-array name="serieEpisodes">
-        <item>14</item>
-        <item>6</item>
-        <item>7</item>
+
         <item>12</item>
         <item>8</item>
         <item>10</item>
         <item>16</item>
         <item>10</item>
+        <item>14</item>
+        <item>6</item>
+        <item>7</item>
     </integer-array>
 </resources>

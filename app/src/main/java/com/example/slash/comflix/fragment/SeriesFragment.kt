@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,11 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.slash.comflix.R
-import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.SerieAdapter
-import com.example.slash.comflix.entities.LinearLayoutSpaceItemDecoration
-import com.example.slash.comflix.entities.Movie
+import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Serie
+import com.example.slash.comflix.entities.dpToPx
 
 /**
  * A simple [Fragment] subclass.
@@ -48,8 +48,8 @@ class SeriesFragment : Fragment() {
         var serieList=ArrayList<Serie>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
         var serieAdapter= SerieAdapter(this.context,serieList)
-        var mLayoutManager: RecyclerView.LayoutManager= LinearLayoutManager(this.context)
-        recyclerView.addItemDecoration(LinearLayoutSpaceItemDecoration(0))
+        var mLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,2)
+        recyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
@@ -58,14 +58,15 @@ class SeriesFragment : Fragment() {
     }
     fun prepareSeries(serieList:ArrayList<Serie>, serieAdapter: SerieAdapter){
         var covers= intArrayOf(
-                R.drawable.breakingbad,
-                R.drawable.lacasadepapel,
-                R.drawable.prisonbreak,
+
                 R.drawable.houseofcards,
                 R.drawable.gameofthrones,
                 R.drawable.friends,
                 R.drawable.suits,
-                R.drawable.vikings
+                R.drawable.vikings,
+                R.drawable.breakingbad,
+                R.drawable.lacasadepapel,
+                R.drawable.prisonbreak
         )
         var serieTitles=resources.getStringArray(R.array.serieTitles)
         var serieSeasons= resources.getIntArray(R.array.serieSeasons)

@@ -42,8 +42,8 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var serie=serieList.get(position)
         holder.title.text=serie.title
-        holder.season.text=serie.season.toString()
-        holder.episode.text=serie.episode.toString()
+        holder.season.text="Season"+" "+serie.season.toString()
+        holder.episode.text="Episode"+" "+serie.episode.toString()
         Glide.with(mcontext).load(serie.cover).into(holder.cover)
 
     }
