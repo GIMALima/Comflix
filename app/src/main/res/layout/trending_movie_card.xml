@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="165dp"
+    android:layout_height="match_parent">
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/serieCover"
+                android:id="@+id/movieCover"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -29,27 +30,16 @@
                 style="@style/textStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/serieCover"
+                android:layout_below="@+id/movieCover"
                 android:paddingLeft="@dimen/paddingTextView"
                 android:paddingRight="@dimen/paddingTextView"
                 android:paddingTop="@dimen/paddingTextView"
                 />
             <TextView
-                android:id="@+id/season"
+                android:id="@+id/cinema"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:paddingLeft="@dimen/paddingTextView"
-                android:paddingRight="@dimen/paddingTextView"
-                android:paddingBottom="@dimen/paddingTextView"
-                />
-            <TextView
-                android:id="@+id/episode"
-                style="@style/secondary_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/season"
                 android:layout_below="@+id/title"
                 android:paddingLeft="@dimen/paddingTextView"
                 android:paddingRight="@dimen/paddingTextView"

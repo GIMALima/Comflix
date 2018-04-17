@@ -31,4 +31,7 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text</item>
     </style>
+    <style name="main_text" parent="textStyle">
+        <item name="android:textColor">@color/text</item>
+    </style>
 </resources>

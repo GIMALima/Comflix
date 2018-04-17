@@ -17,10 +17,12 @@ import com.example.slash.comflix.entities.Serie
 class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
     var mcontext: Context
     var serieList: List<Serie>
+    var layout:Int
 
-    constructor(mcontext: Context, serieList: List<Serie>) : super() {
+    constructor(mcontext: Context, serieList: List<Serie>,layout:Int) : super() {
         this.mcontext = mcontext
         this.serieList = serieList
+        this.layout=layout
     }
 
 
@@ -54,7 +56,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
         var itemView= LayoutInflater.from(parent!!.context)
-                .inflate(R.layout.serie_card,parent,false)
+                .inflate(layout,parent,false)
 
         return MyViewHolder(itemView)
 

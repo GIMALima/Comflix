@@ -15,10 +15,12 @@ import com.example.slash.comflix.entities.Movie
 class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     var mcontext: Context
     var movieList: List<Movie>
+    var layout:Int
 
-    constructor(mcontext: Context, movieList: List<Movie>) : super() {
+    constructor(mcontext: Context, movieList: List<Movie>,layout:Int) : super() {
         this.mcontext = mcontext
         this.movieList = movieList
+        this.layout=layout
     }
 
 
@@ -49,7 +51,7 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
         var itemView=LayoutInflater.from(parent!!.context)
-                        .inflate(R.layout.movie_card,parent,false)
+                        .inflate(layout,parent,false)
 
         return MyViewHolder(itemView)
 

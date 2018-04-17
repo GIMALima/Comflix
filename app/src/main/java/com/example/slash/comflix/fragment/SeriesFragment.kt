@@ -31,7 +31,7 @@ class SeriesFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
-
+    var adapter:SerieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,13 +47,14 @@ class SeriesFragment : Fragment() {
         var view= inflater!!.inflate(R.layout.fragment_series, container, false)
         var serieList=ArrayList<Serie>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-        var serieAdapter= SerieAdapter(this.context,serieList)
+        var serieAdapter= SerieAdapter(this.context,serieList,R.layout.serie_card)
         var mLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,2)
         recyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
         prepareSeries(serieList,serieAdapter)
+        adapter=serieAdapter
         return view
     }
     fun prepareSeries(serieList:ArrayList<Serie>, serieAdapter: SerieAdapter){
@@ -137,4 +138,5 @@ class SeriesFragment : Fragment() {
             return fragment
         }
     }
+
 }// Required empty public constructor

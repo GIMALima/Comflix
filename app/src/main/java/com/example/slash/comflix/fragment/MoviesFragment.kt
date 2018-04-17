@@ -32,7 +32,7 @@ class MoviesFragment : Fragment() {
         var view= inflater!!.inflate(R.layout.fragment_movies, container, false)
         var movieList=ArrayList<Movie>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-        var movieAdapter= MovieAdapter(this.context,movieList)
+        var movieAdapter= MovieAdapter(this.context,movieList,R.layout.movie_card)
         var mLayoutManager:RecyclerView.LayoutManager= GridLayoutManager(this.context,2)
         recyclerView.addItemDecoration(GridSpacingItemDecoration(2,dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
@@ -51,10 +51,9 @@ class MoviesFragment : Fragment() {
                R.drawable.themazerunnerscorch
        )
         var movieTitles=resources.getStringArray(R.array.movieTitles)
-        var movieTime= resources.getStringArray(R.array.movieTime)
         var movieCinema= resources.getStringArray(R.array.movieCinema)
         for (i in 0 until covers.size){
-            var movie=Movie(movieTitles.get(i),covers.get(i),movieTime.get(i),movieCinema.get(i))
+            var movie=Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i))
             movieList.add(movie)
         }
         movieAdapter.notifyDataSetChanged()
