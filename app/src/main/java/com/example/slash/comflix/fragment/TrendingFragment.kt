@@ -14,6 +14,7 @@ import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.entities.*
+import com.example.slash.comflix.prepareTrending
 
 
 class TrendingFragment : Fragment() {
@@ -47,47 +48,11 @@ class TrendingFragment : Fragment() {
         serieRecyclerView.layoutManager=serieLayoutManager
         serieRecyclerView.itemAnimator= DefaultItemAnimator()
         serieRecyclerView.adapter=serieAdapter
-        prepareTrending(trendingMoviesList,movieAdapter,trendingseriesList,serieAdapter)
+        prepareTrending(this.context,trendingMoviesList,movieAdapter,trendingseriesList,serieAdapter)
 
         return view
     }
-    fun prepareTrending(movieTrendingList:ArrayList<Movie>, movieTrendingAdapter: MovieAdapter,serieTrendingList:ArrayList<Serie>, serieTrendingAdapter: SerieAdapter){
 
-        var movieCovers= intArrayOf(
-                R.drawable.divergent,
-                R.drawable.hungergamescatchingfire,
-                R.drawable.mazerunner,
-                R.drawable.pirateofthecar,
-                R.drawable.themazerunnerdeathcure,
-                R.drawable.themazerunnerscorch
-
-        )
-        var serieCovers= intArrayOf(
-                R.drawable.houseofcards,
-                R.drawable.gameofthrones,
-                R.drawable.friends,
-                R.drawable.suits,
-                R.drawable.vikings,
-                R.drawable.breakingbad,
-                R.drawable.lacasadepapel,
-                R.drawable.prisonbreak
-        )
-        var movieTitles=resources.getStringArray(R.array.movieTitles)
-        var movieCinema= resources.getStringArray(R.array.movieCinema)
-        var serieTitles= resources.getStringArray(R.array.serieTitles)
-        var serieSeasons=resources.getIntArray(R.array.serieSeasons)
-        var serieEpisodes=resources.getIntArray(R.array.serieEpisodes)
-        for (i in 0 until movieCovers.size){
-            var movie=Movie(movieTitles.get(i),movieCovers.get(i),movieCinema.get(i))
-            movieTrendingList.add(movie)
-        }
-        for (i in 0 until serieCovers.size){
-            var serie=Serie(serieTitles.get(i),serieCovers.get(i),serieSeasons.get(i),serieEpisodes.get(i))
-            serieTrendingList.add(serie)
-        }
-        movieTrendingAdapter.notifyDataSetChanged()
-        serieTrendingAdapter.notifyDataSetChanged()
-    }
 
 
 

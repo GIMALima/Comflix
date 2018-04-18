@@ -22,6 +22,17 @@
         <item>2</item>
         <item>5</item>
     </integer-array>
+
+    <string-array name="serieGenre">
+        <item>Drama,Politics</item>
+        <item>War,Fiction,Drama</item>
+        <item>Comedy</item>
+        <item>Drama,Comedy</item>
+        <item>War,Fiction,Drama</item>
+        <item>Action,Drama</item>
+        <item>Action,Drama</item>
+        <item>Action,Drama</item>
+    </string-array>
     <integer-array name="serieEpisodes">
 
         <item>12</item>

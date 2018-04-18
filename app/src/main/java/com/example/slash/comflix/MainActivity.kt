@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import com.example.slash.comflix.fragment.FavouriteMoviesFragment
+import com.example.slash.comflix.fragment.FavouriteSeriesFragment
 import com.example.slash.comflix.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -76,10 +78,10 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 fragment= HomeFragment()
             }
             R.id.nav_movies -> {
-
+               fragment=FavouriteMoviesFragment()
             }
             R.id.nav_series -> {
-
+                fragment=FavouriteSeriesFragment()
             }
             R.id.nav_salles -> {
 

@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
+import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.prepareMovies
 
 class MoviesFragment : Fragment() {
 
@@ -33,31 +35,16 @@ class MoviesFragment : Fragment() {
         var movieList=ArrayList<Movie>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
         var movieAdapter= MovieAdapter(this.context,movieList,R.layout.movie_card)
-        var mLayoutManager:RecyclerView.LayoutManager= GridLayoutManager(this.context,2)
+
+        var mLayoutManager:RecyclerView.LayoutManager= GridLayoutManager(this.context,calculateCardNum(this.context))
         recyclerView.addItemDecoration(GridSpacingItemDecoration(2,dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator=DefaultItemAnimator()
         recyclerView.adapter=movieAdapter
-        prepareMovies(movieList,movieAdapter)
+        prepareMovies(this.context,movieList,movieAdapter)
         return view
     }
-    fun prepareMovies(movieList:ArrayList<Movie>, movieAdapter: MovieAdapter){
-       var covers= intArrayOf(
-               R.drawable.divergent,
-               R.drawable.hungergamescatchingfire,
-               R.drawable.mazerunner,
-               R.drawable.pirateofthecar,
-               R.drawable.themazerunnerdeathcure,
-               R.drawable.themazerunnerscorch
-       )
-        var movieTitles=resources.getStringArray(R.array.movieTitles)
-        var movieCinema= resources.getStringArray(R.array.movieCinema)
-        for (i in 0 until covers.size){
-            var movie=Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i))
-            movieList.add(movie)
-        }
-        movieAdapter.notifyDataSetChanged()
-    }
+
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)

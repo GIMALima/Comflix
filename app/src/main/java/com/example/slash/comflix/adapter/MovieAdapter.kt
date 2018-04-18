@@ -56,5 +56,6 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
         return MyViewHolder(itemView)
 
     }
+
 }
 

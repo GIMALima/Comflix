@@ -6,34 +6,22 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.slash.comflix.R
-import com.example.slash.comflix.adapter.SerieAdapter
-import com.example.slash.comflix.calculateCardNum
+import com.example.slash.comflix.adapter.FavouriteMovieAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Serie
+import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareSeries
+import com.example.slash.comflix.prepareFavouriteMovies
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SeriesFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SeriesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SeriesFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
+class FavouriteMoviesFragment : Fragment() {
+
     private var mParam1: String? = null
     private var mParam2: String? = null
-    var adapter:SerieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,18 +34,23 @@ class SeriesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view= inflater!!.inflate(R.layout.fragment_series, container, false)
-        var serieList=ArrayList<Serie>()
+        var view= inflater!!.inflate(R.layout.fragment_favourite_movies, container, false)
+        var favouriteMovieList=ArrayList<Movie>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-        var serieAdapter= SerieAdapter(this.context,serieList,R.layout.serie_card)
-        var mLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context, calculateCardNum(this.context))
+        var movieAdapter= FavouriteMovieAdapter(this.context,favouriteMovieList,R.layout.favoutrite_card)
+        var mLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1)
         recyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
-        recyclerView.adapter=serieAdapter
-        prepareSeries(this.context,serieList,serieAdapter)
-        adapter=serieAdapter
+        recyclerView.adapter=movieAdapter
+        prepareFavouriteMovies(this.context,favouriteMovieList,movieAdapter)
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -72,7 +65,7 @@ class SeriesFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-         //   throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+            //throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
     }
 
@@ -107,11 +100,11 @@ class SeriesFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SeriesFragment.
+         * @return A new instance of fragment FavouriteMoviesFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): SeriesFragment {
-            val fragment = SeriesFragment()
+        fun newInstance(param1: String, param2: String): FavouriteMoviesFragment {
+            val fragment = FavouriteMoviesFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)
@@ -119,5 +112,4 @@ class SeriesFragment : Fragment() {
             return fragment
         }
     }
-
 }// Required empty public constructor

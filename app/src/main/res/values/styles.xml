@@ -27,11 +27,15 @@
     <item name="android:textColor">#000</item>
     <item name="android:textSize">@dimen/titleMovie</item>
 </style>
+
     <style name="secondary_text" parent="textStyle">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text</item>
     </style>
     <style name="main_text" parent="textStyle">
         <item name="android:textColor">@color/text</item>
+    </style>
+    <style name="title_item" parent="textStyle">
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
