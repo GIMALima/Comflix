@@ -10,14 +10,6 @@ import android.view.ViewGroup
 
 import com.example.slash.comflix.R
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SerieDetailsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SerieDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SerieDetailsFragment : Fragment() {
 
     // TODO: Rename and change types of parameters

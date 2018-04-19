@@ -1,13 +1,156 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/text"
+    tools:context="com.example.slash.comflix.fragment.SerieDetailsFragment"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.slash.comflix.fragment.SerieDetailsFragment">
+    android:orientation="vertical"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:src="@drawable/suits"
+        android:scaleType="centerCrop"
+        android:layout_weight="1.5"
+        />
 
-</FrameLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Director: "
+                style="@style/textdetailsLabel"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/director"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wes Ball"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Writers: "
+                style="@style/textdetailsLabel"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/writers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Noah Oppenheim, Grant Pierce Myers"/>
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stars: "
+                    style="@style/textdetailsLabel"/>
+                <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/stars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Something, fdqlkjfsdlkjf, qdlskjfqdslkjfsqdlj"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Released: "
+                    style="@style/textdetailsLabel"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/releae_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="June 23, 2017, USA"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description and details"
+                    style="@style/textdetailsLabel"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Details"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/nbrEpisodes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12"
+                    style="@style/textdetailsLabel"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Episodes"
+                    style="@style/textdetailsLabel"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/episodes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="see all episodes"
+                    android:textAllCaps="false"
+                    android:textColor="@color/linkColor"/>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/actorsRecyclers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbars="vertical">
+            </android.support.v7.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+</ScrollView>
