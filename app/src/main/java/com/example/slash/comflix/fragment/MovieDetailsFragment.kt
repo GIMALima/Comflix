@@ -7,17 +7,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.example.slash.comflix.R
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MovieDetailsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MovieDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MovieDetailsFragment : Fragment() {
 
 
@@ -26,15 +19,23 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (arguments != null) {
-            var id = arguments.getInt(ARG_PARAM1)
+           var id = arguments.getInt(ARG_PARAM1)
         }
+
+
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_movie_details, container, false)
+        var view= inflater!!.inflate(R.layout.fragment_movie_details, container, false)
+
+
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
