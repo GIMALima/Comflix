@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import com.example.slash.comflix.fragment.FavouriteCinemaFragment
 import com.example.slash.comflix.fragment.FavouriteMoviesFragment
 import com.example.slash.comflix.fragment.FavouriteSeriesFragment
 import com.example.slash.comflix.fragment.HomeFragment
@@ -84,7 +85,7 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 fragment=FavouriteSeriesFragment()
             }
             R.id.nav_salles -> {
-
+                fragment=FavouriteCinemaFragment()
             }
             R.id.nav_profil -> {
 

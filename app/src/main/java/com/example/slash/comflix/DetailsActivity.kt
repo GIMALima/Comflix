@@ -21,8 +21,8 @@ class DetailsActivity : AppCompatActivity() {
         val id= intent.getIntExtra("id",0)
         var bundle= Bundle()
         bundle.putInt("id",id)
-        Toast.makeText(this,type,Toast.LENGTH_LONG).show()
-       /* when (type){
+     //   Toast.makeText(this,id.toString(),Toast.LENGTH_LONG).show()
+       when (type){
             "movie"->{
                 // toolbar.title="Entre"
                 fragment=MovieDetailsFragment()
@@ -39,7 +39,7 @@ class DetailsActivity : AppCompatActivity() {
                 .replace(details_container.id,fragment)
                 .addToBackStack(null)
                 .commit()
-*/
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater

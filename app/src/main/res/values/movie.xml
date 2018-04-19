@@ -26,4 +26,13 @@
         <item>Cinéma El Mouggar</item>
     </string-array>
 
+    <array name="coversId">
+        <item>@drawable/divergent</item>
+        <item>@drawable/hungergamescatchingfire</item>
+        <item>@drawable/mazerunner</item>
+        <item>@drawable/pirateofthecar</item>
+        <item>@drawable/themazerunnerscorch</item>
+        <item>@drawable/themazerunnerdeathcure</item>
+    </array>
+
 </resources>

@@ -1,10 +1,8 @@
 package com.example.slash.comflix
 
 import android.content.Context
-import com.example.slash.comflix.adapter.FavouriteMovieAdapter
-import com.example.slash.comflix.adapter.FavouriteSerieAdapter
-import com.example.slash.comflix.adapter.MovieAdapter
-import com.example.slash.comflix.adapter.SerieAdapter
+import com.example.slash.comflix.adapter.*
+import com.example.slash.comflix.entities.Cinema
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.Serie
 
@@ -104,4 +102,25 @@ fun prepareTrending(context:Context,movieTrendingList:ArrayList<Movie>, movieTre
     prepareMovies(context,movieTrendingList,movieTrendingAdapter)
     prepareSeries(context,serieTrendingList,serieTrendingAdapter)
 
+}
+fun prepareFavouriteCinema(context: Context, cinemaFavourite:ArrayList<Cinema>,cinemaAdapter:FavouriteCinemaAdapter){
+    var covers= intArrayOf(
+
+            R.drawable.ibnkhaldoun,
+            R.drawable.atlas,
+            R.drawable.mouggar,
+            R.drawable.chabab,
+            R.drawable.ibnkhaldoun,
+            R.drawable.ibnkhaldoun
+    )
+    var cinemaName=context.resources.getStringArray(R.array.cinemaName)
+    var cinemaLocation=context.resources.getStringArray(R.array.cinemaLocation)
+    var cinemaSalle=context.resources.getIntArray(R.array.nb_salleCinema)
+
+
+    for (i in 0 until covers.size){
+        var cinema= Cinema(cinemaName.get(i),covers.get(i),cinemaLocation.get(i),cinemaSalle.get(i),i)
+        cinemaFavourite.add(cinema)
+    }
+    cinemaAdapter.notifyDataSetChanged()
 }
