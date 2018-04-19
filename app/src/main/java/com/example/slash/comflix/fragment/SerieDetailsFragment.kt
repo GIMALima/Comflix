@@ -4,46 +4,43 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+
 import com.example.slash.comflix.R
-import com.example.slash.comflix.adapter.MovieAdapter
-import com.example.slash.comflix.calculateCardNum
-import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Movie
-import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareMovies
 
-class MoviesFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ * Activities that contain this fragment must implement the
+ * [SerieDetailsFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ * Use the [SerieDetailsFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class SerieDetailsFragment : Fragment() {
 
+    // TODO: Rename and change types of parameters
+    private var mParam1: String? = null
+    private var mParam2: String? = null
 
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        if (arguments != null) {
+            mParam1 = arguments.getString(ARG_PARAM1)
+            mParam2 = arguments.getString(ARG_PARAM2)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-
-        var view= inflater!!.inflate(R.layout.fragment_movies, container, false)
-        var movieList=ArrayList<Movie>()
-        var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-        var movieAdapter= MovieAdapter(this.context,movieList,R.layout.movie_card)
-        var mLayoutManager:RecyclerView.LayoutManager= GridLayoutManager(this.context,calculateCardNum(this.context))
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(2,dpToPx(10),true))
-        recyclerView.layoutManager=mLayoutManager
-        recyclerView.itemAnimator=DefaultItemAnimator()
-        recyclerView.adapter=movieAdapter
-        prepareMovies(this.context,movieList,movieAdapter)
-        return view
+        return inflater!!.inflate(R.layout.fragment_serie_details, container, false)
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)
@@ -90,11 +87,11 @@ class MoviesFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment MoviesFragment.
+         * @return A new instance of fragment SerieDetailsFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): MoviesFragment {
-            val fragment = MoviesFragment()
+        fun newInstance(param1: String, param2: String): SerieDetailsFragment {
+            val fragment = SerieDetailsFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)

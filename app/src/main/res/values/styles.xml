@@ -38,4 +38,7 @@
     <style name="title_item" parent="textStyle">
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/text</item>
+    </style>
 </resources>
