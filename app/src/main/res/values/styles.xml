@@ -28,6 +28,10 @@
     <item name="android:textSize">@dimen/titleMovie</item>
 </style>
 
+    <style name="textdetailsLabel" parent="textStyle">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="secondary_text" parent="textStyle">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text</item>

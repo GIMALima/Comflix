@@ -6,4 +6,7 @@
     <color name="icons">#EFEFEF</color>
     <color name="text">#fff</color>
     <color name="redColor">#EA4E5C</color>
+    <color name="likesColor">#c6c6c6</color>
+    <color name="linkColor">#848383</color>
+
 </resources>
