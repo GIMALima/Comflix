@@ -14,4 +14,12 @@
     <string name="season">Season</string>
     <string name="episode">Episode</string>
     <string name="trending_movies">Trending movies</string>
+    <string name="description_and_details">Description and details</string>
+    <string name="see_seasons">see seasons</string>
+    <string name="episodes">Episodes</string>
+    <string name="writers_label">Writers:\ </string>
+    <string name="director_label">Director: </string>
+    <string name="stars_label">Stars: </string>
+    <string name="released_label">Released: </string>
+    <string name="seasons_lable">Seasons</string>
 </resources>

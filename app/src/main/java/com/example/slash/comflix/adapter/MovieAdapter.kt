@@ -69,55 +69,27 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
         var itemView=LayoutInflater.from(parent!!.context)
                         .inflate(layout,parent,false)
      val holder = MyViewHolder(itemView)
-        holder.card.setOnClickListener{
+        holder.apply {
+            card.setOnClickListener{openDetailsActivity(this)}
+            title.setOnClickListener{openDetailsActivity(this)}
+            thumbnail.setOnClickListener{openDetailsActivity(this)}
+            cinema.setOnClickListener { openDetailsActivity(this) }
 
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
-
-        }
-        holder.title.setOnClickListener{
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)}
-        holder.thumbnail.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
-        }
-        holder.title.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
-        }
-        holder.cinema.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
         }
 
         return MyViewHolder(itemView)
 
+    }
+
+    fun openDetailsActivity(holder: MyViewHolder)
+    {
+        val intent = Intent(mcontext, DetailsActivity::class.java)
+        val bundle = Bundle()
+        bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
+        bundle.putString("type","movie")
+        intent.putExtras(bundle) //P
+
+        mcontext.startActivity(intent)
     }
 
 }

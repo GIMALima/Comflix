@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/text"
     tools:context="com.example.slash.comflix.fragment.SerieDetailsFragment"
+    android:layout_marginTop="?attr/actionBarSize"
     >
 <LinearLayout
     android:layout_width="match_parent"
@@ -13,11 +14,12 @@
     >
 
     <ImageView
+        android:id="@+id/cover"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
         android:src="@drawable/suits"
         android:scaleType="centerCrop"
-        android:layout_weight="1.5"
+
         />
 
     <android.support.v7.widget.CardView
@@ -29,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -37,14 +39,14 @@
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Director: "
+                android:text="@string/director_label"
                 style="@style/textdetailsLabel"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/director"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wes Ball"
+                android:text="@string/director"
                 />
         </LinearLayout>
         <LinearLayout
@@ -54,14 +56,14 @@
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Writers: "
+                android:text="@string/writers_label"
                 style="@style/textdetailsLabel"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/writers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Noah Oppenheim, Grant Pierce Myers"/>
+                android:text="@string/writers"/>
         </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,13 +72,13 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stars: "
+                    android:text="@string/stars_label"
                     style="@style/textdetailsLabel"/>
                 <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/stars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Something, fdqlkjfsdlkjf, qdlskjfqdslkjfsqdlj"/>
+                        android:text="@string/stars"/>
 
             </LinearLayout>
             <LinearLayout
@@ -86,14 +88,14 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Released: "
+                    android:text="@string/released_label"
                     style="@style/textdetailsLabel"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/releae_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="June 23, 2017, USA"/>
+                    android:text="@string/released"/>
             </LinearLayout>
 
             <LinearLayout
@@ -104,21 +106,21 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description and details"
+                    android:text="@string/description_and_details"
                     style="@style/textdetailsLabel"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Details"/>
+                    android:text="@string/description"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/nbrEpisodes"
+                    android:id="@+id/nbrSeason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12"
@@ -127,17 +129,17 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Episodes"
+                    android:text="@string/seasons_lable"
                     style="@style/textdetailsLabel"/>
 
                 <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/episodes"
+                    android:id="@+id/seeSeasons"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:text="see all episodes"
+                    android:text="@string/see_seasons"
                     android:textAllCaps="false"
-                    android:textColor="@color/linkColor"/>
+                    android:textColor="@color/linkColor" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
