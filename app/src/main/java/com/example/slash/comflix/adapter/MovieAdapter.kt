@@ -30,7 +30,7 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     }
 
 
-    inner class MyViewHolder : RecyclerView.ViewHolder{
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var title: TextView
         var cinema: TextView
@@ -38,17 +38,15 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
         var card: CardView
         var movieId:TextView
 
-
-        constructor(itemView: View) : super(itemView) {
+        init {
             this.title= itemView.findViewById<TextView>(R.id.title) as TextView
             this.cinema= itemView.findViewById<TextView>(R.id.cinema) as TextView
             this.thumbnail= itemView.findViewById<ImageView>(R.id.movieCover) as ImageView
             this.card=itemView.findViewById<CardView>(R.id.card_view) as CardView
             this.movieId=itemView.findViewById<TextView>(R.id.movieId) as TextView
-
-
-
         }
+
+
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

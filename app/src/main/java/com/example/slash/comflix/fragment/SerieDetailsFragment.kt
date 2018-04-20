@@ -6,6 +6,9 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +16,18 @@ import android.view.ViewGroup
 import android.widget.*
 
 import com.example.slash.comflix.R
+import com.example.slash.comflix.adapter.PersonAdapter
+import com.example.slash.comflix.entities.GridSpacingItemDecoration
+import com.example.slash.comflix.entities.Person
+import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.preparePersons
 
 class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private var serieID: Int = -1
 
     private var mListener: OnFragmentInteractionListener? = null
-
+    private var alertDialog:AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,13 +55,23 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showSeasonsDialog() }
 
+        var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1, GridLayoutManager.HORIZONTAL,false)
+        var actorsRecyclerView=fragView.findViewById<RecyclerView>(R.id.actorsRecyclerView) as RecyclerView
+        var personRelativeList=ArrayList<Person>()
+        var personAdapter= PersonAdapter(this.context,personRelativeList,R.layout.person_relative_card)
+        actorsRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
+        actorsRecyclerView.layoutManager=personLayoutManager
+        actorsRecyclerView.itemAnimator= DefaultItemAnimator()
+        actorsRecyclerView.adapter=personAdapter
+        preparePersons(this.context,personRelativeList,personAdapter)
+
         return fragView
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
+            mListener!!.onFragmentInteraction()
         }
     }
 
@@ -87,8 +105,8 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         builder.setView(lv)
         builder.setNegativeButton("Annuler",null)
 
-
-        builder.create().show()
+        alertDialog = builder.create()
+        alertDialog?.show()
 
     }
 
@@ -97,12 +115,14 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
     {
 
+            alertDialog?.dismiss()
+            mListener?.onFragmentInteraction()
     }
 
 
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    interface OnFragmentInteractionListener
+    {
+        fun onFragmentInteraction()
     }
 
     companion object {
