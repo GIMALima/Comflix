@@ -18,11 +18,14 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
    <style name="btn_style">
        <item name="android:textColor">@color/text</item>
-       <item name="android:textSize">12sp</item>
+       <item name="android:textSize">14sp</item>
        <item name="android:background">@color/redColor</item>
        <item name="android:layout_width">@dimen/button_width</item>
        <item name="android:layout_height">@dimen/button_height</item>
    </style>
+    <style name="btn" parent="btn_style">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 <style name="textStyle">
     <item name="android:textColor">#000</item>
     <item name="android:textSize">@dimen/titleMovie</item>
@@ -46,8 +49,9 @@
         <item name="android:textColorSecondary">@color/text</item>
     </style>
 
+<style name="cinema_title">
+    <item name="android:textColor">@color/colorPrimary</item>
+    <item name="android:textSize">@dimen/cinema_title</item>
 
-    <style name="button_style">
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
+</style>
 </resources>

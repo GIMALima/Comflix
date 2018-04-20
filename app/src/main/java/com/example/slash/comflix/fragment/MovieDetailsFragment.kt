@@ -1,6 +1,7 @@
 package com.example.slash.comflix.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -56,8 +57,14 @@ class MovieDetailsFragment : Fragment() {
         time.text=resources.getStringArray(R.array.movieTime).get(movieId)
         releae_date.text=resources.getStringArray(R.array.movieRelease).get(movieId)
         description.text=resources.getStringArray(R.array.movieDescription).get(movieId)
-        fab.setOnClickListener {
-            Toast.makeText(this.context,"eeeeee",Toast.LENGTH_LONG).show()
+        cinema.setOnClickListener {
+            val intent = Intent(this.context, DetailsActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt("id", movieId.toString().toInt()) //Your id
+            bundle.putString("type","cinema")
+            intent.putExtras(bundle) //P
+            this.context.startActivity(intent)
+
         }
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,

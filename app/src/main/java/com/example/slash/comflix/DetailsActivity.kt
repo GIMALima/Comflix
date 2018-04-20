@@ -7,6 +7,8 @@ import android.support.v4.app.NavUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.slash.comflix.fragment.CinemaFragment
+import com.example.slash.comflix.fragment.FavouriteCinemaFragment
 import com.example.slash.comflix.fragment.MovieDetailsFragment
 import com.example.slash.comflix.fragment.PersonDetailsFragment
 import kotlinx.android.synthetic.main.activity_details.*
@@ -22,21 +24,26 @@ class DetailsActivity : AppCompatActivity() {
         val id= intent.getIntExtra("id",0)
         var bundle= Bundle()
         bundle.putInt("id",id)
-     //   Toast.makeText(this,id.toString(),Toast.LENGTH_LONG).show()
        when (type){
-            "movie"->{
-                // toolbar.title="Entre"
+           "movie"->{
+                retour_toolbar.title=resources.getStringArray(R.array.movieTitles).get(id)
                 fragment=MovieDetailsFragment()
-
-
             }
-            "serie"->{
-                // toolbar.title="Autre"
+           "serie"->{
+               retour_toolbar.title=resources.getStringArray(R.array.serieTitles).get(id)
                fragment=MovieDetailsFragment()
             }
            "person"->{
-               // toolbar.title="Autre"
+               retour_toolbar.title=resources.getStringArray(R.array.personName).get(id)
                fragment= PersonDetailsFragment()
+           }
+           "cinema"->{
+               retour_toolbar.title=resources.getStringArray(R.array.movieTitles).get(id)
+               fragment= CinemaFragment()
+           }
+           "cinema_favouris"->{
+               retour_toolbar.title="My favourite cinemas"
+               fragment= FavouriteCinemaFragment()
            }
         }
         fragment!!.arguments=bundle

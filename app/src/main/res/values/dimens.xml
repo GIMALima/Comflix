@@ -15,8 +15,9 @@
     <dimen name="image_height">160dp</dimen>
     <dimen name="titleMovie">14sp</dimen>
     <dimen name="marg">10dp</dimen>
-    <dimen name="details_image_height">250dp</dimen>
+    <dimen name="details_image_height">220dp</dimen>
     <dimen name="person_relative_card_width">165dp</dimen>
-    <dimen name="btn_margin_top">220dp</dimen>
+    <dimen name="btn_margin_top">190dp</dimen>
+    <dimen name="cinema_title">22sp</dimen>
 
 </resources>

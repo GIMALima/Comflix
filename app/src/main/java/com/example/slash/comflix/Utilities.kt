@@ -125,6 +125,31 @@ fun prepareFavouriteCinema(context: Context, cinemaFavourite:ArrayList<Cinema>,c
     }
     cinemaAdapter.notifyDataSetChanged()
 }
+fun prepareFavouriteCinema(context: Context, cinemaFavourite:ArrayList<Cinema>,cinemaAdapter:CinemaAdapter){
+    var covers= intArrayOf(
+
+            R.drawable.ibnkhaldoun,
+            R.drawable.atlas,
+            R.drawable.mouggar,
+            R.drawable.chabab,
+            R.drawable.ibnkhaldoun,
+            R.drawable.ibnkhaldoun,
+            R.drawable.ibnkhaldoun,
+            R.drawable.ibnkhaldoun,
+            R.drawable.atlas,
+            R.drawable.mouggar
+    )
+    var cinemaName=context.resources.getStringArray(R.array.cinemaName)
+    var cinemaLocation=context.resources.getStringArray(R.array.cinemaLocation)
+    var cinemaSalle=context.resources.getIntArray(R.array.nb_salleCinema)
+
+
+    for (i in 0 until covers.size){
+        var cinema= Cinema(cinemaName.get(i),covers.get(i),cinemaLocation.get(i),cinemaSalle.get(i),i)
+        cinemaFavourite.add(cinema)
+    }
+    cinemaAdapter.notifyDataSetChanged()
+}
 fun preparePersons(context:Context, personList:ArrayList<Person>, personAdapter: PersonAdapter){
     var covers= intArrayOf(
             R.drawable.dyl,
