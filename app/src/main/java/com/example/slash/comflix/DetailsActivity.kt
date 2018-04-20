@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.slash.comflix.fragment.MovieDetailsFragment
+import com.example.slash.comflix.fragment.PersonDetailsFragment
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
@@ -33,6 +34,10 @@ class DetailsActivity : AppCompatActivity() {
                 // toolbar.title="Autre"
                fragment=MovieDetailsFragment()
             }
+           "person"->{
+               // toolbar.title="Autre"
+               fragment= PersonDetailsFragment()
+           }
         }
         fragment!!.arguments=bundle
         supportFragmentManager.beginTransaction()

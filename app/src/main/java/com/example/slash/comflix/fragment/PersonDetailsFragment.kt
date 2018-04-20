@@ -10,64 +10,47 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.slash.comflix.*
-import com.example.slash.comflix.adapter.FavouriteMovieAdapter
+import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
-import kotlinx.android.synthetic.main.fragment_movie_details.*
+import com.example.slash.comflix.prepareMovies
+import com.example.slash.comflix.preparePersons
+import kotlinx.android.synthetic.main.fragment_person_details.*
 
-class MovieDetailsFragment : Fragment() {
+class PersonDetailsFragment : Fragment() {
 
-
-    var movieId=0
+    var personId=0
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (arguments != null) {
-           movieId = arguments.getInt(ARG_PARAM1)
+            personId = arguments.getInt(PersonDetailsFragment.ARG_PARAM1)
         }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var movieCovers= intArrayOf(
-                R.drawable.divergent,
-                R.drawable.hungergamescatchingfire,
-                R.drawable.mazerunner,
-                R.drawable.pirateofthecar,
-                R.drawable.themazerunnerdeathcure,
-                R.drawable.themazerunnerscorch
-        )
-     //   Toast.makeText(this.context,movieId.toString(),Toast.LENGTH_LONG).show()
-        Glide.with(this.context).load( movieCovers.get(movieId)).into(movieCover)
-        title.text=resources.getStringArray(R.array.movieTitles).get(movieId)
-        director.text=resources.getStringArray(R.array.movieDirector).get(movieId)
-        writers.text=resources.getStringArray(R.array.movieWriters).get(movieId)
-        stars.text=resources.getStringArray(R.array.movieStars).get(movieId)
-        genre.text=resources.getStringArray(R.array.movieGenre).get(movieId)
-        time.text=resources.getStringArray(R.array.movieTime).get(movieId)
-        releae_date.text=resources.getStringArray(R.array.movieRelease).get(movieId)
-        description.text=resources.getStringArray(R.array.movieDescription).get(movieId)
-        fab.setOnClickListener {
-            Toast.makeText(this.context,"eeeeee",Toast.LENGTH_LONG).show()
-        }
+        super.onActivityCreated(savedInstanceState)
+
+        Glide.with(this.context).load( R.drawable.dyl).into(personPicture)
+        title.text=resources.getStringArray(R.array.personTitles).get(personId)
+        name.text=resources.getStringArray(R.array.personName).get(personId)
+        date_birth.text=resources.getStringArray(R.array.personDateOfBirth).get(personId)
+        biography.text=resources.getStringArray(R.array.personBiographie).get(personId)
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        var view= inflater!!.inflate(R.layout.fragment_movie_details, container, false)
+        var view= inflater!!.inflate(R.layout.fragment_person_details, container, false)
         var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
-        var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
-
-        var movieRecyclerView=view.findViewById<RecyclerView>(R.id.moviesRecyclerView) as RecyclerView
+        var movieRecyclerView=view.findViewById<RecyclerView>(R.id.filmRecyclerView) as RecyclerView
         var movieRelativeList=ArrayList<Movie>()
         var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.trending_movie_card)
         movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
@@ -75,14 +58,6 @@ class MovieDetailsFragment : Fragment() {
         movieRecyclerView.itemAnimator= DefaultItemAnimator()
         movieRecyclerView.adapter=movieAdapter
         prepareMovies(this.context,movieRelativeList,movieAdapter)
-        var actorsRecyclerView=view.findViewById<RecyclerView>(R.id.actorsRecyclerView) as RecyclerView
-        var personRelativeList=ArrayList<Person>()
-        var personAdapter= PersonAdapter(this.context,personRelativeList,R.layout.person_relative_card)
-        actorsRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
-        actorsRecyclerView.layoutManager=personLayoutManager
-        actorsRecyclerView.itemAnimator= DefaultItemAnimator()
-        actorsRecyclerView.adapter=personAdapter
-        preparePersons(this.context,personRelativeList,personAdapter)
         return view
     }
 
@@ -98,7 +73,7 @@ class MovieDetailsFragment : Fragment() {
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-            //throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+//            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
     }
 
@@ -126,12 +101,10 @@ class MovieDetailsFragment : Fragment() {
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private val ARG_PARAM1 = "id"
 
-
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: Int): MovieDetailsFragment {
-            val fragment = MovieDetailsFragment()
+        fun newInstance(param1: String): PersonDetailsFragment {
+            val fragment = PersonDetailsFragment()
             val args = Bundle()
-            args.putInt(ARG_PARAM1, param1)
+            args.putString(ARG_PARAM1, param1)
             fragment.arguments = args
             return fragment
         }

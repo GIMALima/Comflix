@@ -1,31 +1,31 @@
 package com.example.slash.comflix.adapter
 
-import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.CardView
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
-import com.example.slash.comflix.entities.Movie
-import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.LinearLayout
+import com.example.slash.comflix.entities.Person
 
-
-class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
+/**
+ * Created by Slash on 20/04/2018.
+ */
+class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
     var mcontext: Context
-    var movieList: List<Movie>
+    var personList: List<Person>
     var layout:Int
 
-    constructor(mcontext: Context, movieList: List<Movie>,layout:Int) : super() {
+    constructor(mcontext: Context, personList: List<Person>, layout:Int) : super() {
         this.mcontext = mcontext
-        this.movieList = movieList
+        this.personList = personList
         this.layout=layout
     }
 
@@ -33,50 +33,46 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     inner class MyViewHolder : RecyclerView.ViewHolder{
 
         var title: TextView
-        var cinema: TextView
+        var name: TextView
         var thumbnail: ImageView
+        var personId:TextView
         var card: CardView
-        var movieId:TextView
 
 
         constructor(itemView: View) : super(itemView) {
             this.title= itemView.findViewById<TextView>(R.id.title) as TextView
-            this.cinema= itemView.findViewById<TextView>(R.id.cinema) as TextView
-            this.thumbnail= itemView.findViewById<ImageView>(R.id.movieCover) as ImageView
+            this.name= itemView.findViewById<TextView>(R.id.name) as TextView
+            this.thumbnail= itemView.findViewById<ImageView>(R.id.personPicture) as ImageView
             this.card=itemView.findViewById<CardView>(R.id.card_view) as CardView
-            this.movieId=itemView.findViewById<TextView>(R.id.movieId) as TextView
-
-
-
+            this.personId=itemView.findViewById<TextView>(R.id.personId) as TextView
         }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-          var movie=movieList.get(position)
-          holder.title.text=movie.title
-          holder.cinema.text=movie.cinema
-          holder.movieId.text=movie.movieId.toString()
-          Glide.with(mcontext).load(movie.cover).into(holder.thumbnail)
+        var person=personList.get(position)
+        holder.title.text=person.title
+        holder.name.text=person.name
+        holder.personId.text=person.personId.toString()
+        Glide.with(mcontext).load(person.image).into(holder.thumbnail)
 
 
     }
 
     override fun getItemCount(): Int {
-      return  movieList.size
+        return  personList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        var itemView=LayoutInflater.from(parent!!.context)
-                        .inflate(layout,parent,false)
-     val holder = MyViewHolder(itemView)
+        var itemView= LayoutInflater.from(parent!!.context)
+                .inflate(layout,parent,false)
+        val holder = MyViewHolder(itemView)
         holder.card.setOnClickListener{
 
             val intent = Intent(mcontext, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
+            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
+            bundle.putString("type","person")
             intent.putExtras(bundle) //P
-
             mcontext.startActivity(intent)
 
         }
@@ -84,8 +80,8 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
         holder.thumbnail.setOnClickListener {
             val intent = Intent(mcontext, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
+            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
+            bundle.putString("type","person")
             intent.putExtras(bundle) //P
 
             mcontext.startActivity(intent)
@@ -93,22 +89,23 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
         holder.title.setOnClickListener {
             val intent = Intent(mcontext, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
+            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
+            bundle.putString("type","person")
             intent.putExtras(bundle) //P
 
             mcontext.startActivity(intent)
         }
 
-        holder.cinema.setOnClickListener {
+        holder.name.setOnClickListener {
             val intent = Intent(mcontext, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
+            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
+            bundle.putString("type","person")
             intent.putExtras(bundle) //P
 
             mcontext.startActivity(intent)
         }
+
 
         return MyViewHolder(itemView)
 
