@@ -6,42 +6,33 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.SearchView
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Serie
 import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.getSerie
 import com.example.slash.comflix.prepareSeries
+import kotlinx.android.synthetic.main.app_bar_main.*
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SeriesFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SeriesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class SeriesFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+    var listSerie:ArrayList<Serie>?=null
     var adapter:SerieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -56,10 +47,15 @@ class SeriesFragment : Fragment() {
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
         prepareSeries(this.context,serieList,serieAdapter)
+        listSerie=serieList
         adapter=serieAdapter
         return view
     }
 
+     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+     }
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {

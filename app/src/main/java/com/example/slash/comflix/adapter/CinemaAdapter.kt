@@ -1,6 +1,8 @@
 package com.example.slash.comflix.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
 import com.example.slash.comflix.entities.Cinema
 
@@ -76,38 +79,33 @@ class CinemaAdapter : RecyclerView.Adapter<CinemaAdapter.MyViewHolder> {
              holder.favourite.setImageDrawable(parent!!.context.resources.getDrawable(R.drawable.ic_favorite_border_24dp))
 
          }
-
-
         }
-/*
-        holder.thumbnail.setOnClickListener {
+
+        holder.card.setOnClickListener {
             val intent = Intent(mcontext, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
+            bundle.putInt("id", holder.cinemaId.text.toString().toInt()) //Your id
+            bundle.putString("type","cinema_details")
             intent.putExtras(bundle) //P
-
             mcontext.startActivity(intent)
         }
-        holder.title.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
-        }
-
         holder.cinema.setOnClickListener {
             val intent = Intent(mcontext, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
-            bundle.putString("type","movie")
+            bundle.putInt("id", holder.cinemaId.text.toString().toInt()) //Your id
+            bundle.putString("type","cinema_details")
             intent.putExtras(bundle) //P
-
             mcontext.startActivity(intent)
-        }*/
+        }
+        holder.salle.setOnClickListener {
+            val intent = Intent(mcontext, DetailsActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt("id", holder.cinemaId.text.toString().toInt()) //Your id
+            bundle.putString("type","cinema_details")
+            intent.putExtras(bundle) //P
+            mcontext.startActivity(intent)
+        }
+
 
         return MyViewHolder(itemView)
 

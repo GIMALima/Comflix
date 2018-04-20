@@ -7,10 +7,7 @@ import android.support.v4.app.NavUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.example.slash.comflix.fragment.CinemaFragment
-import com.example.slash.comflix.fragment.FavouriteCinemaFragment
-import com.example.slash.comflix.fragment.MovieDetailsFragment
-import com.example.slash.comflix.fragment.PersonDetailsFragment
+import com.example.slash.comflix.fragment.*
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
@@ -44,6 +41,10 @@ class DetailsActivity : AppCompatActivity() {
            "cinema_favouris"->{
                retour_toolbar.title="My favourite cinemas"
                fragment= FavouriteCinemaFragment()
+           }
+           "cinema_details"->{
+               retour_toolbar.title=resources.getStringArray(R.array.cinemaName).get(id)
+               fragment= CinemaDetailsFragment()
            }
         }
         fragment!!.arguments=bundle

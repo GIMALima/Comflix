@@ -16,6 +16,26 @@ fun calculateCardNum(context: Context):Int{
     return (num/160).toInt()
 
 }
+fun getMovies(context: Context):ArrayList<Movie>{
+    var movieList=ArrayList<Movie>()
+    var covers= intArrayOf(
+            R.drawable.divergent,
+            R.drawable.hungergamescatchingfire,
+            R.drawable.mazerunner,
+            R.drawable.pirateofthecar,
+            R.drawable.themazerunnerdeathcure,
+            R.drawable.themazerunnerscorch
+    )
+    var movieTitles=context.resources.getStringArray(R.array.movieTitles)
+    var movieCinema= context.resources.getStringArray(R.array.movieCinema)
+    var movieTime=context.resources.getStringArray(R.array.movieTime)
+    for (i in 0 until covers.size){
+        var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
+        movieList.add(movie)
+    }
+    return movieList
+
+}
 fun prepareMovies(context:Context,movieList:ArrayList<Movie>, movieAdapter: MovieAdapter){
     var covers= intArrayOf(
             R.drawable.divergent,
@@ -74,6 +94,30 @@ fun prepareFavouriteSeries(context:Context,serieList:ArrayList<Serie>, serieAdap
         serieList.add(serie)
     }
     serieAdapter.notifyDataSetChanged()
+}
+fun getSerie(context: Context):ArrayList<Serie>{
+   var serieList=ArrayList<Serie>()
+    var covers= intArrayOf(
+
+            R.drawable.houseofcards,
+            R.drawable.gameofthrones,
+            R.drawable.friends,
+            R.drawable.suits,
+            R.drawable.vikings,
+            R.drawable.breakingbad,
+            R.drawable.lacasadepapel,
+            R.drawable.prisonbreak
+    )
+    var serieTitles=context.resources.getStringArray(R.array.serieTitles)
+    var serieSeasons=context.resources.getIntArray(R.array.serieSeasons)
+    var serieEpisodes=context.resources.getIntArray(R.array.serieEpisodes)
+    var serieGenre=context.resources.getStringArray(R.array.serieGenre)
+
+    for (i in 0 until covers.size){
+        var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
+        serieList.add(serie)
+    }
+    return serieList
 }
 fun prepareSeries(context:Context,serieList:ArrayList<Serie>, serieAdapter: SerieAdapter){
     var covers= intArrayOf(

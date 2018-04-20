@@ -33,4 +33,7 @@
     <string name="my_cinemas_6">My cinemas(+12)</string>
     <string name="near">Near</string>
     <string name="title_activity_maps">Map</string>
+    <string name="cinema">Cinema:</string>
+    <string name="location">Location:</string>
+    <string name="movies_in_projection">Movies in projection</string>
 </resources>

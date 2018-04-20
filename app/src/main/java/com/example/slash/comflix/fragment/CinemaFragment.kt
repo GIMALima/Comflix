@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.slash.comflix.DetailsActivity
+import com.example.slash.comflix.MapsActivity
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.CinemaAdapter
 import com.example.slash.comflix.entities.Cinema
@@ -52,7 +53,8 @@ class CinemaFragment:Fragment() {
             override fun onActivityCreated(savedInstanceState: Bundle?) {
                 super.onActivityCreated(savedInstanceState)
                 near_cinema.setOnClickListener{
-                    Toast.makeText(this.context,"ddddddddd",Toast.LENGTH_LONG).show()
+                    val intent = Intent(this.context, MapsActivity::class.java)
+                    this.context.startActivity(intent)
                 }
                 see_favourite_cinema.setOnClickListener{
 

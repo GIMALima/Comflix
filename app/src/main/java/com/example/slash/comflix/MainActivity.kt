@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import android.widget.Toast
 import com.example.slash.comflix.fragment.FavouriteCinemaFragment
 import com.example.slash.comflix.fragment.FavouriteMoviesFragment
 import com.example.slash.comflix.fragment.FavouriteSeriesFragment
@@ -31,11 +32,7 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-        fragment= HomeFragment()
-        supportFragmentManager.beginTransaction()
-                .replace(conteneur_main.id,fragment)
-                .addToBackStack(null)
-                .commit()
+
     }
 
     override fun onBackPressed() {
@@ -49,21 +46,11 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        var item:MenuItem=menu.findItem(R.id.menu_search)
-        val searchView:SearchView = item.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-
-                return false
-            }
-        })
-
-
-
+        fragment= HomeFragment()
+        supportFragmentManager.beginTransaction()
+                .replace(conteneur_main.id,fragment)
+                .addToBackStack(null)
+                .commit()
 
         return true
     }
@@ -75,6 +62,7 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+
             R.id.nav_home -> {
                 fragment= HomeFragment()
             }

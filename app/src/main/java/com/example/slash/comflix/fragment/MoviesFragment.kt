@@ -5,32 +5,77 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.*
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.SearchView
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.getMovies
 import com.example.slash.comflix.prepareMovies
+import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MoviesFragment : Fragment(),AdapterView.OnItemClickListener {
-    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-
-    }
-
-
+class MoviesFragment : Fragment(){
+   var listMovies:ArrayList<Movie>?=null
+   var adapterMovie:MovieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        var item: MenuItem = this.activity.toolbar.menu.findItem(R.id.menu_search)
+        val searchView: SearchView = item.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                var i = 0
+                var allMovie = getMovies(this@MoviesFragment.context)
+                while (i < allMovie!!.size) {
+                    if (!allMovie!!.get(i).title!!.contains(newText, true)) {
+                        var x = 0
+                        while (x < listMovies!!.size) {
+                            if (!listMovies!!.get(x).title!!.contains(newText, true)) {
+                                listMovies!!.removeAt(x)
+                            }
+                            x++
+                        }
+                    } else {
+                        var add = true
+                        var j = 0
+                        while (add && j < listMovies!!.size) {
+                            if (listMovies!!.get(j).title!!.equals(allMovie!!.get(i).title)) {
+                                add = false
+                            }
+                            j++
+                        }
+                        if (add) {
+                            listMovies!!.add(allMovie.get(i))
+                        }
+                    }
+                    adapterMovie!!.notifyDataSetChanged()
+                    i++
+                }
+                return false
+            }
+        })
+    }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -44,7 +89,10 @@ class MoviesFragment : Fragment(),AdapterView.OnItemClickListener {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator=DefaultItemAnimator()
         recyclerView.adapter=movieAdapter
+        adapterMovie=movieAdapter
+        listMovies=movieList
         prepareMovies(this.context,movieList,movieAdapter)
+
         return view
     }
 
@@ -68,34 +116,17 @@ class MoviesFragment : Fragment(),AdapterView.OnItemClickListener {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
+
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
         private val ARG_PARAM1 = "param1"
         private val ARG_PARAM2 = "param2"
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MoviesFragment.
-         */
         // TODO: Rename and change types and number of parameters
         fun newInstance(param1: String, param2: String): MoviesFragment {
             val fragment = MoviesFragment()
