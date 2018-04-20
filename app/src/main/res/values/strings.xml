@@ -14,6 +14,9 @@
     <string name="season">Season</string>
     <string name="episode">Episode</string>
     <string name="trending_movies">Trending movies</string>
+    <string name="see_seasons">see seasons</string>
+    <string name="episodes">Episodes</string>>
+    <string name="seasons_lable">Seasons</string>
     <string name="see_cast_and_crew">See Cast and Crew</string>
     <string name="you_may_also_like_these_movies">You may also like these movies</string>
     <string name="duration">Duration:</string>
@@ -36,4 +39,5 @@
     <string name="cinema">Cinema:</string>
     <string name="location">Location:</string>
     <string name="movies_in_projection">Movies in projection</string>
+
 </resources>

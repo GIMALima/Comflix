@@ -112,6 +112,8 @@ class FavouriteCinemaAdapter : RecyclerView.Adapter<FavouriteCinemaAdapter.MyVie
         }
         holder.location.setOnClickListener {
             val intent = Intent(mcontext, MapsActivity::class.java)
+            val bundle = Bundle()
+            intent.putExtras(bundle) //P
             mcontext.startActivity(intent)
         }
         return MyViewHolder(itemView)

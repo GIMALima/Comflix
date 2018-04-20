@@ -13,7 +13,7 @@
     </string-array>
     <integer-array name="serieSeasons">
 
-        <item>5</item>
+<item>5</item>
         <item>7</item>
         <item>10</item>
         <item>7</item>
@@ -44,4 +44,23 @@
         <item>6</item>
         <item>7</item>
     </integer-array>
+
+    <integer-array name="serieCovers">
+        <item>@drawable/houseofcards</item>
+        <item>@drawable/gameofthrones</item>
+        <item>@drawable/friends</item>
+        <item>@drawable/suits</item>
+        <item>@drawable/vikings</item>
+        <item>@drawable/breakingbad</item>
+        <item>@drawable/lacasadepapel</item>
+        <item>@drawable/prisonbreak</item>
+    </integer-array>
+
+    <string name="serieDirector">Wes Ball</string>
+    <string name="serieWriters">Noah Oppenheim, Grant Pierce Myers</string>
+    <string name="serieStars">Gabriel Macht, Patrick J.Adams, Meghan Markle</string>
+    <string name="serieReleased">June 23, 2011 USA</string>
+    <string name="serieDescription">While running from a drug deal gone bad, Mike Ross, a brilliant young college-dropout, slips into a job interview with one of New York City\'s best legal closers, Harvey Specter. Tired of cookie-cutter law school grads, Harvey takes a gamble by hiring Mike on the spot after he recognizes his raw talent and photographic memory. Mike and Harvey are a winning team. Even though Mike is a genius, he still has a lot to learn about law. And while Harvey may seem like an emotionless, cold-blooded shark, Mike\'s sympathy and concern for their cases and clients will help remind Harvey why he went into law in the first place. Mike's other allies in the office include the firm's best paralegal Rachel and Harvey's no-nonsense assistant Donna to help him serve justice. Proving to be an irrepressible duo and invaluable to the practice, Mike and Harvey must keep their secret from everyone including managing partner Jessica and Harvey's arch nemesis Louis, who seems intent on making Mike's life as difficult as possible.</string>
+
+
 </resources>

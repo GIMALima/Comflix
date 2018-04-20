@@ -34,16 +34,17 @@
                 android:paddingRight="@dimen/paddingTextView"
                 android:paddingTop="@dimen/paddingTextView"
                 />
+
             <TextView
                 android:id="@+id/season"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/title"
-                android:paddingLeft="@dimen/paddingTextView"
-                android:paddingRight="@dimen/paddingTextView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
                 android:paddingBottom="@dimen/paddingTextView"
-                />
+                android:paddingLeft="@dimen/paddingTextView"
+                android:paddingRight="@dimen/paddingTextView" />
             <TextView
                 android:id="@+id/episode"
                 style="@style/secondary_text"
