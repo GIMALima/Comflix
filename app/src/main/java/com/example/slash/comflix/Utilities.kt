@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.slash.comflix.adapter.*
 import com.example.slash.comflix.entities.Cinema
 import com.example.slash.comflix.entities.Movie
+import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.Serie
 
 /**
@@ -123,4 +124,28 @@ fun prepareFavouriteCinema(context: Context, cinemaFavourite:ArrayList<Cinema>,c
         cinemaFavourite.add(cinema)
     }
     cinemaAdapter.notifyDataSetChanged()
+}
+fun preparePersons(context:Context, personList:ArrayList<Person>, personAdapter: PersonAdapter){
+    var covers= intArrayOf(
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl,
+            R.drawable.dyl
+    )
+    var personTitles=context.resources.getStringArray(R.array.personTitles)
+    var personNames= context.resources.getStringArray(R.array.personName)
+    var personDateOfBirth=context.resources.getStringArray(R.array.personDateOfBirth)
+    var personBiographie=context.resources.getStringArray(R.array.personBiographie)
+    var personFilmographie=context.resources.getStringArray(R.array.personFilmographie)
+    for (i in 0 until covers.size){
+        var person= Person(personTitles.get(i),personNames.get(i),covers.get(i),personDateOfBirth.get(i),personBiographie.get(i),personFilmographie.get(i),i)
+        personList.add(person)
+    }
+    personAdapter.notifyDataSetChanged()
 }

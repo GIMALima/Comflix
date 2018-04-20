@@ -14,12 +14,23 @@
     <string name="season">Season</string>
     <string name="episode">Episode</string>
     <string name="trending_movies">Trending movies</string>
-    <string name="description_and_details">Description and details</string>
     <string name="see_seasons">see seasons</string>
-    <string name="episodes">Episodes</string>
-    <string name="writers_label">Writers:\ </string>
-    <string name="director_label">Director: </string>
-    <string name="stars_label">Stars: </string>
-    <string name="released_label">Released: </string>
+    <string name="episodes">Episodes</string>>
     <string name="seasons_lable">Seasons</string>
+    <string name="see_cast_and_crew">See Cast and Crew</string>
+    <string name="you_may_also_like_these_movies">You may also like these movies</string>
+    <string name="duration">Duration:</string>
+    <string name="genre">Genre:</string>
+    <string name="stars">Stars:</string>
+    <string name="writers">Writers:</string>
+    <string name="director">Director:</string>
+    <string name="released">Released:</string>
+    <string name="description_and_details">Description and details</string>
+    <string name="movie_cast_and_crew">Movie Cast and Crew</string>
+    <string name="you_may_also_like">You may also like</string>
+    <string name="filmography">Filmography</string>
+    <string name="date_of_birth">Date of birth: </string>
+    <string name="biography">Biography: </string>
+    <string name="title">Title:</string>
+>>>>>>> 5bb8e98c34f5d647d5cee5fea3fa79093091c9cf
 </resources>

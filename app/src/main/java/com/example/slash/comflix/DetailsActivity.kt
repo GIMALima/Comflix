@@ -8,9 +8,9 @@ import android.support.v4.app.NavUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.example.slash.comflix.fragment.MovieDetailsFragment
 import com.example.slash.comflix.fragment.SerieDetailsFragment
+import com.example.slash.comflix.fragment.PersonDetailsFragment
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
@@ -36,6 +36,10 @@ class DetailsActivity : AppCompatActivity() {
                 // toolbar.title="Autre"
                fragment=SerieDetailsFragment()//SerieDetailsFragment.newInstance(id)
             }
+           "person"->{
+               // toolbar.title="Autre"
+               fragment= PersonDetailsFragment()
+           }
         }
         fragment!!.arguments=bundle
         supportFragmentManager.beginTransaction()
