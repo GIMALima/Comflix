@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/text"
     tools:context="com.example.slash.comflix.fragment.SerieDetailsFragment"
-    android:layout_marginTop="?attr/actionBarSize"
+
     >
 <LinearLayout
     android:layout_width="match_parent"

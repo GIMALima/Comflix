@@ -14,6 +14,10 @@ import com.example.slash.comflix.fragment.MovieDetailsFragment
 import com.example.slash.comflix.fragment.SerieDetailsFragment
 import com.example.slash.comflix.fragment.PersonDetailsFragment
 import com.example.slash.comflix.fragment.SeasonDetailsFragment
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import com.example.slash.comflix.fragment.*
 import kotlinx.android.synthetic.main.activity_details.*
 import java.util.*
 
@@ -30,24 +34,33 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
         val id= intent.getIntExtra("id",0)
         var bundle= Bundle()
         bundle.putInt("id",id)
-     //   Toast.makeText(this,id.toString(),Toast.LENGTH_LONG).show()
-       when (type){
-            "movie"->{
-                // toolbar.title="Entre"
-                fragment=MovieDetailsFragment()
 
-
-
-            }
-            "serie"->{
-                // toolbar.title="Autre"
-               fragment=SerieDetailsFragment()//SerieDetailsFragment.newInstance(id)
-            }
-           "person"->{
-               // toolbar.title="Autre"
-               fragment= PersonDetailsFragment()
+       when (type) {
+           "movie" -> {
+              // retour_toolbar.title = resources.getStringArray(R.array.movieTitles).get(id)
+               fragment = MovieDetailsFragment()
            }
-        }
+           "serie" -> {
+               //retour_toolbar.title = resources.getStringArray(R.array.serieTitles).get(id)
+               fragment = SerieDetailsFragment()
+           }
+           "person" -> {
+              // retour_toolbar.title = resources.getStringArray(R.array.personName).get(id)
+               fragment = PersonDetailsFragment()
+           }
+           "cinema" -> {
+              // retour_toolbar.title = resources.getStringArray(R.array.movieTitles).get(id)
+               fragment = CinemaFragment()
+           }
+           "cinema_favouris" -> {
+              // retour_toolbar.title = "My favourite cinemas"
+               fragment = FavouriteCinemaFragment()
+           }
+           "cinema_details" -> {
+              // retour_toolbar.title = resources.getStringArray(R.array.cinemaName).get(id)
+               fragment = CinemaDetailsFragment()
+           }
+       }
         fragment!!.arguments=bundle
         supportFragmentManager.beginTransaction()
                 .replace(details_container.id,fragment)
@@ -78,7 +91,7 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
                     }
                     BottomSheetBehavior.STATE_EXPANDED ->
                     {comment.setImageDrawable(resources.getDrawable(R.drawable.ic_collapse))
-                    comment.setOnClickListener{
+                     comment.setOnClickListener{
                         bottomsheet.state = BottomSheetBehavior.STATE_COLLAPSED
                     }}
                 }

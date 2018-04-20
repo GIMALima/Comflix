@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#1F1F1F</color>
     <color name="colorAccent">#2A3036</color>
     <color name="icons">#EFEFEF</color>
+    <color name="gray">#F3F3F3</color>
     <color name="text">#fff</color>
     <color name="redColor">#EA4E5C</color>
     <color name="likesColor">#c6c6c6</color>

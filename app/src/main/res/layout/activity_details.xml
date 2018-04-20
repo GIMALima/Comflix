@@ -5,15 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#efefef"
-    tools:context=".DetailsActivity"
+    tools:context=".DetailsActivity">
 
-    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/appBar"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:fitsSystemWindows="true">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/retour_toolbar"
             android:layout_width="match_parent"
@@ -33,10 +38,12 @@
         android:id="@+id/details_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/appBar"
+        tools:layout_editor_absoluteY="30dp"
         android:layout_marginBottom="?attr/actionBarSize"
         android:fitsSystemWindows="true">
     </FrameLayout>
-
+</RelativeLayout>
     <LinearLayout
         android:id="@+id/comments_section"
         android:layout_width="match_parent"
