@@ -6,9 +6,6 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.app.NavUtils
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.*
-import android.widget.TextView
 import android.widget.Toast
 import com.example.slash.comflix.fragment.MovieDetailsFragment
 import com.example.slash.comflix.fragment.SerieDetailsFragment
@@ -17,6 +14,8 @@ import com.example.slash.comflix.fragment.SeasonDetailsFragment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.example.slash.comflix.adapter.CommentsAdapter
+import com.example.slash.comflix.entities.Comment
 import com.example.slash.comflix.fragment.*
 import kotlinx.android.synthetic.main.activity_details.*
 import java.util.*
@@ -147,7 +146,7 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
     }
 
 
-    fun makeComments():CommentsAdapter
+    fun makeComments(): CommentsAdapter
     {
 
         val viewManager = LinearLayoutManager(this)
@@ -176,28 +175,3 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 }
 
 
-class CommentsAdapter(var commentsList:ArrayList<Comment>):RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val comment: TextView
-        val author: TextView
-
-        init {
-            comment = itemView.findViewById(R.id.cardauthor)
-            author = itemView.findViewById(R.id.cardcomment)
-        }
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.comment_card, parent, false)
-        return ViewHolder(itemView)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.author?.text = commentsList[position].author
-        holder?.comment?.text = commentsList[position].comment
-    }
-
-    override fun getItemCount() = commentsList.size
-}
-data class Comment(val author:String,val comment:String )

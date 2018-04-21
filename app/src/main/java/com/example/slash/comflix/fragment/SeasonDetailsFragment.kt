@@ -2,13 +2,14 @@ package com.example.slash.comflix.fragment
 
 import android.support.v4.app.Fragment
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.example.slash.comflix.EpisodesActivity
 import com.example.slash.comflix.R
 
 /**
@@ -31,12 +32,14 @@ class SeasonDetailsFragment: Fragment()
                 setImageDrawable(
                         resources.getDrawable(
                                 resources.obtainTypedArray(
-                                        R.array.episodesCover).getResourceId(
+                                        R.array.seasonCover).getResourceId(
                                         serieID,-1)))
 
         fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieEpisodes)[serieID].toString() + " "
 
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showEpisodesActivity() }
+
+
 
         return fragView
     }
@@ -65,6 +68,8 @@ class SeasonDetailsFragment: Fragment()
 
     fun showEpisodesActivity()
     {
+        val intent = Intent(context,EpisodesActivity::class.java)
+        startActivity(intent)
 
     }
 

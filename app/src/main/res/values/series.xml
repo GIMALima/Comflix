@@ -89,9 +89,22 @@
         <item>Top top top, it\'s art</item>
     </string-array>
 
-    <integer-array name="episodesCover">
+    <integer-array name="seasonCover">
         <item>@drawable/suits_season1</item>
     </integer-array>
+
+    <integer-array name="episodeCover">
+        <item>@drawable/suits</item>
+    </integer-array>
+    <string-array name="episodeTitle">
+        <item>Pilot</item>
+    </string-array>
+    <string-array name="episodeDescription">
+        <item>A "closer" for one of New York City\'s most successful law firms decides to hire an aloof genius who has passed the bar but never went to law school as his associate.</item>
+    </string-array>
+
+
+
     
 
 </resources>
