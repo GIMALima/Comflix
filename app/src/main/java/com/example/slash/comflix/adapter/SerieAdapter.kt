@@ -45,7 +45,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
             this.season= itemView.findViewById<TextView>(R.id.season) as TextView
             this.episode= itemView.findViewById<TextView>(R.id.episode) as TextView
             this.cover= itemView.findViewById<ImageView>(R.id.serieCover) as ImageView
-            this.serieId = itemView.findViewById(R.id.serieId)
+            this.serieId = itemView.findViewById<TextView>(R.id.serieId) as TextView
         }
     }
 
@@ -55,7 +55,6 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
         holder.season.text="Season"+" "+serie.season.toString()
         holder.episode.text="Episode"+" "+serie.episode.toString()
         holder.serieId.text = serie.serieId.toString()
-        Log.d("SerieAdapter",serie.serieId.toString())
         Glide.with(mcontext).load(serie.cover).into(holder.cover)
 
     }
@@ -86,7 +85,6 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
         bundle.putInt("id", holder.serieId.text.toString().toInt()) //Your id
         bundle.putString("type","serie")
         intent.putExtras(bundle)
-
         mcontext.startActivity(intent)
     }
 
