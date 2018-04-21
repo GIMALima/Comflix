@@ -2,25 +2,24 @@ package com.example.slash.comflix.fragment
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
+import com.bumptech.glide.Glide
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
 import com.example.slash.comflix.preparePersons
+import kotlinx.android.synthetic.main.fragment_serie_details.*
 
 class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
@@ -33,8 +32,8 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
         if (arguments != null)
         {
-            serieID = arguments.getInt("id")
-            Log.d("SerieDetailsFragment",serieID.toString())
+            serieID = arguments.getInt(SERIE_ID_PARAM)
+          //  Log.d("SerieDetailsFragment",serieID.toString())
         }
     }
 
@@ -43,18 +42,15 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         // Inflate the layout for this fragment
         val fragView = inflater!!.inflate(R.layout.fragment_serie_details, container, false)
 
-
-        fragView.findViewById<ImageView>(R.id.cover).
+       /* fragView.findViewById<ImageView>(R.id.cover).
                 setImageDrawable(
                         resources.getDrawable(
                                 resources.obtainTypedArray(
                                         R.array.serieCovers).getResourceId(
                                         serieID,-1)))
-
+*/
         fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieSeasons)[serieID].toString() + " "
-
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showSeasonsDialog() }
-
         var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1, GridLayoutManager.HORIZONTAL,false)
         var actorsRecyclerView=fragView.findViewById<RecyclerView>(R.id.actorsRecyclerView) as RecyclerView
         var personRelativeList=ArrayList<Person>()
@@ -68,74 +64,91 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         return fragView
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction()
-        }
-    }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            mListener = context
-        } else {
-           // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
+        var covers= intArrayOf(
 
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
+                R.drawable.houseofcards,
+                R.drawable.gameofthrones,
+                R.drawable.friends,
+                R.drawable.suits,
+                R.drawable.vikings,
+                R.drawable.breakingbad,
+                R.drawable.lacasadepapel,
+                R.drawable.prisonbreak
+        )
+        Glide.with(this.context).load(covers.get(serieID)).into(serieCover)
+}
 
+// TODO: Rename method, update argument and hook method into UI event
+fun onButtonPressed(uri: Uri) {
+if (mListener != null) {
+    mListener!!.onFragmentInteraction()
+}
+}
 
-    fun showSeasonsDialog()
-    {
-        val builder= AlertDialog.Builder(context)
-        builder.setTitle("Choose a season")
-        var array: ArrayList<String> = ArrayList()
-        for (i in 1..resources.getIntArray(R.array.serieSeasons)[serieID])
-            array.add("Season $i")
-        val arrayAdapter = ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,array)
+override fun onAttach(context: Context?) {
+super.onAttach(context)
+if (context is OnFragmentInteractionListener) {
+    mListener = context
+} else {
+   // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+}
+}
 
-        val lv = ListView(context)
-        lv.adapter = arrayAdapter
-        lv.onItemClickListener = this
-        builder.setView(lv)
-        builder.setNegativeButton("Annuler",null)
-
-        alertDialog = builder.create()
-        alertDialog?.show()
-
-    }
+override fun onDetach() {
+super.onDetach()
+mListener = null
+}
 
 
+fun showSeasonsDialog()
+{
+val builder= AlertDialog.Builder(context)
+builder.setTitle("Choose a season")
+var array: ArrayList<String> = ArrayList()
+for (i in 1..resources.getIntArray(R.array.serieSeasons)[serieID])
+    array.add("Season $i")
+val arrayAdapter = ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,array)
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-    {
+val lv = ListView(context)
+lv.adapter = arrayAdapter
+lv.onItemClickListener = this
+builder.setView(lv)
+builder.setNegativeButton("Annuler",null)
 
-            alertDialog?.dismiss()
-            mListener?.onFragmentInteraction()
-    }
+alertDialog = builder.create()
+alertDialog?.show()
+
+}
 
 
-    interface OnFragmentInteractionListener
-    {
-        fun onFragmentInteraction()
-    }
 
-    companion object {
+override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
+{
 
-        private val SERIE_ID_PARAM = "serieId"
+    alertDialog?.dismiss()
+    mListener?.onFragmentInteraction()
+}
 
-        fun newInstance(serieId: Int): SerieDetailsFragment
-        {
-            val fragment = SerieDetailsFragment()
-            val bundle = Bundle()
-            bundle.putInt(SERIE_ID_PARAM,serieId)
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
+
+interface OnFragmentInteractionListener
+{
+fun onFragmentInteraction()
+}
+
+companion object {
+
+private val SERIE_ID_PARAM = "id"
+
+fun newInstance(serieId: Int): SerieDetailsFragment
+{
+    val fragment = SerieDetailsFragment()
+    val bundle = Bundle()
+    bundle.putInt(SERIE_ID_PARAM,serieId)
+    fragment.arguments = bundle
+    return fragment
+}
+}
 }// Required empty public constructor
