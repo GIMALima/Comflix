@@ -26,15 +26,11 @@ class MoviesFragment : Fragment(){
    var adapterMovie:MovieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
 
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        var item: MenuItem = this.activity.toolbar.menu.findItem(R.id.menu_search)
+     fun search()
+     {
+         var item: MenuItem = this.activity.toolbar.menu.findItem(R.id.menu_search)
         val searchView: SearchView = item.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -106,6 +102,7 @@ class MoviesFragment : Fragment(){
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+            search()
         } else {
            // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }

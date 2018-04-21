@@ -107,6 +107,7 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
             if (filtredCom != "")
             {
                 adapter.commentsList.add(Comment(com.toString(),getString(R.string.current_user)))
+                text_comment.setText("")
                 adapter.notifyDataSetChanged()
             }
             else
