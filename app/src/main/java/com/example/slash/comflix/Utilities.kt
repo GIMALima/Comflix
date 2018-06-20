@@ -30,8 +30,8 @@ fun getMovies(context: Context):ArrayList<Movie>{
     var movieCinema= context.resources.getStringArray(R.array.movieCinema)
     var movieTime=context.resources.getStringArray(R.array.movieTime)
     for (i in 0 until covers.size){
-        var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
-        movieList.add(movie)
+        //var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
+       // movieList.add(movie)
     }
     return movieList
 
@@ -49,8 +49,8 @@ fun prepareMovies(context:Context,movieList:ArrayList<Movie>, movieAdapter: Movi
     var movieCinema= context.resources.getStringArray(R.array.movieCinema)
     var movieTime=context.resources.getStringArray(R.array.movieTime)
     for (i in 0 until covers.size){
-        var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
-        movieList.add(movie)
+     //   var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
+       // movieList.add(movie)
     }
     movieAdapter.notifyDataSetChanged()
 }
@@ -67,8 +67,8 @@ fun prepareFavouriteMovies(context:Context,movieList:ArrayList<Movie>, movieAdap
     var movieCinema= context.resources.getStringArray(R.array.movieCinema)
     var movieTime=context.resources.getStringArray(R.array.movieTime)
     for (i in 0 until covers.size){
-        var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
-        movieList.add(movie)
+     //   var movie= Movie(movieTitles.get(i),covers.get(i),movieCinema.get(i),movieTime.get(i),i)
+       // movieList.add(movie)
     }
     movieAdapter.notifyDataSetChanged()
 }
@@ -142,9 +142,9 @@ fun prepareSeries(context:Context,serieList:ArrayList<Serie>, serieAdapter: Seri
     }
     serieAdapter.notifyDataSetChanged()
 }
-fun prepareTrending(context:Context,movieTrendingList:ArrayList<Movie>, movieTrendingAdapter: MovieAdapter,serieTrendingList:ArrayList<Serie>, serieTrendingAdapter: SerieAdapter){
+fun prepareTrending(context:Context,serieTrendingList:ArrayList<Serie>, serieTrendingAdapter: SerieAdapter){
 
-    prepareMovies(context,movieTrendingList,movieTrendingAdapter)
+
     prepareSeries(context,serieTrendingList,serieTrendingAdapter)
 
 }

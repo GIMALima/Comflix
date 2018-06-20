@@ -1,5 +1,8 @@
 package com.example.slash.comflix.fragment
 
+import android.app.ProgressDialog
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -7,14 +10,18 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.slash.comflix.R
+import com.example.slash.comflix.ViewModel.MovieViewModel
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.entities.*
 import com.example.slash.comflix.prepareTrending
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class TrendingFragment : Fragment() {
@@ -29,6 +36,7 @@ class TrendingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         val view = inflater!!.inflate(R.layout.fragment_trending, container, false)
         var trendingMoviesList=ArrayList<Movie>()
         var trendingseriesList=ArrayList<Serie>()
@@ -38,25 +46,28 @@ class TrendingFragment : Fragment() {
         var serieAdapter= SerieAdapter(this.context,trendingseriesList,R.layout.trending_serie_card)
         var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         var serieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
-
         movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         serieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
-
         movieRecyclerView.layoutManager=movieLayoutManager
         movieRecyclerView.itemAnimator= DefaultItemAnimator()
         movieRecyclerView.adapter=movieAdapter
         serieRecyclerView.layoutManager=serieLayoutManager
         serieRecyclerView.itemAnimator= DefaultItemAnimator()
         serieRecyclerView.adapter=serieAdapter
-        prepareTrending(this.context,trendingMoviesList,movieAdapter,trendingseriesList,serieAdapter)
+        prepareTrending(this.context,trendingseriesList,serieAdapter)
+        RetrofitBuilder.movieApi.getMoviesNowPalying()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { result -> trendingMoviesList=result.results
+                                    movieAdapter.updateListMovie(trendingMoviesList)
+                        },
+                        { error -> Log.e("ERROR", error.message) }
+                )
 
         return view
     }
 
-
-
-
-    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)

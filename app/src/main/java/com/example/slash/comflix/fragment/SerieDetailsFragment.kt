@@ -33,7 +33,6 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         if (arguments != null)
         {
             serieID = arguments.getInt(SERIE_ID_PARAM)
-          //  Log.d("SerieDetailsFragment",serieID.toString())
         }
     }
 
@@ -42,13 +41,6 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         // Inflate the layout for this fragment
         val fragView = inflater!!.inflate(R.layout.fragment_serie_details, container, false)
 
-       /* fragView.findViewById<ImageView>(R.id.cover).
-                setImageDrawable(
-                        resources.getDrawable(
-                                resources.obtainTypedArray(
-                                        R.array.serieCovers).getResourceId(
-                                        serieID,-1)))
-*/
         fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieSeasons)[serieID].toString() + " "
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showSeasonsDialog() }
         var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1, GridLayoutManager.HORIZONTAL,false)

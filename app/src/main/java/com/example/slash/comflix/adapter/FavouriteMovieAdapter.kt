@@ -50,9 +50,9 @@ class FavouriteMovieAdapter : RecyclerView.Adapter<FavouriteMovieAdapter.MyViewH
         if (!movieList.isEmpty()) {
             var movie = movieList.get(position)
             holder.title.text = movie.title
-            holder.time.text = movie.time
-            holder.movieId.text = movie.movieId.toString()
-            Glide.with(mcontext).load(movie.cover).into(holder.thumbnail)
+            holder.time.text = movie.release_date
+            holder.movieId.text = movie.id.toString()
+            Glide.with(mcontext).load(movie.poster_path).into(holder.thumbnail)
 
         }
 
