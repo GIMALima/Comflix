@@ -24,6 +24,9 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 {
 
     var fragment: Fragment?=null
+
+    var isLiked= false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -111,9 +114,18 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
             }
             else
                 Toast.makeText(this,getString(R.string.empty_string),Toast.LENGTH_LONG).show()
+        }
 
-
-
+        like.setOnClickListener{
+            if (isLiked)
+            {
+                like.setImageDrawable(resources.getDrawable(R.drawable.ic_thumbup))
+                isLiked = false
+            }else
+            {
+                like.setImageDrawable(resources.getDrawable(R.drawable.ic_thumbup_active))
+                isLiked = true
+            }
         }
 
     }
@@ -172,6 +184,8 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
         return commentSize
     }
+
+
 }
 
 
