@@ -50,7 +50,6 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
         fragment= HomeFragment()
         supportFragmentManager.beginTransaction()
                 .replace(conteneur_main.id,fragment)
-                .addToBackStack(null)
                 .commit()
 
         return true
