@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
+import com.example.slash.comflix.entities.RetrofitBuilder
 import com.example.slash.comflix.entities.Serie
 
 /**
@@ -51,11 +52,11 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val serie=serieList.get(position)
-        holder.title.text=serie.title
-        holder.season.text="Season"+" "+serie.season.toString()
-        holder.episode.text="Episode"+" "+serie.episode.toString()
-        holder.serieId.text = serie.serieId.toString()
-        Glide.with(mcontext).load(serie.cover).into(holder.cover)
+        holder.title.text=serie.name
+        holder.season.text=serie.first_air_date
+        //holder.episode.text="Episode"+" "+serie.episode.toString()
+        holder.serieId.text = serie.id.toString()
+        Glide.with(mcontext).load(RetrofitBuilder.imageBaseURL+serie.poster_path).into(holder.cover)
 
     }
 

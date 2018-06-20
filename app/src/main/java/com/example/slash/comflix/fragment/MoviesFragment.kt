@@ -21,12 +21,12 @@ import com.example.slash.comflix.entities.dpToPx
 import com.example.slash.comflix.getMovies
 import com.example.slash.comflix.prepareMovies
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_series.*
 
 class MoviesFragment : Fragment(){
    var listMovies:ArrayList<Movie>?=null
    var adapterMovie:MovieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
-
 
 
      fun search()

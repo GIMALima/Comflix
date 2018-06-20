@@ -7,20 +7,25 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.SearchView
+import android.widget.Toast
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.calculateCardNum
-import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Serie
-import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.entities.*
 import com.example.slash.comflix.getSerie
 import com.example.slash.comflix.prepareSeries
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_series.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class SeriesFragment : Fragment() {
@@ -30,11 +35,10 @@ class SeriesFragment : Fragment() {
     var listSerie:ArrayList<Serie>?=null
     var adapter:SerieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
+    val progressBar:ProgressBar by lazy { progressbar }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    var currentPage = 1
 
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,9 +51,37 @@ class SeriesFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
-        prepareSeries(this.context,serieList,serieAdapter)
-        listSerie=serieList
+        //prepareSeries(this.context,serieList,serieAdapter)
+        //listSerie=serieList
         adapter=serieAdapter
+        RetrofitBuilder.serieApi.getPopluareSeries(currentPage).enqueue(object : Callback<PopularSerieDTO>
+        {
+            override fun onFailure(call: Call<PopularSerieDTO>?, t: Throwable?)
+            {
+                Toast.makeText(activity,"Problem",Toast.LENGTH_LONG).show()
+                Log.d("SeriesFragment",t?.message)
+            }
+
+            override fun onResponse(call: Call<PopularSerieDTO>?, response: Response<PopularSerieDTO>?)
+            {
+                //Toast.makeText(activity,"Response",Toast.LENGTH_LONG).show()
+
+                progressbar.visibility = ProgressBar.GONE
+                if(response?.isSuccessful!!)
+                {
+                    Toast.makeText(activity,"Success",Toast.LENGTH_LONG).show()
+
+                    listSerie = response.body()?.results
+                    adapter?.serieList = listSerie?.toList()!!
+                    adapter?.notifyDataSetChanged()
+                }else
+                {
+                    //Toast.makeText(activity,response.code().toString() +"   "+response.errorBody() ,Toast.LENGTH_LONG).show()
+                    Log.d("SeriesFragment",response.code().toString() +"   "+response.errorBody())
+                }
+            }
+
+        })
         return view
     }
 

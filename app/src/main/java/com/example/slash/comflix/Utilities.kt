@@ -88,12 +88,12 @@ fun prepareFavouriteSeries(context:Context,serieList:ArrayList<Serie>, serieAdap
     var serieSeasons=context.resources.getIntArray(R.array.serieSeasons)
     var serieEpisodes=context.resources.getIntArray(R.array.serieEpisodes)
     var serieGenre=context.resources.getStringArray(R.array.serieGenre)
-
+/*
     for (i in 0 until covers.size){
         var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
         serieList.add(serie)
     }
-    serieAdapter.notifyDataSetChanged()
+    serieAdapter.notifyDataSetChanged()*/
 }
 fun getSerie(context: Context):ArrayList<Serie>{
    var serieList=ArrayList<Serie>()
@@ -112,11 +112,11 @@ fun getSerie(context: Context):ArrayList<Serie>{
     var serieSeasons=context.resources.getIntArray(R.array.serieSeasons)
     var serieEpisodes=context.resources.getIntArray(R.array.serieEpisodes)
     var serieGenre=context.resources.getStringArray(R.array.serieGenre)
-
+/*
     for (i in 0 until covers.size){
         var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
         serieList.add(serie)
-    }
+    }*/
     return serieList
 }
 fun prepareSeries(context:Context,serieList:ArrayList<Serie>, serieAdapter: SerieAdapter){
@@ -135,11 +135,11 @@ fun prepareSeries(context:Context,serieList:ArrayList<Serie>, serieAdapter: Seri
     var serieSeasons=context.resources.getIntArray(R.array.serieSeasons)
     var serieEpisodes=context.resources.getIntArray(R.array.serieEpisodes)
     var serieGenre=context.resources.getStringArray(R.array.serieGenre)
-
+/*
     for (i in 0 until covers.size){
         var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
         serieList.add(serie)
-    }
+    }*/
     serieAdapter.notifyDataSetChanged()
 }
 fun prepareTrending(context:Context,serieTrendingList:ArrayList<Serie>, serieTrendingAdapter: SerieAdapter){

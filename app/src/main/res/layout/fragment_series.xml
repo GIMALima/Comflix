@@ -1,11 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorAccent"
     app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingView"
-    tools:context="com.example.slash.comflix.fragment.SeriesFragment">
+    tools:context="com.example.slash.comflix.fragment.SeriesFragment"
+    android:orientation="vertical">
+
+
+    <ProgressBar
+        android:elevation="6dp"
+        android:id="@+id/progressbar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@color/colorAccent"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/redColor"
+        android:max="100"
+        />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -14,4 +30,4 @@
         android:clipToPadding="false"
         android:scrollbars="vertical"/>
 
-</RelativeLayout>
+</android.support.v7.widget.LinearLayoutCompat>
