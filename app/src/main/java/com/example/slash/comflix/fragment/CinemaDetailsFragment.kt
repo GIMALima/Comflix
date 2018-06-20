@@ -63,7 +63,7 @@ class CinemaDetailsFragment : Fragment() {
         var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         var movieRecyclerView=view.findViewById<RecyclerView>(R.id.moviesRecyclerView) as RecyclerView
         var movieRelativeList=ArrayList<Movie>()
-        var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.trending_movie_card)
+        var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.movie_card)
         movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         movieRecyclerView.layoutManager=movieLayoutManager
         movieRecyclerView.itemAnimator= DefaultItemAnimator()

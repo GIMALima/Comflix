@@ -43,6 +43,6 @@
     <string name="url">https://api.themoviedb.org/3/</string>
     <string name="overview">overview</string>
     <string name="movie_url">movie/now_playing?api_key=b73297ba2fd4486c8d1e39f3e8d0c0e4</string>
-    <string name="image_url">https://image.tmdb.org/t/p/w500/</string>
+    <string name="image_url">https://image.tmdb.org/t/p/w300/</string>
 
 </resources>

@@ -4,9 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-/**
- * Created by Slash on 20/06/2018.
- */
+
 object RetrofitBuilder{
     val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -15,5 +13,6 @@ object RetrofitBuilder{
             .build()
 
     val movieApi = retrofit.create(MovieAPIClient::class.java)
+    val serieApi = retrofit.create(SerieAPIClient::class.java)
 
 }

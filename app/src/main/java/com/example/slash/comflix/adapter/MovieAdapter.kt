@@ -31,7 +31,7 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var title: TextView
-        var cinema: TextView
+        var date: TextView
         var thumbnail: ImageView
         var card: CardView
         var movieId:TextView
@@ -39,16 +39,16 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
         init {
 
             this.title= itemView.findViewById<TextView>(R.id.title) as TextView
-            this.cinema= itemView.findViewById<TextView>(R.id.cinema) as TextView
-            this.thumbnail= itemView.findViewById<ImageView>(R.id.movieCover) as ImageView
+            this.date= itemView.findViewById<TextView>(R.id.date) as TextView
+            this.thumbnail= itemView.findViewById<ImageView>(R.id.cover) as ImageView
             this.card=itemView.findViewById<CardView>(R.id.card_view) as CardView
-            this.movieId=itemView.findViewById<TextView>(R.id.movieId) as TextView
+            this.movieId=itemView.findViewById<TextView>(R.id.id) as TextView
         }
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
          var movie=movieList.get(position)
           holder.title.text=movie.title
-          holder.cinema.text=movie.release_date
+          holder.date.text=movie.release_date
           holder.movieId.text=movie.id.toString()
           Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+movie.poster_path).into(holder.thumbnail)
     }
@@ -66,7 +66,7 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
             card.setOnClickListener{openDetailsActivity(this)}
             title.setOnClickListener{openDetailsActivity(this)}
             thumbnail.setOnClickListener{openDetailsActivity(this)}
-            cinema.setOnClickListener { openDetailsActivity(this) }
+            date.setOnClickListener { openDetailsActivity(this) }
 
         }
 

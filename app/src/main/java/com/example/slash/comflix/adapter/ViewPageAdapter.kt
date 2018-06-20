@@ -38,9 +38,9 @@ class ViewPageAdapter: FragmentPagerAdapter {
         Log.i("title=",position.toString())
         when (position) {
             0 -> return "Trending"
-            1 -> return "Movies"
-            2 -> return "Series"
-            3 -> return "Persons"
+            1 -> return "Movie"
+            2 -> return "Serie"
+            3 -> return "Person"
             else -> { return  "Trending"
             }
         }

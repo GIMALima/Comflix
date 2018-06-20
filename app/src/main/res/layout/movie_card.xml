@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="165dp"
+    android:layout_height="match_parent"
     >
 
     <android.support.v7.widget.CardView
@@ -13,13 +13,17 @@
         android:layout_margin="@dimen/cardmargin"
         android:elevation="@dimen/cardEaluation"
         card_view:cardCornerRadius="0dp">
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/id"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/movieCover"
+                android:id="@+id/cover"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -31,27 +35,18 @@
                 style="@style/textStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/movieCover"
-                android:paddingLeft="@dimen/paddingTextView"
-                android:paddingRight="@dimen/paddingTextView"
-                android:paddingTop="@dimen/paddingTextView"
+                android:layout_below="@+id/cover"
+                android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
                 />
             <TextView
-                android:id="@+id/cinema"
+                android:id="@+id/date"
                 style="@style/secondary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title"
-                android:paddingLeft="@dimen/paddingTextView"
-                android:paddingRight="@dimen/paddingTextView"
-                android:paddingBottom="@dimen/paddingTextView"
+                android:paddingLeft="5dp"
                 />
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:visibility="invisible"
-              android:id="@+id/movieId"/>
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

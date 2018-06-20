@@ -48,13 +48,13 @@ class FavouriteSerieAdapter : RecyclerView.Adapter<FavouriteSerieAdapter.MyViewH
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         if (!serieList.isEmpty()) {
-            var serie = serieList.get(position)
+          /*  var serie = serieList.get(position)
             holder.title.text = serie.title
             holder.genre.text = serie.genre
             holder.season.text = "Season" + serie.season
             holder.episode.text = "Episode" + serie.episode
             holder.serieId.text = serie.serieId.toString()
-            Glide.with(mcontext).load(serie.cover).into(holder.thumbnail)
+            Glide.with(mcontext).load(serie.cover).into(holder.thumbnail)*/
 
         }
 

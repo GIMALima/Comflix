@@ -8,19 +8,15 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Serie
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.getSerie
 import com.example.slash.comflix.prepareSeries
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class SeriesFragment : Fragment() {
