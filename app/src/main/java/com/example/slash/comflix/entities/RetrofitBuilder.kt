@@ -38,7 +38,7 @@ object RetrofitBuilder {
             .build()
 
     val movieApi = retrofit.create(MovieAPIClient::class.java)
-    val serieApi = retrofit.create(SeriesAPIClient::class.java)
+    val serieApi = retrofit.create(SerieAPIClient::class.java)
 
 
 }

@@ -56,6 +56,7 @@ class FavouriteSerieAdapter : RecyclerView.Adapter<FavouriteSerieAdapter.MyViewH
             holder.serieId.text = ""//""serie.serieId.toString()
             //Glide.with(mcontext).load(serie.cover).into(holder.thumbnail)
 
+
         }
 
     }

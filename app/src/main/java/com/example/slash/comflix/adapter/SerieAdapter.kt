@@ -14,8 +14,11 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
+
 import com.example.slash.comflix.entities.RetrofitBuilder
+
 import com.example.slash.comflix.entities.Serie
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Slash on 13/04/2018.
@@ -34,8 +37,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
 
     inner class MyViewHolder : RecyclerView.ViewHolder{
         var title: TextView
-        var season: TextView
-        var episode: TextView
+        var date: TextView
         var cover: ImageView
         var card: CardView
         var serieId: TextView
@@ -43,20 +45,19 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
         constructor(itemView: View) : super(itemView) {
             this.card = itemView.findViewById(R.id.card_view)
             this.title= itemView.findViewById<TextView>(R.id.title) as TextView
-            this.season= itemView.findViewById<TextView>(R.id.season) as TextView
-            this.episode= itemView.findViewById<TextView>(R.id.episode) as TextView
-            this.cover= itemView.findViewById<ImageView>(R.id.serieCover) as ImageView
-            this.serieId = itemView.findViewById<TextView>(R.id.serieId) as TextView
+            this.date= itemView.findViewById<TextView>(R.id.date) as TextView
+            this.cover= itemView.findViewById<ImageView>(R.id.cover) as ImageView
+            this.serieId = itemView.findViewById<TextView>(R.id.id) as TextView
         }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val serie=serieList.get(position)
         holder.title.text=serie.name
-        holder.season.text=serie.first_air_date
-        //holder.episode.text="Episode"+" "+serie.episode.toString()
+
+        holder.date.text=serie.first_air_date
         holder.serieId.text = serie.id.toString()
-        Glide.with(mcontext).load(RetrofitBuilder.imageBaseURL+serie.poster_path).into(holder.cover)
+        Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+serie.poster_path).into(holder.cover)
 
     }
 
@@ -73,8 +74,8 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
             card.setOnClickListener{openDetailsActivity(this)}
             title.setOnClickListener{openDetailsActivity(this)}
             cover.setOnClickListener{openDetailsActivity(this)}
-            episode.setOnClickListener { openDetailsActivity(this)
-            season.setOnClickListener { openDetailsActivity(this)}}
+            date.setOnClickListener { openDetailsActivity(this)
+            }
 
         }
         return MyViewHolder(itemView)
@@ -88,6 +89,9 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
         intent.putExtras(bundle)
         mcontext.startActivity(intent)
     }
-
+    fun updateListSerie(listSerie:ArrayList<Serie>){
+        this.serieList=listSerie
+        this.notifyDataSetChanged()
+    }
 }
 

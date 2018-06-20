@@ -13,13 +13,10 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
-import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
-import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
 import com.example.slash.comflix.prepareMovies
-import com.example.slash.comflix.preparePersons
 import kotlinx.android.synthetic.main.fragment_person_details.*
 
 class PersonDetailsFragment : Fragment() {
@@ -52,7 +49,7 @@ class PersonDetailsFragment : Fragment() {
         var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         var movieRecyclerView=view.findViewById<RecyclerView>(R.id.filmRecyclerView) as RecyclerView
         var movieRelativeList=ArrayList<Movie>()
-        var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.trending_movie_card)
+        var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.movie_card)
         movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         movieRecyclerView.layoutManager=movieLayoutManager
         movieRecyclerView.itemAnimator= DefaultItemAnimator()

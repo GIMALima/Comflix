@@ -12,7 +12,7 @@
     <dimen name="cardmarginTop">150dp</dimen>
     <dimen name="button_width">100dp</dimen>
     <dimen name="button_height">35dp</dimen>
-    <dimen name="image_height">160dp</dimen>
+    <dimen name="image_height">150dp</dimen>
     <dimen name="titleMovie">14sp</dimen>
     <dimen name="marg">10dp</dimen>
     <dimen name="details_image_height">220dp</dimen>

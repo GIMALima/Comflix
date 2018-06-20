@@ -1,7 +1,6 @@
 package com.example.slash.comflix.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,17 +10,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.example.slash.comflix.*
-import com.example.slash.comflix.adapter.FavouriteMovieAdapter
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
-import kotlinx.android.synthetic.main.fragment_movie_details.*
 
 class MovieDetailsFragment : Fragment() {
 
@@ -48,7 +43,7 @@ class MovieDetailsFragment : Fragment() {
                 R.drawable.themazerunnerscorch
         )
      //   Toast.makeText(this.context,movieId.toString(),Toast.LENGTH_LONG).show()
-        Glide.with(this.context).load( movieCovers.get(movieId)).into(movieCover)
+/*        Glide.with(this.context).load( movieCovers.get(movieId)).into(movieCover)
         title.text=resources.getStringArray(R.array.movieTitles).get(movieId)
         director.text=resources.getStringArray(R.array.movieDirector).get(movieId)
         writers.text=resources.getStringArray(R.array.movieWriters).get(movieId)
@@ -65,7 +60,7 @@ class MovieDetailsFragment : Fragment() {
             intent.putExtras(bundle) //P
             this.context.startActivity(intent)
 
-        }
+        }*/
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -76,7 +71,7 @@ class MovieDetailsFragment : Fragment() {
 
         var movieRecyclerView=view.findViewById<RecyclerView>(R.id.moviesRecyclerView) as RecyclerView
         var movieRelativeList=ArrayList<Movie>()
-        var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.trending_movie_card)
+        var movieAdapter= MovieAdapter(this.context,movieRelativeList,R.layout.movie_card)
         movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         movieRecyclerView.layoutManager=movieLayoutManager
         movieRecyclerView.itemAnimator= DefaultItemAnimator()
