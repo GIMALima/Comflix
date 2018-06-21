@@ -10,13 +10,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
+import com.example.slash.comflix.entities.PersonDTO
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareMovies
+import com.example.slash.comflix.getPersonDetails
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_person_details.*
 
 class PersonDetailsFragment : Fragment() {
@@ -36,16 +37,13 @@ class PersonDetailsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         super.onActivityCreated(savedInstanceState)
 
-        Glide.with(this.context).load( R.drawable.dyl).into(personPicture)
-        title.text=resources.getStringArray(R.array.personTitles).get(personId)
-        name.text=resources.getStringArray(R.array.personName).get(personId)
-        date_birth.text=resources.getStringArray(R.array.personDateOfBirth).get(personId)
-        biography.text=resources.getStringArray(R.array.personBiographie).get(personId)
+
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view= inflater!!.inflate(R.layout.fragment_person_details, container, false)
+        getPersonDetails(personId,this)
         var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         var movieRecyclerView=view.findViewById<RecyclerView>(R.id.filmRecyclerView) as RecyclerView
         var movieRelativeList=ArrayList<Movie>()
@@ -54,7 +52,6 @@ class PersonDetailsFragment : Fragment() {
         movieRecyclerView.layoutManager=movieLayoutManager
         movieRecyclerView.itemAnimator= DefaultItemAnimator()
         movieRecyclerView.adapter=movieAdapter
-        prepareMovies(this.context,movieRelativeList,movieAdapter)
         return view
     }
 
@@ -79,23 +76,23 @@ class PersonDetailsFragment : Fragment() {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
-
+   fun onQueryResponse(personDetails: PersonDTO){
+       Picasso.with(this.context).load(this.context.getString(R.string.image_url) + personDetails!!.profile_path).into(personPicture)
+       name.text=personDetails.name
+       title.text="Also known as: "
+       for(i in 0 until personDetails.also_known_as.size) {
+           title.text =title.text.toString() + personDetails.also_known_as.get(i)
+       }
+       date_birth.text=personDetails.birthday
+       biography.text=personDetails.biography
+       popularity.text=personDetails.popularity.toString()
+       place_birth.text=personDetails.place_of_birth
+   }
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
         private val ARG_PARAM1 = "id"
 
         fun newInstance(param1: String): PersonDetailsFragment {

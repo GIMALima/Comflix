@@ -12,26 +12,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.SearchView
 import android.widget.Toast
+import com.example.slash.comflix.R
+import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.*
-import com.example.slash.comflix.prepareSeries
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_series.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-import com.example.slash.comflix.R
-import com.example.slash.comflix.R.id.progressbar
-import com.example.slash.comflix.adapter.SerieAdapter
-import com.example.slash.comflix.calculateCardNum
-import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Serie
-import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareSeries
-import kotlinx.android.synthetic.*
 
 
 class SeriesFragment : Fragment() {
@@ -57,8 +45,6 @@ class SeriesFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
-        //prepareSeries(this.context,serieList,serieAdapter)
-        //listSerie=serieList
         adapter=serieAdapter
         RetrofitBuilder.serieApi.getPopluareSeries(currentPage).enqueue(object : Callback<PopularSerieDTO>
         {

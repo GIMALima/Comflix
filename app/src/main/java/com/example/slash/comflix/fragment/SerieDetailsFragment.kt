@@ -18,7 +18,6 @@ import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.preparePersons
 import kotlinx.android.synthetic.main.fragment_serie_details.*
 
 class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
@@ -51,7 +50,6 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         actorsRecyclerView.layoutManager=personLayoutManager
         actorsRecyclerView.itemAnimator= DefaultItemAnimator()
         actorsRecyclerView.adapter=personAdapter
-        preparePersons(this.context,personRelativeList,personAdapter)
 
         return fragView
     }

@@ -15,7 +15,6 @@ import com.example.slash.comflix.adapter.FavouriteMovieAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareFavouriteMovies
 
 
 class FavouriteMoviesFragment : Fragment() {
@@ -43,7 +42,6 @@ class FavouriteMoviesFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=movieAdapter
-        prepareFavouriteMovies(this.context,favouriteMovieList,movieAdapter)
         return view
     }
 

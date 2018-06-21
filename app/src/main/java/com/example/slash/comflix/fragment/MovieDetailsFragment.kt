@@ -7,14 +7,16 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.slash.comflix.*
+import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.entities.*
+import com.example.slash.comflix.getCastCrew
+import com.example.slash.comflix.getMovieDetails
+import com.example.slash.comflix.getSimilarMovies
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 

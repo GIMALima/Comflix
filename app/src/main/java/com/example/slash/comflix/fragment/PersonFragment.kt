@@ -10,17 +10,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.slash.comflix.R
-import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareMovies
-import com.example.slash.comflix.preparePersons
 
 
 class PersonFragment : Fragment() {
@@ -40,7 +35,6 @@ class PersonFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=personAdapter
-        preparePersons(this.context,personList,personAdapter)
         return view
     }
 

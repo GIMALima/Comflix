@@ -1,12 +1,7 @@
 package com.example.slash.comflix.entities
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
 
 
-    val imageBaseURL = "https://image.tmdb.org/t/p/w500"
 
     private val clientInterceptor = Interceptor { chain ->
         var request = chain.request()
@@ -39,6 +33,5 @@ object RetrofitBuilder {
 
     val movieApi = retrofit.create(MovieAPIClient::class.java)
     val serieApi = retrofit.create(SerieAPIClient::class.java)
-
-
+    val personApi= retrofit.create(PersonAPIClient::class.java)
 }
