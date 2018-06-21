@@ -73,12 +73,12 @@ fun prepareFavouriteSeries(context:Context,serieList:ArrayList<Serie>, serieAdap
     var serieSeasons=context.resources.getIntArray(R.array.serieSeasons)
     var serieEpisodes=context.resources.getIntArray(R.array.serieEpisodes)
     var serieGenre=context.resources.getStringArray(R.array.serieGenre)
-
+/*
     for (i in 0 until covers.size){
       //  var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
         //serieList.add(serie)
     }
-    serieAdapter.notifyDataSetChanged()
+    serieAdapter.notifyDataSetChanged()*/
 }
 
 fun prepareSeries(context:Context,serieList:ArrayList<Serie>, serieAdapter: SerieAdapter){
@@ -97,11 +97,14 @@ fun prepareSeries(context:Context,serieList:ArrayList<Serie>, serieAdapter: Seri
     var serieSeasons=context.resources.getIntArray(R.array.serieSeasons)
     var serieEpisodes=context.resources.getIntArray(R.array.serieEpisodes)
     var serieGenre=context.resources.getStringArray(R.array.serieGenre)
-
+/*
     for (i in 0 until covers.size){
-       // var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
-        //serieList.add(serie)
-    }
+
+        var serie= Serie(serieTitles.get(i),covers.get(i),serieSeasons.get(i),serieEpisodes.get(i),i,serieGenre.get(i))
+        serieList.add(serie)
+    }*/
+
+
     serieAdapter.notifyDataSetChanged()
 }
 
@@ -175,6 +178,7 @@ fun preparePersons(context:Context, personList:ArrayList<Person>, personAdapter:
     }
     personAdapter.notifyDataSetChanged()
 }
+
 fun getListMoviesNowPlaying(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>){
     RetrofitBuilder.movieApi.getMoviesNowPalying(num_page_movies)
             .subscribeOn(Schedulers.io())

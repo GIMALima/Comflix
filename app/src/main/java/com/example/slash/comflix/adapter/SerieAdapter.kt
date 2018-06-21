@@ -14,7 +14,9 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
-import com.example.slash.comflix.entities.Movie
+
+import com.example.slash.comflix.entities.RetrofitBuilder
+
 import com.example.slash.comflix.entities.Serie
 import com.squareup.picasso.Picasso
 
@@ -52,6 +54,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val serie=serieList.get(position)
         holder.title.text=serie.name
+
         holder.date.text=serie.first_air_date
         holder.serieId.text = serie.id.toString()
         Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+serie.poster_path).into(holder.cover)

@@ -16,7 +16,9 @@ import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.dpToPx
 
+
 class MoviesFragment : Fragment(){
+
 
     private var mListener: OnFragmentInteractionListener? = null
 
