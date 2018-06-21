@@ -22,29 +22,11 @@ import com.example.slash.comflix.entities.dpToPx
 import com.example.slash.comflix.prepareMovies
 import com.example.slash.comflix.preparePersons
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [PersonFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [PersonFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PersonFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+class PersonFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

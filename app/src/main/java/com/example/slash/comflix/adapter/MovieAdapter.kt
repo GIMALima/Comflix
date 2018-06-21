@@ -78,10 +78,9 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
     {
         val intent = Intent(mcontext, DetailsActivity::class.java)
         val bundle = Bundle()
-        bundle.putInt("id", holder.movieId.text.toString().toInt()) //Your id
+        bundle.putInt("id", holder.movieId.text.toString().toInt())
         bundle.putString("type","movie")
-        intent.putExtras(bundle) //P
-
+        intent.putExtras(bundle)
         mcontext.startActivity(intent)
     }
    fun updateListMovie(listMovie:ArrayList<Movie>){

@@ -4,13 +4,15 @@ import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.widget.ImageView
 import com.example.slash.comflix.adapter.*
 import com.example.slash.comflix.entities.*
+import com.example.slash.comflix.fragment.MovieDetailsFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 var num_page_movies=1
-var num_page_latest_movies=1
+var num_page_popular_movies=1
 var num_page_series=1
 fun calculateCardNum(context: Context):Int{
     val n=context.resources.displayMetrics
@@ -168,8 +170,8 @@ fun preparePersons(context:Context, personList:ArrayList<Person>, personAdapter:
     var personBiographie=context.resources.getStringArray(R.array.personBiographie)
     var personFilmographie=context.resources.getStringArray(R.array.personFilmographie)
     for (i in 0 until covers.size){
-        var person= Person(personTitles.get(i),personNames.get(i),covers.get(i),personDateOfBirth.get(i),personBiographie.get(i),personFilmographie.get(i),i)
-        personList.add(person)
+      //  var person= Person(personTitles.get(i),personNames.get(i),covers.get(i),personDateOfBirth.get(i),personBiographie.get(i),personFilmographie.get(i),i)
+        //personList.add(person)
     }
     personAdapter.notifyDataSetChanged()
 }
@@ -186,8 +188,8 @@ fun getListMoviesNowPlaying(movieAdapter: MovieAdapter,movieList: ArrayList<Movi
             )
     num_page_movies++
 }
-fun getListMoviesLatest(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>){
-    RetrofitBuilder.movieApi.getAllLastestMovies(num_page_latest_movies)
+fun getListMoviesPopular(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>){
+    RetrofitBuilder.movieApi.getPopularMovies(num_page_popular_movies)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -197,7 +199,7 @@ fun getListMoviesLatest(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>){
                     },
                     { error -> Log.e("ERROR", error.message) }
             )
-    num_page_latest_movies++
+    num_page_popular_movies++
 }
 fun getListSeries(serieAdapter: SerieAdapter,serieList: ArrayList<Serie>){
 
@@ -212,6 +214,42 @@ fun getListSeries(serieAdapter: SerieAdapter,serieList: ArrayList<Serie>){
                     { error -> Log.e("ERROR", error.message) }
             )
     num_page_movies++
+}
+fun getMovieDetails(movie_id:Int,fragment: MovieDetailsFragment){
+
+    RetrofitBuilder.movieApi.getMovieDetails(movie_id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    { result -> fragment.onQueryResponse(result)
+                    },
+                    { error -> Log.e("ERROR", error.message) }
+            )
+
+}
+fun getSimilarMovies(movie_id:Int, adapter: MovieAdapter){
+    RetrofitBuilder.movieApi.getSimilarMovies(movie_id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    { result -> adapter.updateListMovie(result.results)
+                    },
+                    { error -> Log.e("ERROR", error.message) }
+            )
+
+}
+fun getCastCrew(movie_id:Int, credistAdapter: PersonAdapter){
+    RetrofitBuilder.movieApi.getCredits(movie_id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    { result -> result.cast.addAll(result.crew)
+                        credistAdapter.updateListPerson(result.cast)
+                    },
+                    { error -> Log.e("ERROR", error.message) }
+            )
+
+
 }
 fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):Boolean{
     var charger=false

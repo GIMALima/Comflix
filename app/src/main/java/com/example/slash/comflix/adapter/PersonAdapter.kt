@@ -13,17 +13,19 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
+import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.Person
+import com.squareup.picasso.Picasso
 
 /**
  * Created by Slash on 20/04/2018.
  */
 class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
     var mcontext: Context
-    var personList: List<Person>
+    var personList: ArrayList<Person>
     var layout:Int
 
-    constructor(mcontext: Context, personList: List<Person>, layout:Int) : super() {
+    constructor(mcontext: Context, personList: ArrayList<Person>, layout:Int) : super() {
         this.mcontext = mcontext
         this.personList = personList
         this.layout=layout
@@ -50,11 +52,10 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var person=personList.get(position)
-        holder.title.text=person.title
-        holder.name.text=person.name
-        holder.personId.text=person.personId.toString()
-        Glide.with(mcontext).load(person.image).into(holder.thumbnail)
-
+        holder.title.text=person.character
+        holder.name.text=person.name+ " staring sas"
+        holder.personId.text=person.id.toString()
+        Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+person.profile_path).into(holder.thumbnail)
 
     }
 
@@ -109,6 +110,10 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
 
         return MyViewHolder(itemView)
 
+    }
+    fun updateListPerson(listPerson:ArrayList<Person>){
+        this.personList=listPerson
+        this.notifyDataSetChanged()
     }
 
 }
