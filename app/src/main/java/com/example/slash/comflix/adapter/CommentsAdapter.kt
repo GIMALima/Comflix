@@ -15,13 +15,9 @@ import java.util.ArrayList
 
 class CommentsAdapter(var commentsList: ArrayList<Comment>): RecyclerView.Adapter<CommentsAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val comment: TextView
-        val author: TextView
+        val comment: TextView = itemView.findViewById(R.id.cardauthor)
+        val author: TextView = itemView.findViewById(R.id.cardcomment)
 
-        init {
-            comment = itemView.findViewById(R.id.cardauthor)
-            author = itemView.findViewById(R.id.cardcomment)
-        }
     }
 
 
@@ -32,7 +28,7 @@ class CommentsAdapter(var commentsList: ArrayList<Comment>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.author?.text = commentsList[position].author
-        holder?.comment?.text = commentsList[position].comment
+        holder?.comment?.text = commentsList[position].content
     }
 
     override fun getItemCount() = commentsList.size

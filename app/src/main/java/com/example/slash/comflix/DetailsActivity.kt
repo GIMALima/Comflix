@@ -16,12 +16,29 @@ import android.view.MenuItem
 import android.view.View
 import com.example.slash.comflix.adapter.CommentsAdapter
 import com.example.slash.comflix.entities.Comment
+import com.example.slash.comflix.entities.CommentDTO
+import com.example.slash.comflix.entities.RetrofitBuilder
 import com.example.slash.comflix.fragment.*
 import kotlinx.android.synthetic.main.activity_details.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
-class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInteractionListener
+class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInteractionListener,
+        SeasonDetailsFragment.SeasonDetailsInteraction
 {
+    override fun addSeasonToTitle(season: String) {
+        if(!supportActionBar?.title!!.contains(":"))
+            supportActionBar?.title = "${supportActionBar?.title} : $season"
+    }
+
+    override fun getActionBarTitle():String
+    {
+        return supportActionBar?.title.toString()!!
+    }
+
     override fun changeBarTitle(title:String) {
         supportActionBar?.title = title
     }
@@ -90,32 +107,9 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
         })
 
-        val adapter = makeComments()
-        btn_comment.setOnClickListener{
-            val com = text_comment.text
-            val filtredCom = com.replace(" ".toRegex(),"").replace("\n".toRegex(),"")
+        makeComments()
 
-            if (filtredCom != "")
-            {
-                adapter.commentsList.add(Comment(com.toString(),getString(R.string.current_user)))
-                text_comment.setText("")
-                adapter.notifyDataSetChanged()
-            }
-            else
-                Toast.makeText(this,getString(R.string.empty_string),Toast.LENGTH_LONG).show()
-        }
 
-        like.setOnClickListener{
-            if (isLiked)
-            {
-                like.setImageDrawable(resources.getDrawable(R.drawable.ic_thumbup))
-                isLiked = false
-            }else
-            {
-                like.setImageDrawable(resources.getDrawable(R.drawable.ic_thumbup_active))
-                isLiked = true
-            }
-        }
 
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -125,9 +119,9 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
     }
 
 
-    override fun onFragmentInteraction()
+    override fun onFragmentInteraction(serieID:Int,position:Int)
     {
-        val newFragment:Fragment = SeasonDetailsFragment()
+        val newFragment:Fragment = SeasonDetailsFragment.newInstance(serieID,position +1)
         supportFragmentManager.beginTransaction()
                 .replace(fragment!!.id,newFragment)
                 .addToBackStack(null)
@@ -147,11 +141,11 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
     }
 
 
-    fun makeComments(): CommentsAdapter
+    fun makeComments()
     {
 
         val viewManager = LinearLayoutManager(this)
-        val commentsList = createCommentsLis()
+        val commentsList = ArrayList<Comment>()
         val viewAdapter = CommentsAdapter(commentsList)
         comments_list.apply{
             setHasFixedSize(true)
@@ -159,19 +153,34 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
             adapter= viewAdapter
         }
 
-        return viewAdapter
+        createCommentsLis(viewAdapter)
+
+
 
     }
 
-    private fun createCommentsLis(): ArrayList<Comment>
+    private fun createCommentsLis(viewAdapter:CommentsAdapter)
     {
-        var commentSize = ArrayList<Comment>()
-        val userArray=resources.getStringArray(R.array.users)
-        val commentArray = resources.getStringArray(R.array.comments)
-        for (i in 0 until userArray.size)
-            commentSize.add(Comment(commentArray[i],userArray[i]))
+        val typeFragment = fragment
+        if(typeFragment is SerieDetailsFragment)
+        {
+            RetrofitBuilder.serieApi.getComments(typeFragment.serieID).enqueue(object: Callback<CommentDTO>{
+                override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
 
-        return commentSize
+                override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {
+
+                    if(response?.isSuccessful!!)
+                    {
+                        viewAdapter.commentsList = response.body()!!.results
+                        viewAdapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+
+        }
     }
 
 

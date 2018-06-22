@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.example.slash.comflix.adapter.Episode
 import com.example.slash.comflix.adapter.EpisodesAdapter
+import com.example.slash.comflix.entities.Episode
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.fragment.SeasonDetailsFragment
 import kotlinx.android.synthetic.main.activity_episodes.*
 
 class EpisodesActivity : AppCompatActivity() {
@@ -17,11 +18,14 @@ class EpisodesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_episodes)
         setSupportActionBar(findViewById(R.id.retour_toolbar))
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = intent.getStringExtra("Title") + " Episodes"
+        }
 
         val viewManager: RecyclerView.LayoutManager = GridLayoutManager(this, 1)
         val episodesList = createEpisodesList()
-        val viewAdapter = EpisodesAdapter(this,episodesList)
+        val viewAdapter = EpisodesAdapter(this,episodesList?:ArrayList<Episode>())
         episodes_list.apply{
             setHasFixedSize(true)
             layoutManager = viewManager
@@ -32,16 +36,9 @@ class EpisodesActivity : AppCompatActivity() {
 
     }
 
-    fun createEpisodesList():ArrayList<Episode>
+    fun createEpisodesList():ArrayList<Episode>?
     {
-        var array = ArrayList<Episode>()
-        for (i in 0..10)
-        {
-            array.add(Episode(resources.obtainTypedArray(R.array.episodeCover).getResourceId(0,-1),
-                    resources.getStringArray(R.array.episodeTitle)[0],
-                    resources.getStringArray(R.array.episodeDescription)[0]))
-        }
 
-        return array
+        return SeasonDetailsFragment.currentSeasonEpisodes
     }
 }
