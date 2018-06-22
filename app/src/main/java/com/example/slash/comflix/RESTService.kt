@@ -9,6 +9,9 @@ import com.example.slash.comflix.adapter.*
 import com.example.slash.comflix.entities.*
 import com.example.slash.comflix.fragment.MovieDetailsFragment
 import com.example.slash.comflix.fragment.PersonDetailsFragment
+import com.example.slash.comflix.room.MovieDB
+import com.example.slash.comflix.room.MovieEntity
+import com.example.slash.comflix.room.MovieEntityDao
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
