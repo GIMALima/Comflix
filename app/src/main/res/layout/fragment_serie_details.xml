@@ -1,149 +1,247 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/text"
-    tools:context="com.example.slash.comflix.fragment.SerieDetailsFragment"
-
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-    <ImageView
-        android:id="@+id/serieCover"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorAccent"
+    tools:context="com.example.slash.comflix.fragment.SerieDetailsFragment">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/suits"
-        android:scaleType="centerCrop"
-
-        />
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/details_image_height"
+                android:id="@+id/movieCover"
+                android:scaleType="centerCrop"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/movieCover"
+                android:paddingRight="10dp"
+                android:layout_marginTop="@dimen/btn_margin_top"
+                >
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/addFavoris"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    app:backgroundTint="@color/redColor"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/director"
-                style="@style/textdetailsLabel"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/director"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/serieDirector"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/writers"
-                style="@style/textdetailsLabel"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/writers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/writers"/>
-        </LinearLayout>
+            android:paddingLeft="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
+                <android.support.v7.widget.AppCompatTextView
+                    android:text="Title:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/title_style"
+                    android:layout_marginRight="5dp"
+                    />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/released"
-                    style="@style/textdetailsLabel"/>
-
+                    android:text="@string/genre"
+                    style="@style/title_style"
+                    android:layout_marginRight="5dp"/>
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/releae_date"
+                    android:id="@+id/genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/serieReleased"/>
+                    style="@style/text_style"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.AppCompatTextView
+                    style="@style/title_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/txt_episode_duration" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/episode_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_first_release"
+                    style="@style/title_style"
+                    android:layout_marginRight="5dp"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/first_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_last_release"
+                    style="@style/title_style"
+                    android:layout_marginRight="5dp"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/last_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_grade_black_24dp"
+                    android:layout_marginRight="5dp"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/average"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    android:layout_marginRight="10dp"
+
+                    />
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_favorite_black_24dp"
+                    android:layout_marginRight="5dp"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/votes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/text_style"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/description_and_details"
-                    style="@style/textdetailsLabel"/>
+                    style="@style/title_style"/>
 
-                    <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/description"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/serieDescription"/>
+                    style="@style/text_style"
+                    />
             </LinearLayout>
-            <LinearLayout
+
+
+            <android.support.v7.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/nbrSeason"
+                <TextView
+                    android:id="@+id/nbrSeasons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12 "
-                    style="@style/textdetailsLabel"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/seasons_lable"
-                    style="@style/textdetailsLabel"/>
+                    android:text="18 seasons"
+                    android:textColor="#fff" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/seeSeasons"
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/see_seasons"
-                    android:textAllCaps="false"
-                    android:textColor="@color/linkColor" />
-            </LinearLayout>
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:text="See seasons"
+                    android:textColor="@color/redColor"/>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
             <android.support.v7.widget.AppCompatTextView
-                style="@style/textdetailsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/see_cast_and_crew" />
+                android:text="Cast and Crew"
+                style="@style/title_style"/>
 
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/actorsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/icons"
+                android:background="@color/colorAccent"
+                android:clipToPadding="false"
+                android:scrollbars="vertical"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_may_also_like" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/moviesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
                 android:clipToPadding="false"
                 android:scrollbars="vertical"/>
 
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

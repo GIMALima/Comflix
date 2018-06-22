@@ -1,5 +1,5 @@
 package com.example.slash.comflix
-
+/*
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 var num_page_movies=1
 var num_page_latest_movies=1
 var num_page_series=1
+
 fun calculateCardNum(context: Context):Int{
     val n=context.resources.displayMetrics
     val num=n.widthPixels/n.density
@@ -265,3 +266,4 @@ fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):B
     return  charger
 
 }
+*/

@@ -10,41 +10,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.slash.comflix.R
-import com.example.slash.comflix.adapter.MovieAdapter
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareMovies
-import com.example.slash.comflix.preparePersons
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [PersonFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [PersonFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class PersonFragment : Fragment() {
-
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
 
     private var mListener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -58,7 +35,6 @@ class PersonFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=personAdapter
-        preparePersons(this.context,personList,personAdapter)
         return view
     }
 

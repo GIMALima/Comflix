@@ -22,6 +22,9 @@ import java.util.*
 
 class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInteractionListener
 {
+    override fun changeBarTitle(title:String) {
+        supportActionBar?.title = title
+    }
 
     var fragment: Fragment?=null
 
@@ -39,29 +42,15 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
        when (type) {
            "movie" -> {
-              // retour_toolbar.title = resources.getStringArray(R.array.movieTitles).get(id)
                fragment = MovieDetailsFragment()
            }
            "serie" -> {
-               //retour_toolbar.title = resources.getStringArray(R.array.serieTitles).get(id)
                fragment = SerieDetailsFragment()
            }
            "person" -> {
-              // retour_toolbar.title = resources.getStringArray(R.array.personName).get(id)
                fragment = PersonDetailsFragment()
            }
-           "cinema" -> {
-              // retour_toolbar.title = resources.getStringArray(R.array.movieTitles).get(id)
-               fragment = CinemaFragment()
-           }
-           "cinema_favouris" -> {
-              // retour_toolbar.title = "My favourite cinemas"
-               fragment = FavouriteCinemaFragment()
-           }
-           "cinema_details" -> {
-              // retour_toolbar.title = resources.getStringArray(R.array.cinemaName).get(id)
-               fragment = CinemaDetailsFragment()
-           }
+
        }
         fragment!!.arguments=bundle
         supportFragmentManager.beginTransaction()

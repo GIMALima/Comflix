@@ -10,20 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.example.slash.comflix.DetailsActivity
 import com.example.slash.comflix.R
 import com.example.slash.comflix.entities.Person
+import com.squareup.picasso.Picasso
 
-/**
- * Created by Slash on 20/04/2018.
- */
+
 class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
     var mcontext: Context
-    var personList: List<Person>
+    var personList: ArrayList<Person>
     var layout:Int
 
-    constructor(mcontext: Context, personList: List<Person>, layout:Int) : super() {
+    constructor(mcontext: Context, personList: ArrayList<Person>, layout:Int) : super() {
         this.mcontext = mcontext
         this.personList = personList
         this.layout=layout
@@ -50,11 +48,10 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var person=personList.get(position)
-        holder.title.text=person.title
-        holder.name.text=person.name
-        holder.personId.text=person.personId.toString()
-        Glide.with(mcontext).load(person.image).into(holder.thumbnail)
-
+        holder.title.text=person.character
+        holder.name.text=person.name+ " staring as"
+        holder.personId.text=person.id.toString()
+        Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+person.profile_path).into(holder.thumbnail)
 
     }
 
@@ -66,49 +63,30 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
         var itemView= LayoutInflater.from(parent!!.context)
                 .inflate(layout,parent,false)
         val holder = MyViewHolder(itemView)
-        holder.card.setOnClickListener{
+        holder.apply {
+            card.setOnClickListener{openDetailsActivity(this)}
+            title.setOnClickListener{openDetailsActivity(this)}
+            thumbnail.setOnClickListener{openDetailsActivity(this)}
+            name.setOnClickListener { openDetailsActivity(this) }
 
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
-            bundle.putString("type","person")
-            intent.putExtras(bundle) //P
-            mcontext.startActivity(intent)
-
-        }
-
-        holder.thumbnail.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
-            bundle.putString("type","person")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
-        }
-        holder.title.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
-            bundle.putString("type","person")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
-        }
-
-        holder.name.setOnClickListener {
-            val intent = Intent(mcontext, DetailsActivity::class.java)
-            val bundle = Bundle()
-            bundle.putInt("id", holder.personId.text.toString().toInt()) //Your id
-            bundle.putString("type","person")
-            intent.putExtras(bundle) //P
-
-            mcontext.startActivity(intent)
         }
 
 
         return MyViewHolder(itemView)
 
+    }
+    fun openDetailsActivity(holder: PersonAdapter.MyViewHolder)
+    {
+        val intent = Intent(mcontext, DetailsActivity::class.java)
+        val bundle = Bundle()
+        bundle.putInt("id", holder.personId.text.toString().toInt())
+        bundle.putString("type","person")
+        intent.putExtras(bundle) //P
+        mcontext.startActivity(intent)
+    }
+    fun updateListPerson(listPerson:ArrayList<Person>){
+        this.personList=listPerson
+        this.notifyDataSetChanged()
     }
 
 }

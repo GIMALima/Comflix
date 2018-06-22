@@ -10,13 +10,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.FavouriteSerieAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Serie
 import com.example.slash.comflix.entities.dpToPx
-import com.example.slash.comflix.prepareFavouriteSeries
 
 /**
  * A simple [Fragment] subclass.
@@ -54,7 +52,6 @@ class FavouriteSeriesFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
-        prepareFavouriteSeries(this.context,favouriteSeriesList,serieAdapter)
 
         return view
     }

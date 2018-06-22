@@ -14,7 +14,7 @@
         android:id="@+id/trendingMovie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:text="@string/trending_movies"
         style="@style/main_text"/>
@@ -23,14 +23,14 @@
         android:id="@+id/moviesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/trendingMovie"
         android:clipToPadding="false" />
     <TextView
         android:id="@+id/trendingSerie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/moviesRecyclerView"
         style="@style/main_text"
@@ -40,7 +40,7 @@
         android:id="@+id/seriesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/trendingSerie"
         android:clipToPadding="false" />
 

@@ -2,6 +2,7 @@ package com.example.slash.comflix.entities
 
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -9,10 +10,19 @@ import retrofit2.http.Query
  */
 interface SerieAPIClient {
     /* Get list of movies now playing */
-    @GET("tv/on_the_air?api_key=b73297ba2fd4486c8d1e39f3e8d0c0e4")
+    @GET("tv/on_the_air")
     fun getSeriesNowPalying(@Query("page")page:Int): Observable<SerieDTO>
 
     @GET("tv/popular")
     fun getPopluareSeries(@Query("page")page:Int): retrofit2.Call<PopularSerieDTO>
+
+    @GET("tv/{id}")
+    fun getSeriesDetails(@Path("id")id:Int):retrofit2.Call<SerieDetails>
+
+    @GET("tv/{id}/similar")
+    fun getSimilarSeries(@Path("id") id:Int):Observable<SerieDTO>
+
+    @GET("tv/{id}/credits")
+    fun getCreditsSeries(@Path("id") id:Int):Observable<CastCrewDTO>
 
 }

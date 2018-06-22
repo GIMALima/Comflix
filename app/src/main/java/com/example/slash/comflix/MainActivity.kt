@@ -8,9 +8,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
-import android.widget.Toast
-import com.example.slash.comflix.fragment.FavouriteCinemaFragment
 import com.example.slash.comflix.fragment.FavouriteMoviesFragment
 import com.example.slash.comflix.fragment.FavouriteSeriesFragment
 import com.example.slash.comflix.fragment.HomeFragment
@@ -60,8 +57,8 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        when (item.itemId) {
+
+       when (item.itemId) {
 
             R.id.nav_home -> {
                 fragment= HomeFragment()
@@ -72,13 +69,6 @@ class MainActivity :AppCompatActivity(), NavigationView.OnNavigationItemSelected
             R.id.nav_series -> {
                 fragment=FavouriteSeriesFragment()
             }
-            R.id.nav_salles -> {
-                fragment=FavouriteCinemaFragment()
-            }
-            R.id.nav_profil -> {
-
-            }
-
         }
         supportFragmentManager.beginTransaction()
                 .replace(conteneur_main.id,fragment)

@@ -16,14 +16,7 @@
             android:id="@+id/nav_series"
             android:icon="@drawable/ic_videocam_black_24dp"
             android:title="My series" />
-        <item
-            android:id="@+id/nav_salles"
-            android:icon="@drawable/ic_map_black_24dp"
-            android:title="My cinemas" />
-        <item
-            android:id="@+id/nav_profil"
-            android:icon="@drawable/ic_person_black_24dp"
-            android:title="Profile" />
+
     </group>
 
 </menu>

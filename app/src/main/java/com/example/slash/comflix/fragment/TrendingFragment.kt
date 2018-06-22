@@ -34,7 +34,7 @@ class TrendingFragment : Fragment() {
         //Trending movies
         var trendingMoviesList=ArrayList<Movie>()
         var movieRecyclerView=view.findViewById<RecyclerView>(R.id.moviesRecyclerView) as RecyclerView
-        var movieAdapter= MovieAdapter(this.context,trendingMoviesList,R.layout.movie_card)
+        var movieAdapter= MovieAdapter(this.context,trendingMoviesList,R.layout.trending_card)
         var movieLayoutManager = GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         movieRecyclerView.layoutManager=movieLayoutManager
@@ -47,7 +47,7 @@ class TrendingFragment : Fragment() {
         //Trending series
         var trendingseriesList=ArrayList<Serie>()
         var serieRecyclerView=view.findViewById<RecyclerView>(R.id.seriesRecyclerView) as RecyclerView
-        var serieAdapter= SerieAdapter(this.context,trendingseriesList,R.layout.movie_card)
+        var serieAdapter= SerieAdapter(this.context,trendingseriesList,R.layout.trending_card)
         var serieLayoutManager = GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         serieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         serieRecyclerView.layoutManager=serieLayoutManager

@@ -11,19 +11,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.SearchView
 import android.widget.Toast
 import com.example.slash.comflix.*
 import com.example.slash.comflix.R.id.add
 import com.example.slash.comflix.entities.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_series.*
+import com.example.slash.comflix.R
+import com.example.slash.comflix.calculateCardNum
+import com.example.slash.comflix.entities.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-import com.example.slash.comflix.R.id.progressbar
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Serie
@@ -38,7 +38,6 @@ class SeriesFragment : Fragment() {
     var listSerie:ArrayList<Serie>?=null
     var adapter:SerieAdapter?=null
     private var mListener: OnFragmentInteractionListener? = null
-    val progressBar:ProgressBar by lazy { view?.findViewById<ProgressBar>(R.id.progressbar)!! }
 
     var currentPage = 1
 
@@ -46,13 +45,14 @@ class SeriesFragment : Fragment() {
 
     fun loadData()
     {
-        if(isLoading)
-            return
+        currentPage = 1
+
         isLoading = true
         RetrofitBuilder.serieApi.getPopluareSeries(currentPage).enqueue(object : Callback<PopularSerieDTO>
         {
             override fun onFailure(call: Call<PopularSerieDTO>?, t: Throwable?)
             {
+
                 isLoading = false
                 Toast.makeText(activity,"Problem",Toast.LENGTH_LONG).show()
                 Log.d("SeriesFragment",t?.message)
@@ -63,7 +63,7 @@ class SeriesFragment : Fragment() {
                 //Toast.makeText(activity,"Response",Toast.LENGTH_LONG).show()
                 isLoading = false
 
-                progressBar.visibility = ProgressBar.GONE
+                 
                 if(response?.isSuccessful!!)
                 {
                     currentPage++
@@ -94,21 +94,24 @@ class SeriesFragment : Fragment() {
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=serieAdapter
-        //prepareSeries(this.context,serieList,serieAdapter)
-        //listSerie=serieList
         adapter=serieAdapter
-        loadData()
 
         return view
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        loadData()
+
+    }
 
     fun addData()
     {
         if(isLoading)
             return
         isLoading = true
-        progressBar.visibility = ProgressBar.VISIBLE
+         
         RetrofitBuilder.serieApi.getPopluareSeries(currentPage).enqueue(object : Callback<PopularSerieDTO>
         {
             override fun onFailure(call: Call<PopularSerieDTO>?, t: Throwable?)
@@ -124,7 +127,7 @@ class SeriesFragment : Fragment() {
                 //Toast.makeText(activity,"Response",Toast.LENGTH_LONG).show()
                 isLoading = false
 
-                progressBar.visibility = ProgressBar.GONE
+                 
                 if(response?.isSuccessful!!)
                 {
                     currentPage++
@@ -134,6 +137,7 @@ class SeriesFragment : Fragment() {
 
                     adapter?.serieList = adapter?.serieList!! + listSerie?.toList()!!
                     adapter?.notifyDataSetChanged()
+
                 }else
                 {
                     //Toast.makeText(activity,response.code().toString() +"   "+response.errorBody() ,Toast.LENGTH_LONG).show()
