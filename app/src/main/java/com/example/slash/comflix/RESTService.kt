@@ -89,6 +89,32 @@ fun getSimilarMovies(movie_id:Int, adapter: MovieAdapter){
             )
 
 }
+
+fun getSimilarSeries(id:Int, adapter: SerieAdapter){
+    RetrofitBuilder.serieApi.getSimilarSeries(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    { result -> adapter.updateListSerie(result.results)
+                    },
+                    { error -> Log.e("ERROR", error.message) }
+            )
+
+}
+fun getCastCrewSeries(id:Int, credistAdapter: PersonAdapter){
+    RetrofitBuilder.serieApi.getCreditsSeries(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    { result -> result.cast.addAll(result.crew)
+                        credistAdapter.updateListPerson(result.cast)
+                    },
+                    { error -> Log.e("ERROR", error.message) }
+            )
+
+
+}
+
 fun getCastCrew(movie_id:Int, credistAdapter: PersonAdapter){
     RetrofitBuilder.movieApi.getCredits(movie_id)
             .subscribeOn(Schedulers.io())

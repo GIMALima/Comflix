@@ -15,22 +15,27 @@ import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.PersonAdapter
-import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Person
-import com.example.slash.comflix.entities.dpToPx
+import com.example.slash.comflix.adapter.SerieAdapter
+import com.example.slash.comflix.entities.*
+import com.example.slash.comflix.getCastCrewSeries
+import com.example.slash.comflix.getSimilarSeries
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_serie_details.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private var serieID: Int = -1
 
+    private var numberOfSseasons = 0
     private var mListener: OnFragmentInteractionListener? = null
-    private var alertDialog:AlertDialog? = null
+    private var alertDialog: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (arguments != null)
-        {
+        if (arguments != null) {
             serieID = arguments.getInt(SERIE_ID_PARAM)
         }
     }
@@ -40,9 +45,22 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         // Inflate the layout for this fragment
         val fragView = inflater!!.inflate(R.layout.fragment_serie_details, container, false)
 
-        //fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieSeasons)[serieID].toString() + " "
+
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showSeasonsDialog() }
-        var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1, GridLayoutManager.HORIZONTAL,false)
+
+
+        var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
+        var movieRecyclerView=fragView.findViewById<RecyclerView>(R.id.moviesRecyclerView) as RecyclerView
+        var movieRelativeList=ArrayList<Serie>()
+        var movieAdapter= SerieAdapter(this.context,movieRelativeList,R.layout.trending_card)
+        movieRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
+        movieRecyclerView.layoutManager=movieLayoutManager
+        movieRecyclerView.itemAnimator= DefaultItemAnimator()
+        movieRecyclerView.adapter=movieAdapter
+        getSimilarSeries(serieID,movieAdapter)
+
+
+        var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         var actorsRecyclerView=fragView.findViewById<RecyclerView>(R.id.actorsRecyclerView) as RecyclerView
         var personRelativeList=ArrayList<Person>()
         var personAdapter= PersonAdapter(this.context,personRelativeList,R.layout.person_relative_card,2)
@@ -50,83 +68,111 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         actorsRecyclerView.layoutManager=personLayoutManager
         actorsRecyclerView.itemAnimator= DefaultItemAnimator()
         actorsRecyclerView.adapter=personAdapter
-
+        getCastCrewSeries(serieID,personAdapter)
         return fragView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart()
+    {
+        super.onStart()
+        RetrofitBuilder.serieApi.getSeriesDetails(serieID).enqueue(object: Callback<SerieDetails>
+        {
+            override fun onFailure(call: Call<SerieDetails>?, t: Throwable?) {
+                Toast.makeText(activity,"Network problem",Toast.LENGTH_LONG).show()
+            }
 
-}
+            override fun onResponse(call: Call<SerieDetails>?, response: Response<SerieDetails>?) {
 
-// TODO: Rename method, update argument and hook method into UI event
-fun onButtonPressed(uri: Uri) {
-if (mListener != null) {
-    mListener!!.onFragmentInteraction()
-}
-}
+                if(response?.isSuccessful!!)
+                {
+                    val serie = response?.body()
+                    (activity as OnFragmentInteractionListener).changeBarTitle(serie!!.name)
+                    Picasso.with(activity).load(activity.getString(R.string.image_url)+serie?.poster_path).into(movieCover)
+                    title.text = serie?.name
+                    genre.text = serie?.getGendersFormatted()
+                    episode_time.text = serie!!.episode_run_time[0] + " min"
+                    first_release_date.text = serie.first_air_date
+                    last_release_date.text = serie.last_air_date + " (${if(serie.in_production) "still in production" else "not in production"})"
+                    votes.text=serie.vote_count.toString()+" votes"
+                    average.text=serie.vote_average.toString()+"/10"
+                    description.text = serie.overview
+                    nbrSeasons.text = "${serie.number_of_seasons} seasons"
+                    numberOfSseasons = serie.number_of_seasons
 
-override fun onAttach(context: Context?) {
-super.onAttach(context)
-if (context is OnFragmentInteractionListener) {
-    mListener = context
-} else {
-   // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-}
-}
+                }
+            }
 
-override fun onDetach() {
-super.onDetach()
-mListener = null
-}
+        })
 
 
-fun showSeasonsDialog()
-{
-val builder= AlertDialog.Builder(context)
-builder.setTitle("Choose a season")
-var array: ArrayList<String> = ArrayList()
-/*for (i in 1..resources.getIntArray(R.array.serieSeasons)[serieID])
-    array.add("Season $i")*/
-val arrayAdapter = ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,array)
-
-val lv = ListView(context)
-lv.adapter = arrayAdapter
-lv.onItemClickListener = this
-builder.setView(lv)
-builder.setNegativeButton("Annuler",null)
-
-alertDialog = builder.create()
-alertDialog?.show()
-
-}
+    }
 
 
 
-override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long)
-{
+    // TODO: Rename method, update argument and hook method into UI event
+    fun onButtonPressed(uri: Uri) {
+        if (mListener != null) {
+            mListener!!.onFragmentInteraction()
+        }
+    }
 
-    alertDialog?.dismiss()
-    mListener?.onFragmentInteraction()
-}
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is OnFragmentInteractionListener) {
+            mListener = context
+        } else {
+            // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mListener = null
+    }
 
 
-interface OnFragmentInteractionListener
-{
-fun onFragmentInteraction()
-}
+    fun showSeasonsDialog() {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Choose a season")
+        var array: ArrayList<String> = ArrayList()
+        for (i in 1..numberOfSseasons)
+            array.add("Season $i")
+        val arrayAdapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, array)
 
-companion object {
+        val lv = ListView(context)
+        lv.adapter = arrayAdapter
+        lv.onItemClickListener = this
+        builder.setView(lv)
+        builder.setNegativeButton("Annuler", null)
 
-private val SERIE_ID_PARAM = "id"
+        alertDialog = builder.create()
+        alertDialog?.show()
 
-fun newInstance(serieId: Int): SerieDetailsFragment
-{
-    val fragment = SerieDetailsFragment()
-    val bundle = Bundle()
-    bundle.putInt(SERIE_ID_PARAM,serieId)
-    fragment.arguments = bundle
-    return fragment
-}
-}
+    }
+
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+        alertDialog?.dismiss()
+        mListener?.onFragmentInteraction()
+    }
+
+
+    interface OnFragmentInteractionListener {
+        fun onFragmentInteraction()
+        fun changeBarTitle(title:String)
+    }
+
+    companion object {
+
+        private val SERIE_ID_PARAM = "id"
+
+        fun newInstance(serieId: Int): SerieDetailsFragment {
+            val fragment = SerieDetailsFragment()
+            val bundle = Bundle()
+            bundle.putInt(SERIE_ID_PARAM, serieId)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 }// Required empty public constructor

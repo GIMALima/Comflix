@@ -22,6 +22,9 @@ import java.util.*
 
 class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInteractionListener
 {
+    override fun changeBarTitle(title:String) {
+         supportActionBar?.title = title
+     }
 
     var fragment: Fragment?=null
 

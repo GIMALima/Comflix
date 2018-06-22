@@ -9,19 +9,6 @@
     android:orientation="vertical">
 
 
-    <ProgressBar
-        android:elevation="6dp"
-        android:id="@+id/progressbar"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:background="@color/colorAccent"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/redColor"
-        android:max="100"
-        />
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
