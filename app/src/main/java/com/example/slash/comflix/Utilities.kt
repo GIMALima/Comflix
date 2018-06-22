@@ -217,7 +217,7 @@ fun getListSeries(serieAdapter: SerieAdapter,serieList: ArrayList<Serie>){
             )
     num_page_movies++
 }
-fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):Boolean{
+fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager,loading:()->Unit):Boolean{
     var charger=false
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         var pastVisiblesItems: Int = 0
@@ -232,6 +232,34 @@ fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):B
             pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
 
             if (visibleItemCount + pastVisiblesItems >= totalItemCount) charger=true
+
+            if(charger)
+                loading()
+        }
+    })
+    return  charger
+
+}
+
+
+fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):Boolean{
+    var charger=false
+    recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        var pastVisiblesItems: Int = 0
+        var visibleItemCount: Int = 0
+        var totalItemCount: Int = 0
+        val visibleThreshold = 5
+
+        override fun onScrolled(recyclerView: RecyclerView?,
+                                dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            visibleItemCount = layoutManager.childCount
+            totalItemCount = layoutManager.itemCount
+            pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
+
+            if (visibleItemCount + pastVisiblesItems + visibleThreshold >= totalItemCount) charger=true
+
+
         }
     })
     return  charger

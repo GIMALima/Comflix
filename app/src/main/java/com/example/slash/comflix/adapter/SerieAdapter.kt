@@ -57,7 +57,7 @@ class SerieAdapter : RecyclerView.Adapter<SerieAdapter.MyViewHolder> {
 
         holder.date.text=serie.first_air_date
         holder.serieId.text = serie.id.toString()
-        Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+serie.poster_path).into(holder.cover)
+        Picasso.with(mcontext).load(mcontext.getString(R.string.small_image_url)+serie.poster_path).into(holder.cover)
 
     }
 
