@@ -17,18 +17,21 @@ import com.example.slash.comflix.entities.Movie
 import com.example.slash.comflix.entities.PersonDTO
 import com.example.slash.comflix.entities.dpToPx
 import com.example.slash.comflix.getPersonDetails
+import com.example.slash.comflix.popular
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_person_details.*
 
 class PersonDetailsFragment : Fragment() {
 
     var personId=0
+    var position=-1
     private var mListener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             personId = arguments.getInt(PersonDetailsFragment.ARG_PARAM1)
+            position = arguments.getInt(PersonDetailsFragment.ARG_PARAM2)
         }
 
     }
@@ -41,7 +44,7 @@ class PersonDetailsFragment : Fragment() {
     }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
         var view= inflater!!.inflate(R.layout.fragment_person_details, container, false)
         getPersonDetails(personId,this)
         var movieLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
@@ -52,6 +55,12 @@ class PersonDetailsFragment : Fragment() {
         movieRecyclerView.layoutManager=movieLayoutManager
         movieRecyclerView.itemAnimator= DefaultItemAnimator()
         movieRecyclerView.adapter=movieAdapter
+        if(position!=-1 && popular!=null){
+
+            movieRelativeList=popular!!.get(position)!!.known_for!!
+            movieAdapter.updateListMovie(movieRelativeList)
+        }
+
         return view
     }
 
@@ -84,7 +93,7 @@ class PersonDetailsFragment : Fragment() {
        name.text=personDetails.name
        title.text="Also known as: "
        for(i in 0 until personDetails.also_known_as.size) {
-           title.text =title.text.toString() + personDetails.also_known_as.get(i)
+           title.text =title.text.toString() +", "+ personDetails.also_known_as.get(i)
        }
        date_birth.text=personDetails.birthday
        biography.text=personDetails.biography
@@ -94,13 +103,15 @@ class PersonDetailsFragment : Fragment() {
     companion object {
 
         private val ARG_PARAM1 = "id"
+        private val ARG_PARAM2= "position"
 
-        fun newInstance(param1: String): PersonDetailsFragment {
+        fun newInstance(param1: String,param2: Int): PersonDetailsFragment {
             val fragment = PersonDetailsFragment()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
+            args.putInt(ARG_PARAM2,param2)
             fragment.arguments = args
             return fragment
         }
     }
-}// Required empty public constructor
+}

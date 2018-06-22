@@ -67,11 +67,8 @@ class MovieAdapter :RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
             title.setOnClickListener{openDetailsActivity(this)}
             thumbnail.setOnClickListener{openDetailsActivity(this)}
             date.setOnClickListener { openDetailsActivity(this) }
-
         }
-
         return MyViewHolder(itemView)
-
     }
 
     fun openDetailsActivity(holder: MyViewHolder)

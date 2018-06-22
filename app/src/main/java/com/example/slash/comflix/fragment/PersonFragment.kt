@@ -10,9 +10,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.slash.comflix.R
+import com.example.slash.comflix.*
 import com.example.slash.comflix.adapter.PersonAdapter
-import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.GridSpacingItemDecoration
 import com.example.slash.comflix.entities.Person
 import com.example.slash.comflix.entities.dpToPx
@@ -25,21 +24,23 @@ class PersonFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
         var view= inflater!!.inflate(R.layout.fragment_person, container, false)
         var personList=ArrayList<Person>()
         var recyclerView=view.findViewById<RecyclerView>(R.id.recyclerView) as RecyclerView
-        var personAdapter= PersonAdapter(this.context,personList,R.layout.person_card)
-        var mLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context, calculateCardNum(this.context))
+        var personAdapter= PersonAdapter(this.context,personList,R.layout.person_card,0)
+        var mLayoutManager= GridLayoutManager(this.context, calculateCardNum(this.context))
         recyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         recyclerView.layoutManager=mLayoutManager
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=personAdapter
+        getPopularPerson(personList,personAdapter)
+        if(chargerScoll(recyclerView,mLayoutManager)){
+            getPopularPerson(personList,personAdapter)
+        }
         return view
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
+  fun onButtonPressed(uri: Uri) {
         if (mListener != null) {
             mListener!!.onFragmentInteraction(uri)
         }

@@ -15,6 +15,8 @@ import io.reactivex.schedulers.Schedulers
 var num_page_movies=1
 var num_page_popular_movies=1
 var num_page_series=1
+var num_page_persons=1
+var popular:ArrayList<Person>?=null
 fun calculateCardNum(context: Context):Int{
     val n=context.resources.displayMetrics
     val num=n.widthPixels/n.density
@@ -106,6 +108,22 @@ fun getPersonDetails(person_id:Int, personDetailsFragment: PersonDetailsFragment
                     },
                     { error -> Log.e("ERROR", error.message) }
             )
+
+}
+fun getPopularPerson( personList:ArrayList<Person>,personAdapter: PersonAdapter){
+
+    RetrofitBuilder.personApi.getPopularPersons(num_page_persons)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    { result ->
+                        personList.addAll(result.results)
+                        personAdapter.updateListPerson(personList)
+                        popular=result.results
+                    },
+                    { error -> Log.e("ERROR", error.message) }
+            )
+    num_page_persons++
 
 }
 fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):Boolean{
