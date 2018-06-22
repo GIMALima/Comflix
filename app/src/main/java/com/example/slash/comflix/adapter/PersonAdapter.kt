@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,11 +21,14 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
     var mcontext: Context
     var personList: ArrayList<Person>
     var layout:Int
+    var from:Int
+    var position:Int=-1
 
-    constructor(mcontext: Context, personList: ArrayList<Person>, layout:Int) : super() {
+    constructor(mcontext: Context, personList: ArrayList<Person>, layout:Int,from:Int) : super() {
         this.mcontext = mcontext
         this.personList = personList
         this.layout=layout
+        this.from=from
     }
 
 
@@ -35,21 +39,29 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
         var thumbnail: ImageView
         var personId:TextView
         var card: CardView
-
-
+        var position:TextView
         constructor(itemView: View) : super(itemView) {
             this.title= itemView.findViewById<TextView>(R.id.title) as TextView
             this.name= itemView.findViewById<TextView>(R.id.name) as TextView
             this.thumbnail= itemView.findViewById<ImageView>(R.id.personPicture) as ImageView
             this.card=itemView.findViewById<CardView>(R.id.card_view) as CardView
             this.personId=itemView.findViewById<TextView>(R.id.personId) as TextView
+            this.position=itemView.findViewById<TextView>(R.id.position) as TextView
+
         }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
         var person=personList.get(position)
-        holder.title.text=person.character
-        holder.name.text=person.name+ " staring as"
+
+        holder.name.text=person.name
+        if(this.from==1) {
+            holder.title.text =" stating as "+ person.character
+            holder.position.text=this.position.toString()
+        }else{
+            holder.position.text=position.toString()
+        }
         holder.personId.text=person.id.toString()
         Picasso.with(mcontext).load(mcontext.getString(R.string.image_url)+person.profile_path).into(holder.thumbnail)
 
@@ -81,6 +93,7 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder> {
         val bundle = Bundle()
         bundle.putInt("id", holder.personId.text.toString().toInt())
         bundle.putString("type","person")
+        bundle.putInt("position",holder.position.text.toString().toInt())
         intent.putExtras(bundle) //P
         mcontext.startActivity(intent)
     }

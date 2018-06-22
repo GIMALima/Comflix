@@ -63,7 +63,7 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1,GridLayoutManager.HORIZONTAL,false)
         var actorsRecyclerView=fragView.findViewById<RecyclerView>(R.id.actorsRecyclerView) as RecyclerView
         var personRelativeList=ArrayList<Person>()
-        var personAdapter= PersonAdapter(this.context,personRelativeList,R.layout.person_relative_card)
+        var personAdapter= PersonAdapter(this.context,personRelativeList,R.layout.person_relative_card,2)
         actorsRecyclerView.addItemDecoration(GridSpacingItemDecoration(2, dpToPx(10),true))
         actorsRecyclerView.layoutManager=personLayoutManager
         actorsRecyclerView.itemAnimator= DefaultItemAnimator()
