@@ -13,7 +13,7 @@ import com.example.slash.comflix.fragment.TrendingFragment
 
 
 class ViewPageAdapter: FragmentPagerAdapter {
-    private val FRAGMENT_COUNT = 3
+    private val FRAGMENT_COUNT = 4
 
     constructor(fm: FragmentManager?) : super(fm)
 
@@ -23,8 +23,8 @@ class ViewPageAdapter: FragmentPagerAdapter {
         when (position) {
             0 -> {return TrendingFragment()}
             1 ->  return MoviesFragment()
-           // 2 ->  return SeriesFragment()
-            2->  return PersonFragment()
+            2 ->  return SeriesFragment()
+            3->  return PersonFragment()
             else -> { return  TrendingFragment()
             }
         }
@@ -39,8 +39,8 @@ class ViewPageAdapter: FragmentPagerAdapter {
         when (position) {
             0 -> return "Trending"
             1 -> return "Movie"
-          //  2 -> return "Serie"
-            2 -> return "Person"
+            2 -> return "Serie"
+            3 -> return "Person"
             else -> { return  "Trending"
             }
         }

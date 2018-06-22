@@ -40,7 +40,7 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         // Inflate the layout for this fragment
         val fragView = inflater!!.inflate(R.layout.fragment_serie_details, container, false)
 
-        fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieSeasons)[serieID].toString() + " "
+        //fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieSeasons)[serieID].toString() + " "
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showSeasonsDialog() }
         var personLayoutManager: RecyclerView.LayoutManager= GridLayoutManager(this.context,1, GridLayoutManager.HORIZONTAL,false)
         var actorsRecyclerView=fragView.findViewById<RecyclerView>(R.id.actorsRecyclerView) as RecyclerView
@@ -57,18 +57,6 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        var covers= intArrayOf(
-
-                R.drawable.houseofcards,
-                R.drawable.gameofthrones,
-                R.drawable.friends,
-                R.drawable.suits,
-                R.drawable.vikings,
-                R.drawable.breakingbad,
-                R.drawable.lacasadepapel,
-                R.drawable.prisonbreak
-        )
-        Glide.with(this.context).load(covers.get(serieID)).into(serieCover)
 }
 
 // TODO: Rename method, update argument and hook method into UI event
@@ -98,8 +86,8 @@ fun showSeasonsDialog()
 val builder= AlertDialog.Builder(context)
 builder.setTitle("Choose a season")
 var array: ArrayList<String> = ArrayList()
-for (i in 1..resources.getIntArray(R.array.serieSeasons)[serieID])
-    array.add("Season $i")
+/*for (i in 1..resources.getIntArray(R.array.serieSeasons)[serieID])
+    array.add("Season $i")*/
 val arrayAdapter = ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,array)
 
 val lv = ListView(context)

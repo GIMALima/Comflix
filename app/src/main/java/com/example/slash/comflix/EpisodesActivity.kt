@@ -35,12 +35,12 @@ class EpisodesActivity : AppCompatActivity() {
     fun createEpisodesList():ArrayList<Episode>
     {
         var array = ArrayList<Episode>()
-        for (i in 0..10)
+       /* for (i in 0..10)
         {
-            array.add(Episode(resources.obtainTypedArray(R.array.episodeCover).getResourceId(0,-1),
+           array.add(Episode(resources.obtainTypedArray(R.array.episodeCover).getResourceId(0,-1),
                     resources.getStringArray(R.array.episodeTitle)[0],
                     resources.getStringArray(R.array.episodeDescription)[0]))
-        }
+        }*/
 
         return array
     }

@@ -44,7 +44,7 @@ class TrendingFragment : Fragment() {
         if(chargerScoll(movieRecyclerView,movieLayoutManager)){
             getListMoviesNowPlaying(movieAdapter,trendingMoviesList)
         }
-        //Trending series
+
         var trendingseriesList=ArrayList<Serie>()
         var serieRecyclerView=view.findViewById<RecyclerView>(R.id.seriesRecyclerView) as RecyclerView
         var serieAdapter= SerieAdapter(this.context,trendingseriesList,R.layout.trending_card)

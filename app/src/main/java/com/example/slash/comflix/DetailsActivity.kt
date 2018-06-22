@@ -163,10 +163,10 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
     private fun createCommentsLis(): ArrayList<Comment>
     {
         var commentSize = ArrayList<Comment>()
-        val userArray=resources.getStringArray(R.array.users)
-        val commentArray = resources.getStringArray(R.array.comments)
-        for (i in 0 until userArray.size)
-            commentSize.add(Comment(commentArray[i],userArray[i]))
+       // val userArray=resources.getStringArray(R.array.users)
+        //val commentArray = resources.getStringArray(R.array.comments)
+       // for (i in 0 until userArray.size)
+         //   commentSize.add(Comment(commentArray[i],userArray[i]))
 
         return commentSize
     }

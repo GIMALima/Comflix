@@ -28,8 +28,8 @@ class SeasonDetailsFragment: Fragment()
         val fragView = inflater!!.inflate(R.layout.season_details, container, false)
 
 
-        fragView.findViewById<ImageView>(R.id.cover).
-                setImageDrawable(
+       /* fragView.findViewById<ImageView>(R.id.cover).
+             setImageDrawable(
                         resources.getDrawable(
                                 resources.obtainTypedArray(
                                         R.array.seasonCover).getResourceId(
@@ -38,7 +38,7 @@ class SeasonDetailsFragment: Fragment()
         fragView.findViewById<TextView>(R.id.nbrSeason).text =resources.getIntArray(R.array.serieEpisodes)[serieID].toString() + " "
 
         fragView.findViewById<Button>(R.id.seeSeasons).setOnClickListener { showEpisodesActivity() }
-
+*/
 
 
         return fragView
