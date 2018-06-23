@@ -1,17 +1,11 @@
 package com.example.slash.comflix
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.app.NavUtils
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.widget.Toast
-import com.example.slash.comflix.fragment.MovieDetailsFragment
-import com.example.slash.comflix.fragment.SerieDetailsFragment
-import com.example.slash.comflix.fragment.PersonDetailsFragment
-import com.example.slash.comflix.fragment.SeasonDetailsFragment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -19,16 +13,18 @@ import com.example.slash.comflix.adapter.CommentsAdapter
 import com.example.slash.comflix.entities.Comment
 import com.example.slash.comflix.entities.CommentDTO
 import com.example.slash.comflix.entities.RetrofitBuilder
-import com.example.slash.comflix.fragment.*
+import com.example.slash.comflix.fragment.MovieDetailsFragment
+import com.example.slash.comflix.fragment.PersonDetailsFragment
+import com.example.slash.comflix.fragment.SeasonDetailsFragment
+import com.example.slash.comflix.fragment.SerieDetailsFragment
 import kotlinx.android.synthetic.main.activity_details.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
 class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInteractionListener,
-        SeasonDetailsFragment.SeasonDetailsInteraction
+        SeasonDetailsFragment.SeasonDetailsInteraction,
+        MovieDetailsFragment.OnFragmentInteractionListener
 {
     override fun addSeasonToTitle(season: String) {
         if(!supportActionBar?.title!!.contains(":"))
@@ -71,6 +67,8 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
            }
            "person" -> {
                fragment = PersonDetailsFragment()
+               comments_section.visibility= View.GONE
+
            }
 
        }
@@ -162,14 +160,46 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
     }
 
-    override fun loadComments(serieID: Int)
+    override fun loadCOmmentsSeries(serieID: Int)
     {
         val typeFragment = fragment
         if(typeFragment is SerieDetailsFragment)
         {
             RetrofitBuilder.serieApi.getComments(serieID).enqueue(object: Callback<CommentDTO>{
                 override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
-               }
+                }
+                override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {
+
+                    if(response?.isSuccessful!!)
+                    {
+                        //Toast.makeText(this@DetailsActivity,"Sucess",Toast.LENGTH_SHORT).show()
+
+                        commentsAdapter?.commentsList = response.body()!!.results
+                        commentsAdapter?.notifyDataSetChanged()
+                        total_reviews.text = response.body()!!.total_results.toString() + " Reviews"
+
+                    }else
+                    {
+                        //Toast.makeText(this@DetailsActivity,response.message(),Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+            })
+
+        }
+    }
+
+
+
+    override fun loadCOmmentsMovies(movieID: Int)
+    {
+        val typeFragment = fragment
+        if(typeFragment is MovieDetailsFragment)
+        {
+            RetrofitBuilder.movieApi.getComments(movieID).enqueue(object: Callback<CommentDTO>{
+                override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
+                }
 
                 override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {
 
@@ -182,8 +212,7 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
                     }else
                     {
-
-                    }
+             }
                 }
 
             })

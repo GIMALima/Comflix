@@ -2,7 +2,6 @@ package com.example.slash.comflix.fragment
 
 import android.app.AlertDialog
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -12,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.bumptech.glide.Glide
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.PersonAdapter
 import com.example.slash.comflix.adapter.SerieAdapter
@@ -70,7 +68,7 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         actorsRecyclerView.adapter=personAdapter
         getCastCrewSeries(serieID,personAdapter)
 
-        mListener?.loadComments(serieID)
+        mListener?.loadCOmmentsSeries(serieID)
         return fragView
     }
 
@@ -80,7 +78,8 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         RetrofitBuilder.serieApi.getSeriesDetails(serieID).enqueue(object: Callback<SerieDetails>
         {
             override fun onFailure(call: Call<SerieDetails>?, t: Throwable?) {
-                }
+            }
+
 
             override fun onResponse(call: Call<SerieDetails>?, response: Response<SerieDetails>?) {
 
@@ -160,7 +159,7 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(serieID:Int,position: Int)
         fun changeBarTitle(title:String)
-        fun loadComments(serieID: Int)
+        fun loadCOmmentsSeries(serieID: Int)
     }
 
     companion object {

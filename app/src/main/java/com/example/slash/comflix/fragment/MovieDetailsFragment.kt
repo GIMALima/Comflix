@@ -53,6 +53,7 @@ class MovieDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         var view= inflater!!.inflate(R.layout.fragment_movie_details, container, false)
+
      if(from==0) {
          getMovieDetails(movieId, this)
          var movieLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)
@@ -74,6 +75,8 @@ class MovieDetailsFragment : Fragment() {
          actorsRecyclerView.itemAnimator = DefaultItemAnimator()
          actorsRecyclerView.adapter = personAdapter
          getCastCrew(movieId, personAdapter)
+         mListener?.loadCOmmentsMovies(movieId)
+
      }
         return view
     }
@@ -130,7 +133,7 @@ class MovieDetailsFragment : Fragment() {
         mListener = null
     }
     interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+        fun loadCOmmentsMovies(movieID: Int)
     }
     fun onQueryResponse(movieDetails:MovieDetails){
 

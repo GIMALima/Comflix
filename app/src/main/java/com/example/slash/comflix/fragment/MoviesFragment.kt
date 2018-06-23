@@ -37,9 +37,7 @@ class MoviesFragment : Fragment(){
         recyclerView.itemAnimator=DefaultItemAnimator()
         recyclerView.adapter=movieAdapter
         getListMoviesPopular(movieAdapter, movieList)
-        if(chargerScoll(recyclerView,mLayoutManager)){
-            getListMoviesPopular(movieAdapter,movieList)
-        }
+        chargerScoll(recyclerView,mLayoutManager) { getListMoviesPopular(movieAdapter,movieList) }
         return view
     }
 

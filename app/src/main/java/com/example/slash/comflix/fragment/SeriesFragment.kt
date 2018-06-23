@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import com.example.slash.comflix.R
 import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.calculateCardNum
+import com.example.slash.comflix.chargerScoll
 import com.example.slash.comflix.entities.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +30,7 @@ class SeriesFragment : Fragment() {
     private var mListener: OnFragmentInteractionListener? = null
 
     var currentPage = 1
+    var maxPages = 0
 
     var isLoading:Boolean = false
 
@@ -56,6 +58,7 @@ class SeriesFragment : Fragment() {
                 {
                     currentPage++
                     listSerie = response.body()?.results
+                    maxPages = response.body()?.total_pages!!
                     adapter?.serieList = listSerie?.toList()!!
                     adapter?.notifyDataSetChanged()
                 }else
@@ -81,6 +84,8 @@ class SeriesFragment : Fragment() {
         recyclerView.adapter=serieAdapter
         adapter=serieAdapter
 
+        chargerScoll(recyclerView,mLayoutManager) {addData()}
+
         return view
     }
 
@@ -93,17 +98,16 @@ class SeriesFragment : Fragment() {
 
     fun addData()
     {
-        if(isLoading)
+        if(currentPage > maxPages)
             return
-        isLoading = true
-         
+
         RetrofitBuilder.serieApi.getPopluareSeries(currentPage).enqueue(object : Callback<PopularSerieDTO>
         {
             override fun onFailure(call: Call<PopularSerieDTO>?, t: Throwable?)
             {
                 isLoading = false
 
-               Log.d("SeriesFragment",t?.message)
+
             }
 
             override fun onResponse(call: Call<PopularSerieDTO>?, response: Response<PopularSerieDTO>?)
@@ -115,7 +119,6 @@ class SeriesFragment : Fragment() {
                 if(response?.isSuccessful!!)
                 {
                     currentPage++
-
                     listSerie = response.body()?.results
 
                     adapter?.serieList = adapter?.serieList!! + listSerie?.toList()!!
@@ -152,6 +155,7 @@ class SeriesFragment : Fragment() {
         super.onDetach()
         mListener = null
     }
+
 
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

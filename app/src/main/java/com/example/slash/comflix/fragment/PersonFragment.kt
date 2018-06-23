@@ -35,9 +35,7 @@ class PersonFragment : Fragment() {
         recyclerView.itemAnimator= DefaultItemAnimator()
         recyclerView.adapter=personAdapter
         getPopularPerson(personList,personAdapter)
-        if(chargerScoll(recyclerView,mLayoutManager)){
-            getPopularPerson(personList,personAdapter)
-        }
+        chargerScoll(recyclerView,mLayoutManager) { getPopularPerson(personList,personAdapter) }
         return view
     }
   fun onButtonPressed(uri: Uri) {

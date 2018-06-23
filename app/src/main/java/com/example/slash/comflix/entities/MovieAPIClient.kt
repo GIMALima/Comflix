@@ -23,4 +23,6 @@ interface MovieAPIClient {
     @GET("movie/{movie_id}/credits")
     fun getCredits(@Path("movie_id") movie_id:Int):Observable<CastCrewDTO>
 
+    @GET("movie/{id}/reviews")
+    fun getComments(@Path("id")id:Int):retrofit2.Call<CommentDTO>
 }

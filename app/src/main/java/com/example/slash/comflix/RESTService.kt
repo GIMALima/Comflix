@@ -22,6 +22,8 @@ var num_page_persons=1
 var popular:ArrayList<Person>?=null
 var total_pages_now_palying=1
 var total_pages_popular=1
+var total_pages_series=1
+var total_pages_person=1
 fun calculateCardNum(context: Context):Int{
     val n=context.resources.displayMetrics
     val num=n.widthPixels/n.density
@@ -61,7 +63,7 @@ if(num_page_popular_movies<= total_pages_popular) {
 }
 }
 fun getListSeries(serieAdapter: SerieAdapter,serieList: ArrayList<Serie>){
-
+if(num_page_series <= total_pages_series) {
     RetrofitBuilder.serieApi.getSeriesNowPalying(num_page_series)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -69,10 +71,12 @@ fun getListSeries(serieAdapter: SerieAdapter,serieList: ArrayList<Serie>){
                     { result ->
                         serieList.addAll(result.results)
                         serieAdapter.updateListSerie(serieList)
+                        total_pages_series = result.total_page
                     },
                     { error -> Log.e("ERROR", error.message) }
             )
     num_page_movies++
+}
 }
 fun getMovieDetails(movie_id:Int,fragment: MovieDetailsFragment){
 
@@ -148,22 +152,26 @@ fun getPersonDetails(person_id:Int, personDetailsFragment: PersonDetailsFragment
 
 }
 fun getPopularPerson( personList:ArrayList<Person>,personAdapter: PersonAdapter){
-
-    RetrofitBuilder.personApi.getPopularPersons(num_page_persons)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                    { result ->
-                        personList.addAll(result.results)
-                        personAdapter.updateListPerson(personList)
-                        popular=result.results
-                    },
-                    { error -> Log.e("ERROR", error.message) }
-            )
-    num_page_persons++
+  if(num_page_persons <= total_pages_person) {
+      RetrofitBuilder.personApi.getPopularPersons(num_page_persons)
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(
+                      { result ->
+                          personList.addAll(result.results)
+                          personAdapter.updateListPerson(personList)
+                          popular = result.results
+                          total_pages_person=result.total_pages
+                      },
+                      { error -> Log.e("ERROR", error.message) }
+              )
+      num_page_persons++
+  }
 
 }
-fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):Boolean{
+
+
+fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager, loadDataFun:()->Unit):Boolean{
     var charger=false
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         var pastVisiblesItems: Int = 0
@@ -177,14 +185,13 @@ fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):B
             totalItemCount = layoutManager.itemCount
             pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
 
+            if (visibleItemCount + pastVisiblesItems >= totalItemCount) charger=true
 
-            if (visibleItemCount + pastVisiblesItems >= totalItemCount){
-                charger=true
-
-
-            }
+            if(charger)
+                loadDataFun()
         }
     })
     return  charger
 
 }
+

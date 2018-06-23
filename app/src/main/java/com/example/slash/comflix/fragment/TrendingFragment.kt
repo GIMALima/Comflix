@@ -41,7 +41,7 @@ class TrendingFragment : Fragment() {
         movieRecyclerView.itemAnimator= DefaultItemAnimator()
         movieRecyclerView.adapter=movieAdapter
         getListMoviesNowPlaying(movieAdapter, trendingMoviesList)
-        if(chargerScoll(movieRecyclerView,movieLayoutManager)){
+        chargerScoll(movieRecyclerView,movieLayoutManager){
             getListMoviesNowPlaying(movieAdapter,trendingMoviesList)
         }
 
@@ -54,7 +54,7 @@ class TrendingFragment : Fragment() {
         serieRecyclerView.itemAnimator= DefaultItemAnimator()
         serieRecyclerView.adapter=serieAdapter
         getListSeries(serieAdapter,trendingseriesList)
-        if(chargerScoll(serieRecyclerView,serieLayoutManager)){
+        chargerScoll(serieRecyclerView,serieLayoutManager){
             getListSeries(serieAdapter,trendingseriesList)
         }
         return view
