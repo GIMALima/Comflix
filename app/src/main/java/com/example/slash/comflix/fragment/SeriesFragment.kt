@@ -40,6 +40,7 @@ class SeriesFragment : Fragment() {
     private var mListener: OnFragmentInteractionListener? = null
 
     var currentPage = 1
+    var maxPages = 0
 
     var isLoading:Boolean = false
 
@@ -67,6 +68,7 @@ class SeriesFragment : Fragment() {
                 {
                     currentPage++
                     listSerie = response.body()?.results
+                    maxPages = response.body()?.total_pages!!
                     adapter?.serieList = listSerie?.toList()!!
                     adapter?.notifyDataSetChanged()
                 }else
@@ -93,6 +95,8 @@ class SeriesFragment : Fragment() {
         recyclerView.adapter=serieAdapter
         adapter=serieAdapter
 
+        chargerScoll(recyclerView,mLayoutManager) {addData()}
+
         return view
     }
 
@@ -105,10 +109,9 @@ class SeriesFragment : Fragment() {
 
     fun addData()
     {
-        if(isLoading)
+        if(currentPage > maxPages)
             return
-        isLoading = true
-         
+
         RetrofitBuilder.serieApi.getPopluareSeries(currentPage).enqueue(object : Callback<PopularSerieDTO>
         {
             override fun onFailure(call: Call<PopularSerieDTO>?, t: Throwable?)
@@ -166,6 +169,7 @@ class SeriesFragment : Fragment() {
         super.onDetach()
         mListener = null
     }
+
 
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

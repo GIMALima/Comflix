@@ -67,6 +67,8 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
            }
            "person" -> {
                fragment = PersonDetailsFragment()
+               comments_section.visibility= View.GONE
+
            }
 
        }
