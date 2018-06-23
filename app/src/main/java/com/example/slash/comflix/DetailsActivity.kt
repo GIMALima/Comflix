@@ -27,7 +27,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInteractionListener,
-        SeasonDetailsFragment.SeasonDetailsInteraction
+        SeasonDetailsFragment.SeasonDetailsInteraction,
+        MovieDetailsFragment.OnFragmentInteractionListener
 {
     override fun addSeasonToTitle(season: String) {
         if(!supportActionBar?.title!!.contains(":"))
@@ -158,7 +159,7 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
     }
 
-    override fun loadComments(serieID: Int)
+    override fun loadCOmmentsSeries(serieID: Int)
     {
         val typeFragment = fragment
         if(typeFragment is SerieDetailsFragment)
@@ -166,6 +167,40 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
             RetrofitBuilder.serieApi.getComments(serieID).enqueue(object: Callback<CommentDTO>{
                 override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
                 Toast.makeText(this@DetailsActivity,"Network problem",Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {
+
+                    if(response?.isSuccessful!!)
+                    {
+                        Toast.makeText(this@DetailsActivity,"Sucess",Toast.LENGTH_SHORT).show()
+
+                        commentsAdapter?.commentsList = response.body()!!.results
+                        commentsAdapter?.notifyDataSetChanged()
+                        total_reviews.text = response.body()!!.total_results.toString() + " Reviews"
+
+                    }else
+                    {
+                        Toast.makeText(this@DetailsActivity,response.message(),Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+            })
+
+        }
+    }
+
+
+
+    override fun loadCOmmentsMovies(movieID: Int)
+    {
+        val typeFragment = fragment
+        if(typeFragment is MovieDetailsFragment)
+        {
+            RetrofitBuilder.movieApi.getComments(movieID).enqueue(object: Callback<CommentDTO>{
+                override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
+                    Toast.makeText(this@DetailsActivity,"Network problem",Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {

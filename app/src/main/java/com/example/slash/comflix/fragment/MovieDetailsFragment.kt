@@ -72,6 +72,8 @@ class MovieDetailsFragment : Fragment() {
         actorsRecyclerView.adapter=personAdapter
         getCastCrew(movieId,personAdapter)
 
+        mListener?.loadCOmmentsMovies(movieId)
+
         return view
     }
 
@@ -139,7 +141,7 @@ class MovieDetailsFragment : Fragment() {
 
 
     interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
+        fun loadCOmmentsMovies(movieID: Int)
     }
     fun onQueryResponse(movieDetails:MovieDetails){
         Picasso.with(this.context).load(this.context.getString(R.string.image_url) + movieDetails!!.backdrop_path)
