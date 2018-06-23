@@ -6,7 +6,7 @@ import android.arch.persistence.room.*
 @Dao
 interface MovieEntityDao {
 
-   /* @Query("SELECT * FROM movie")
+    @Query("SELECT * FROM movie")
     fun getAllMovies(): List<MovieEntity>
 
     @Query("SELECT * FROM movie WHERE id = :arg0")
@@ -16,5 +16,5 @@ interface MovieEntityDao {
     fun addMovie(movie : MovieEntity)
 
     @Delete
-    fun deleteMovie(id:Int)*/
+    fun deleteMovie(movie: MovieEntity)
 }

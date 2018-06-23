@@ -10,7 +10,7 @@ import android.content.Context
 @Database(entities = arrayOf(MovieEntity::class), version = 1)
 abstract class MovieDB():RoomDatabase() {
 
- /*   abstract fun movieDAO(): MovieEntityDao
+ abstract fun movieDAO(): MovieEntityDao
 
     companion object {
         private var instance: MovieDB? = null
@@ -19,8 +19,8 @@ abstract class MovieDB():RoomDatabase() {
             if (instance == null) {
 
                 instance = Room.databaseBuilder(context.getApplicationContext(),
-                        MovieDB::class.java, "movie.db")
-                        .build()
+                           MovieDB::class.java, "movieDB.db")
+                           .build()
             }
             return instance
         }
@@ -29,5 +29,5 @@ abstract class MovieDB():RoomDatabase() {
             instance = null
         }
     }
-*/
+
 }

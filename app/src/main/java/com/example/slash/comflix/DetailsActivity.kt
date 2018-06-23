@@ -6,6 +6,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v4.app.NavUtils
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.widget.Toast
 import com.example.slash.comflix.fragment.MovieDetailsFragment
 import com.example.slash.comflix.fragment.SerieDetailsFragment
@@ -37,9 +38,12 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val type = intent.getStringExtra("type")
         val id= intent.getIntExtra("id",0)
+        val pos= intent.getIntExtra("position",-1)
+        val from= intent.getIntExtra("from",0)
         var bundle= Bundle()
         bundle.putInt("id",id)
-
+        bundle.putInt("position",pos)
+        bundle.putInt("from",from)
        when (type) {
            "movie" -> {
                fragment = MovieDetailsFragment()

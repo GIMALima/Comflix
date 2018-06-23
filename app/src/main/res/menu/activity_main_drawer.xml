@@ -12,10 +12,7 @@
             android:id="@+id/nav_movies"
             android:icon="@drawable/ic_local_movies_black_24dp"
             android:title="My movies" />
-        <item
-            android:id="@+id/nav_series"
-            android:icon="@drawable/ic_videocam_black_24dp"
-            android:title="My series" />
+
 
     </group>
 
