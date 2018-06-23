@@ -61,19 +61,19 @@ class SeasonDetailsFragment: Fragment()
 
     override fun onStart() {
         super.onStart()
-        Toast.makeText(activity,"$serieID,$seasonNumber",Toast.LENGTH_LONG).show()
+        //Toast.makeText(activity,"$serieID,$seasonNumber",Toast.LENGTH_LONG).show()
 
         RetrofitBuilder.serieApi.getSeason(serieID,seasonNumber).enqueue(object: Callback<Season>
         {
             override fun onFailure(call: Call<Season>?, t: Throwable?) {
-                Toast.makeText(activity,"Network problem",Toast.LENGTH_LONG).show()
+                //Toast.makeText(activity,"Network problem",Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: Call<Season>?, response: Response<Season>?) {
 
                 if(response?.isSuccessful!!)
                 {
-                    Toast.makeText(activity,"success",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(activity,"success",Toast.LENGTH_LONG).show()
 
                     val result =response.body()!!
                     Picasso.with(activity).load(activity.getString(R.string.image_url)+result.poster_path).into(cover)
@@ -87,7 +87,7 @@ class SeasonDetailsFragment: Fragment()
                     currentSeasonEpisodes = result.episodes
                 }else
                 {
-                    Toast.makeText(activity,response.message().toString(),Toast.LENGTH_LONG).show()
+                    //Toast.makeText(activity,response.message().toString(),Toast.LENGTH_LONG).show()
 
                 }
 

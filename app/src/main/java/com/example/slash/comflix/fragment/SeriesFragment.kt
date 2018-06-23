@@ -54,7 +54,6 @@ class SeriesFragment : Fragment() {
             {
 
                 isLoading = false
-                Toast.makeText(activity,"Problem",Toast.LENGTH_LONG).show()
                 Log.d("SeriesFragment",t?.message)
             }
 
@@ -67,8 +66,6 @@ class SeriesFragment : Fragment() {
                 if(response?.isSuccessful!!)
                 {
                     currentPage++
-                    Toast.makeText(activity,"Success",Toast.LENGTH_LONG).show()
-
                     listSerie = response.body()?.results
                     adapter?.serieList = listSerie?.toList()!!
                     adapter?.notifyDataSetChanged()
@@ -118,7 +115,7 @@ class SeriesFragment : Fragment() {
             {
                 isLoading = false
 
-                Toast.makeText(activity,"Problem",Toast.LENGTH_LONG).show()
+                //Toast.makeText(activity,"Problem",Toast.LENGTH_LONG).show()
                 Log.d("SeriesFragment",t?.message)
             }
 
@@ -131,7 +128,7 @@ class SeriesFragment : Fragment() {
                 if(response?.isSuccessful!!)
                 {
                     currentPage++
-                    Toast.makeText(activity,"Success",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(activity,"Success",Toast.LENGTH_LONG).show()
 
                     listSerie = response.body()?.results
 
