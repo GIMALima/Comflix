@@ -11,24 +11,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.slash.comflix.*
-import com.example.slash.comflix.R.id.add
-import com.example.slash.comflix.entities.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_series.*
 import com.example.slash.comflix.R
+import com.example.slash.comflix.adapter.SerieAdapter
 import com.example.slash.comflix.calculateCardNum
 import com.example.slash.comflix.entities.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-import com.example.slash.comflix.adapter.SerieAdapter
-import com.example.slash.comflix.entities.GridSpacingItemDecoration
-import com.example.slash.comflix.entities.Serie
-import com.example.slash.comflix.entities.dpToPx
-import kotlinx.android.synthetic.*
 
 
 class SeriesFragment : Fragment() {
@@ -71,7 +60,6 @@ class SeriesFragment : Fragment() {
                     adapter?.notifyDataSetChanged()
                 }else
                 {
-                    //Toast.makeText(activity,response.code().toString() +"   "+response.errorBody() ,Toast.LENGTH_LONG).show()
                     Log.d("SeriesFragment",response.code().toString() +"   "+response.errorBody())
                 }
             }
@@ -115,8 +103,7 @@ class SeriesFragment : Fragment() {
             {
                 isLoading = false
 
-                Toast.makeText(activity,"Problem",Toast.LENGTH_LONG).show()
-                Log.d("SeriesFragment",t?.message)
+               Log.d("SeriesFragment",t?.message)
             }
 
             override fun onResponse(call: Call<PopularSerieDTO>?, response: Response<PopularSerieDTO>?)
@@ -128,7 +115,6 @@ class SeriesFragment : Fragment() {
                 if(response?.isSuccessful!!)
                 {
                     currentPage++
-                    Toast.makeText(activity,"Success",Toast.LENGTH_LONG).show()
 
                     listSerie = response.body()?.results
 

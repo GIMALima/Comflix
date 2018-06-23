@@ -3,7 +3,6 @@ package com.example.slash.comflix.room
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import com.example.slash.comflix.entities.genre
 
 
 @Entity(tableName = "movie")
@@ -15,11 +14,12 @@ data class MovieEntity( @PrimaryKey() var id: String,
                         @ColumnInfo(name = "title") var title:String?,
                         @ColumnInfo(name="vote_average") var average:Double?,
                         @ColumnInfo(name = "vote_count") var vote_count:Int?,
+                        @ColumnInfo(name = "genre") var genre:String?,
                         @ColumnInfo(name = "backdrop_path") var backdrop_path:String?,
                         @ColumnInfo(name = "favoris") var favoris:Boolean?
 )
 {
-    constructor():this("","","","",0,"",0.0,0,"",false){
+    constructor():this("","","","",0,"",0.0,0,"","",false){
 
     }
 }

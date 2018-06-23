@@ -169,14 +169,12 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
         {
             RetrofitBuilder.serieApi.getComments(serieID).enqueue(object: Callback<CommentDTO>{
                 override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
-                Toast.makeText(this@DetailsActivity,"Network problem",Toast.LENGTH_SHORT).show()
-                }
+               }
 
                 override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {
 
                     if(response?.isSuccessful!!)
                     {
-                        Toast.makeText(this@DetailsActivity,"Sucess",Toast.LENGTH_SHORT).show()
 
                         commentsAdapter?.commentsList = response.body()!!.results
                         commentsAdapter?.notifyDataSetChanged()
@@ -184,7 +182,6 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
                     }else
                     {
-                        Toast.makeText(this@DetailsActivity,response.message(),Toast.LENGTH_SHORT).show()
 
                     }
                 }

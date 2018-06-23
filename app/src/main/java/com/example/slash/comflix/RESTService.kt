@@ -20,6 +20,8 @@ var num_page_popular_movies=1
 var num_page_series=1
 var num_page_persons=1
 var popular:ArrayList<Person>?=null
+var total_pages_now_palying=1
+var total_pages_popular=1
 fun calculateCardNum(context: Context):Int{
     val n=context.resources.displayMetrics
     val num=n.widthPixels/n.density
@@ -27,19 +29,23 @@ fun calculateCardNum(context: Context):Int{
 
 }
 fun getListMoviesNowPlaying(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>){
-    RetrofitBuilder.movieApi.getMoviesNowPalying(num_page_movies)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                    { result ->
-                       movieList.addAll(result.results)
-                       movieAdapter.updateListMovie(movieList)
-                    },
-                    { error -> Log.e("ERROR", error.message) }
-            )
-    num_page_movies++
+   if(num_page_movies <= total_pages_now_palying ) {
+       RetrofitBuilder.movieApi.getMoviesNowPalying(num_page_movies)
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe(
+                       { result ->
+                           movieList.addAll(result.results)
+                           movieAdapter.updateListMovie(movieList)
+                           total_pages_now_palying = result.total_pages
+                       },
+                       { error -> Log.e("ERROR", error.message) }
+               )
+       num_page_movies++
+   }
 }
 fun getListMoviesPopular(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>){
+if(num_page_popular_movies<= total_pages_popular) {
     RetrofitBuilder.movieApi.getPopularMovies(num_page_popular_movies)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -47,10 +53,12 @@ fun getListMoviesPopular(movieAdapter: MovieAdapter,movieList: ArrayList<Movie>)
                     { result ->
                         movieList.addAll(result.results)
                         movieAdapter.updateListMovie(movieList)
+                        total_pages_popular = result.total_pages
                     },
                     { error -> Log.e("ERROR", error.message) }
             )
     num_page_popular_movies++
+}
 }
 fun getListSeries(serieAdapter: SerieAdapter,serieList: ArrayList<Serie>){
 
@@ -169,7 +177,12 @@ fun chargerScoll(recyclerView: RecyclerView, layoutManager: GridLayoutManager):B
             totalItemCount = layoutManager.itemCount
             pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
 
-            if (visibleItemCount + pastVisiblesItems >= totalItemCount) charger=true
+
+            if (visibleItemCount + pastVisiblesItems >= totalItemCount){
+                charger=true
+
+
+            }
         }
     })
     return  charger

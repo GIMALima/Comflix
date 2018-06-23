@@ -89,7 +89,9 @@ class MovieDetailsFragment : Fragment() {
             votes.text = Room.movies!!.get(pos).vote_count.toString() + " votes"
             average.text = Room.movies!!.get(pos).average.toString() + "/10"
             description.text = Room.movies!!.get(pos).overview
+            genre.text=Room.movies!!.get(pos).genre
             this.moviefavoris = Room.movies!!.get(pos)
+
             addFavoris.setImageDrawable(resources.getDrawable(R.drawable.ic_favorite_black))
             favoris=true
         }
@@ -145,8 +147,13 @@ class MovieDetailsFragment : Fragment() {
          votes.text = movieDetails.vote_count.toString() + " votes"
          average.text = movieDetails.vote_average.toString() + "/10"
          description.text = movieDetails.overview
+
+        var genre=""
+        for(i in 0 until movieDetails.genres.size) {
+            genre = genre+ movieDetails.genres.get(i).name+ ", "
+        }
          this.moviefavoris = MovieEntity(movieId.toString(), movieDetails.poster_path, movieDetails.overview, movieDetails.release_date,
-                 movieDetails.runtime, movieDetails.title, movieDetails.vote_average, movieDetails.vote_count,
+                 movieDetails.runtime, movieDetails.title, movieDetails.vote_average, movieDetails.vote_count,genre,
                  movieDetails.backdrop_path, favoris)
 
 

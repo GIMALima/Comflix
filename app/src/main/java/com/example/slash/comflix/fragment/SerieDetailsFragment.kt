@@ -80,8 +80,7 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         RetrofitBuilder.serieApi.getSeriesDetails(serieID).enqueue(object: Callback<SerieDetails>
         {
             override fun onFailure(call: Call<SerieDetails>?, t: Throwable?) {
-                Toast.makeText(activity,"Network problem",Toast.LENGTH_LONG).show()
-            }
+                }
 
             override fun onResponse(call: Call<SerieDetails>?, response: Response<SerieDetails>?) {
 

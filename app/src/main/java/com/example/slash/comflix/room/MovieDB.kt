@@ -19,7 +19,7 @@ abstract class MovieDB():RoomDatabase() {
             if (instance == null) {
 
                 instance = Room.databaseBuilder(context.getApplicationContext(),
-                           MovieDB::class.java, "movieDB.db")
+                           MovieDB::class.java, "movieDataBase.db")
                            .build()
             }
             return instance
