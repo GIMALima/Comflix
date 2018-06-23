@@ -25,4 +25,10 @@ interface SerieAPIClient {
     @GET("tv/{id}/credits")
     fun getCreditsSeries(@Path("id") id:Int):Observable<CastCrewDTO>
 
+    @GET ("tv/{id}/season/{number}")
+    fun getSeason(@Path("id")id:Int,@Path("number") number:Int):retrofit2.Call<Season>
+
+
+    @GET("tv/{id}/reviews")
+    fun getComments(@Path("id")id:Int):retrofit2.Call<CommentDTO>
 }

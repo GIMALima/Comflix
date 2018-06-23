@@ -50,5 +50,7 @@
     <string name="txt_episode_duration">Episode duration:</string>
     <string name="txt_first_release">First release:</string>
     <string name="txt_last_release">Last release:</string>
+    <string name="txt_season">Season</string>
+    <string name="txt_date_de_diffusion">Date de diffusion:</string>
 
 </resources>

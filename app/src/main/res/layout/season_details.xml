@@ -37,13 +37,16 @@
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/director"
-                        style="@style/textdetailsLabel"/>
+                        android:text="@string/title"
+                        style="@style/textdetailsLabel"
+                        android:layout_marginRight="5dp"/>
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/director"
+                        android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text=""
+
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -53,28 +56,15 @@
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/writers"
-                        style="@style/textdetailsLabel"/>
-
+                        android:text="@string/txt_season"
+                        style="@style/textdetailsLabel"
+                        android:layout_marginRight="5dp"/>
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/writers"
+                        android:id="@+id/season_nbr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/writers"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                        android:text=""/>
 
-                    <android.support.v7.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/stars"
-                        style="@style/textdetailsLabel"/>
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/stars"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -84,13 +74,16 @@
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/released"
-                        style="@style/textdetailsLabel"/>
+                        android:text="@string/txt_date_de_diffusion"
+                        style="@style/textdetailsLabel"
+                        android:layout_marginRight="5dp"/>
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/releae_date"
+                        android:id="@+id/projection_date"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,7 +100,9 @@
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/description"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -118,7 +113,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="12 "
-                        style="@style/textdetailsLabel"/>
+                        style="@style/textdetailsLabel"
+                        android:layout_marginRight="5dp"/>
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"

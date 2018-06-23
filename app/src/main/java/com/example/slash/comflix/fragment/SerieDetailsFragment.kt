@@ -27,7 +27,7 @@ import retrofit2.Response
 
 class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
-    private var serieID: Int = -1
+    var serieID: Int = -1
 
     private var numberOfSseasons = 0
     private var mListener: OnFragmentInteractionListener? = null
@@ -69,6 +69,8 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         actorsRecyclerView.itemAnimator= DefaultItemAnimator()
         actorsRecyclerView.adapter=personAdapter
         getCastCrewSeries(serieID,personAdapter)
+
+        mListener?.loadComments(serieID)
         return fragView
     }
 
@@ -109,20 +111,18 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
 
 
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction()
-        }
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+
         } else {
             // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onDetach() {
@@ -154,13 +154,14 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
         alertDialog?.dismiss()
-        mListener?.onFragmentInteraction()
+        mListener?.onFragmentInteraction(serieID,position)
     }
 
 
     interface OnFragmentInteractionListener {
-        fun onFragmentInteraction()
+        fun onFragmentInteraction(serieID:Int,position: Int)
         fun changeBarTitle(title:String)
+        fun loadComments(serieID: Int)
     }
 
     companion object {
