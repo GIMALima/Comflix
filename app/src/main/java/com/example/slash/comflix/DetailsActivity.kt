@@ -45,7 +45,8 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
     var fragment: Fragment?=null
 
-    var isLiked= false
+
+    var  commentsAdapter:CommentsAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,35 +147,41 @@ class DetailsActivity : AppCompatActivity(),SerieDetailsFragment.OnFragmentInter
 
         val viewManager = LinearLayoutManager(this)
         val commentsList = ArrayList<Comment>()
-        val viewAdapter = CommentsAdapter(commentsList)
+        commentsAdapter = CommentsAdapter(commentsList)
         comments_list.apply{
             setHasFixedSize(true)
             layoutManager = viewManager
-            adapter= viewAdapter
+            adapter= commentsAdapter
         }
-
-        createCommentsLis(viewAdapter)
 
 
 
     }
 
-    private fun createCommentsLis(viewAdapter:CommentsAdapter)
+    override fun loadComments(serieID: Int)
     {
         val typeFragment = fragment
         if(typeFragment is SerieDetailsFragment)
         {
-            RetrofitBuilder.serieApi.getComments(typeFragment.serieID).enqueue(object: Callback<CommentDTO>{
+            RetrofitBuilder.serieApi.getComments(serieID).enqueue(object: Callback<CommentDTO>{
                 override fun onFailure(call: Call<CommentDTO>?, t: Throwable?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Toast.makeText(this@DetailsActivity,"Network problem",Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onResponse(call: Call<CommentDTO>?, response: Response<CommentDTO>?) {
 
                     if(response?.isSuccessful!!)
                     {
-                        viewAdapter.commentsList = response.body()!!.results
-                        viewAdapter.notifyDataSetChanged()
+                        Toast.makeText(this@DetailsActivity,"Sucess",Toast.LENGTH_SHORT).show()
+
+                        commentsAdapter?.commentsList = response.body()!!.results
+                        commentsAdapter?.notifyDataSetChanged()
+                        total_reviews.text = response.body()!!.total_results.toString() + " Reviews"
+
+                    }else
+                    {
+                        Toast.makeText(this@DetailsActivity,response.message(),Toast.LENGTH_SHORT).show()
+
                     }
                 }
 

@@ -29,6 +29,6 @@ interface SerieAPIClient {
     fun getSeason(@Path("id")id:Int,@Path("number") number:Int):retrofit2.Call<Season>
 
 
-    @GET("tv/{tv_id}/reviews")
-    fun getComments(@Path("tv_id")id:Int):retrofit2.Call<CommentDTO>
+    @GET("tv/{id}/reviews")
+    fun getComments(@Path("id")id:Int):retrofit2.Call<CommentDTO>
 }

@@ -27,8 +27,8 @@ class CommentsAdapter(var commentsList: ArrayList<Comment>): RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.author?.text = commentsList[position].author
-        holder?.comment?.text = commentsList[position].content
+        holder?.author?.text = commentsList[position].content
+        holder?.comment?.text = commentsList[position].author
     }
 
     override fun getItemCount() = commentsList.size

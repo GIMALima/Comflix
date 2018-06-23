@@ -69,6 +69,8 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         actorsRecyclerView.itemAnimator= DefaultItemAnimator()
         actorsRecyclerView.adapter=personAdapter
         getCastCrewSeries(serieID,personAdapter)
+
+        mListener?.loadComments(serieID)
         return fragView
     }
 
@@ -113,9 +115,14 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             mListener = context
+
         } else {
             // throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onDetach() {
@@ -154,6 +161,7 @@ class SerieDetailsFragment : Fragment(), AdapterView.OnItemClickListener {
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(serieID:Int,position: Int)
         fun changeBarTitle(title:String)
+        fun loadComments(serieID: Int)
     }
 
     companion object {
